@@ -39,8 +39,10 @@
 */
 
 $route['default_controller'] = "welcome";
-$route['app/add']="app/add";
-//$route['(:any)'] = 'welcome/$1';
+//$route['default_controller'] = "app";
+//$route['app/add']="app/add";
+//$route['app/(:any)'] = 'app/$1';
+
 $route['404_override'] = '';
 
 

@@ -1,6 +1,23 @@
 
 #http://www.codeigniter.org.tw/forum/viewtopic.php?f=6&t=2756#p3141
-
+#RewriteRule ^js/([a-z0-9_\.]+)\.js$ /static/js/$1.js [NC,L]
+# for js and css http://ellislab.com/forums/viewthread/179645/#850728
 RewriteEngine on
-RewriteCond $1 !^(index\.php|images|includes|robots\.txt|$)
+
+#RewriteRule ^css/(.*)$ application/views/css/$1 [L]
+#RewriteRule ^js/(.*)$ application/views/js/$1 [L]
+#RewriteRule ^images/(.*)$ application/views/images/$1 [L]
+
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond $1 !^(index\.php|assets|images|img|includes|robots\.txt|$)
+
+#RewriteCond $1 !^(index\.php|images|robots\.txt|application\/views)
+
 RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+
+
+

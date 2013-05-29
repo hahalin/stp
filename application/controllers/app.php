@@ -9,14 +9,53 @@ class app extends CI_Controller {
 		$this -> load -> model('appcfg_model');
 	}
 
+	public function prodlist()
+	{
+		$this -> load -> helper('url');
+		$this->load->library('parser');
+		$this->load->view('prodlist');
+		
+	}
+	
+	public function addpid($pid)
+	{
+		$this -> load -> library('session');
+		$newdata = array('username' => 'frank', 'email' => 'frank@a.b.c', 'logged_in' => TRUE);
+		$list=array();
+		$msg="initial,";
+		if ($this->session->userdata('pidlist'))
+		{
+			$list=$this->session->userdata('pidlist');
+		}
+		if (!array_key_exists($pid,$list))
+		{
+			$list[$pid]=1;
+			$msg .="add";
+		}
+		else 
+		{
+			$list[$pid] +=1;
+			$msg .="modify";
+		}
+		$this -> session -> set_userdata('pidlist',$list);
+		
+		print "{success:true,msg:'".$msg."'}";
+		
+		
+	}
+	
+	public function foo($p="default")
+	{
+	   print "foo";
+	}
+
 	public function testq()
 	{
-		
-		$this -> appcfg_model ->q();
+		print_r ($this -> appcfg_model ->q());
 	}
 
 	public function index() {
-
+		return;
 		$options = array(
 		  'code' => $this -> input -> post('code'), 
 		  'v' => $this -> input -> post('v')
@@ -46,8 +85,8 @@ class app extends CI_Controller {
 		return;
 
 
-
 	}
+
 
 	public function add() {
 
