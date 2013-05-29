@@ -1,0 +1,39 @@
+2013/5/28
+
+.htaccess
+	
+	RewriteEngine on
+	RewriteCond $1 !^(index\.php|images|includes|robots\.txt|$)
+	RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+application -> config
+
+	$config['base_url']	= '';
+	
+application -> routes
+
+	$route['default_controller'] = "welcome";
+	$route['app/add']="app/add";
+	
+view -> app -> frmsuccess.php
+
+	<?=base_url()?>
+	<?php  
+	  print_r($result);
+	?>
+	{result}
+	
+controllers -> app.php
+
+		$this -> load -> helper('form');
+		$this -> load -> helper('url');
+		$this -> load -> library('form_validation');
+		$this->load->library('parser');
+		
+		$data=array('result'=>$appcfg);
+		//$data['baseurl']=base_url();
+		//$this->parser->parse('app/frmsuccess',$data);
+		$this -> load -> view('app/frmsuccess',$data);
+		
+
+

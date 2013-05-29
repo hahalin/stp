@@ -1,0 +1,6 @@
+
+#http://www.codeigniter.org.tw/forum/viewtopic.php?f=6&t=2756#p3141
+
+RewriteEngine on
+RewriteCond $1 !^(index\.php|images|includes|robots\.txt|$)
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
