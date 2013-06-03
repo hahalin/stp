@@ -6,13 +6,15 @@ $(function () {
     baseUrl : '/ci_sock/part_one/',
     maxCharacters: 320,
     maxPostsPerPage : 5,
-
+	getbaseurl:function(){
+		alert(this.baseUrl);
+	},
     init: function () {
       this.setElements();
       this.bindEvents();
       this.setupComponents();
     },
-
+	
     // Cache all the jQuery selectors for easy reference.
     setElements: function () {
       this.$messageBox = $('#txtNewMessage');

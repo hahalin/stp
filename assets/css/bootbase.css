@@ -1,0 +1,25 @@
+#menu
+{
+	display:block;
+}
+
+#menu li 
+{
+	
+	border:dashed gray 2px;
+	padding:3px;
+	
+}
+
+#menu li a {
+   
+   display: block;
+		
+}
+.col_1, .col_2, .col_3, .col_4, .col_5 {
+	display: inline;
+	float: left;
+	position: relative;
+	margin-left: 5px;
+	margin-right: 5px;
+}

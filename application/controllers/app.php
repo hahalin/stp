@@ -8,10 +8,29 @@ class app extends CI_Controller {
 		parent::__construct();
 		$this -> load -> model('appcfg_model');
 	}
+	
+	public function printsess()
+	{
+		$this -> load -> library('session');
+		print_r($this->session->userdata);
+	}
+
+	public function setstyle()
+	{
+		$s=urlencode($this->input->post('style'));
+		$this -> load -> library('session');
+		$this->session->set_userdata('style',$s);
+	} 
+	public function getstyle()
+	{
+		$this -> load -> library('session');
+		print $this->session->userdata('style');
+		return $this->session->userdata('style');
+	}
 
 	public function prodlist()
 	{
-		$this -> load -> helper('url');
+		//$this -> load -> helper('url');
 		$this->load->library('parser');
 		$this->load->view('prodlist');
 		
@@ -55,6 +74,8 @@ class app extends CI_Controller {
 	}
 
 	public function index() {
+		$this -> load -> view('main');
+		return;
 		return;
 		$options = array(
 		  'code' => $this -> input -> post('code'), 

@@ -1,0 +1,143 @@
+body {
+
+	padding: 0;
+	margin: 0;
+	position: relative;
+	background-color: #ccc;
+	background-color: white;
+}
+
+div {
+	display: block;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, font, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, dl, dt, dd, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+	/*  ol, ul, li, */
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+.clear {
+	clear: both;
+}
+
+#wrapper {
+	width: 100%;
+	border: 0px dashed #666;
+}
+
+#header {
+	padding: 0;
+	border: 0px dashed #aaa;
+	
+	display:block;
+	width:982px;
+	margin:0 auto;
+}
+
+#head {
+	width: 1000px;
+	margin: 0 auto;
+	border: 0px dashed yellow;
+}
+
+#logo {
+	margin: 25px 5px 15px 15px;
+	float: left;
+	position: relative;
+}
+
+#logo label {
+	position: absolute;
+	left: 0;
+	top: -30px;
+}
+
+#logo label {
+	left: 0px;
+	top: 0px;
+	width: 200px;
+	display: block;
+	float: left;
+	color: #fff;
+	text-shadow: 1px 1px #333;
+	text-shadow: 1px 2px 3px #666;
+	font-size: 20px;
+}
+
+
+#cssswitcher
+{
+	width:200px;
+	display:block;
+	position:relative;
+	left:0px;
+	margin-top:100px;
+	margin-left:-250px;
+	float:left;
+	
+}
+
+#container {
+	width: 1000px;
+	margin: 0 auto;
+	background-color: #fff;
+}
+
+#intro {
+	padding: 15px 20px;
+	font-size: 1.0em;
+	height:155px;
+	color: #444;
+	background: #fff;
+	text-align: justify;
+}
+
+#wrap {
+	float: left;
+	width: 950px;
+	padding: 10px 15px 15px 15px;
+	background: #fff;
+	box-shadow: 0 2px 8px #999;
+	margin-bottom: 10px;
+}
+
+#page-content {
+	float: left;
+	width: 645px;
+	width: 630px;
+	margin: 5px 0px 0px 0px ;
+	
+	border: green dashed 2px;
+	position:relative;
+	top:-10px;
+	left:300px;
+}
+
+.fullwidth{width:1000px !important;padding:5px}
+
+#sidebar {
+	padding-top: 5px;
+	/*margin-left: 660px;*
+	 float:left; 
+	 */
+	width: 290px;
+	border: orange 2px dashed;
+}
+
+#footer {
+	clear: both;
+}
+
+#footer div {
+	margin: 0 auto;
+	width: 980px;
+}
+

@@ -1,0 +1,133 @@
+#tabswrapper #tabs{
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ 
+#tabswrapper #tabs li{
+  float: left;
+  margin: 0 .5em 0 0;
+}
+
+#tabswrapper #tabs li
+{
+	width:115px;
+	line-height:22px;
+}
+ 
+#tabswrapper #tabs li:first-child
+{
+	margin-left:20px;
+	
+}
+
+#tabswrapper #tabs 
+{
+	 margin-left:5px;
+}
+ 
+#tabswrapper #tabs a{
+  position: relative;
+  background: #ddd;
+  background-image: linear-gradient(to bottom, #fff, #ddd);
+  /*padding: .7em 3.5em;*/
+  text-align:center;
+  padding-top:.7em;
+  padding-bottom:.7em;
+  padding-top:.5em;
+  padding-bottom:.5em;
+  width:8em;
+  float: left;
+  text-decoration: none;
+  color: #444;
+  text-shadow: 0 1px 0 rgba(255,255,255,.8);
+  
+  -moz-border-radius: 5px 0 0 0;
+  -webkit-border-radius: 5px 0 0 0;
+  
+  border-radius: 5px 0 0 0;
+  
+  box-shadow: 0 3px 3px rgba(0,0,0,.4);
+}
+ 
+#tabswrapper #tabs a:hover,
+#tabswrapper #tabs a:hover::after,
+#tabswrapper #tabs a:focus,
+#tabswrapper #tabs a:focus::after{
+  background: #fff;
+}
+ 
+#tabswrapper #tabs a:focus{
+  outline: 0;
+}
+ 
+#tabswrapper #tabs a::after{
+  content:'';
+  position:absolute;
+  z-index: 1;
+  top: 0;
+  right: -.5em;
+  bottom: 0;
+  width: 1em;
+  background: #ddd;
+  background-image: linear-gradient(to bottom, #fff, #ddd);
+  box-shadow: 2px 2px 2px rgba(0,0,0,.4);
+  transform: skew(10deg);
+  border-radius: 0 5px 0 0;
+}
+ 
+#tabswrapper #tabs #current a,
+#tabswrapper #tabs #current a::after{
+  background: #fff;
+  z-index: 3;
+}
+
+#tabs-content #tab1,
+#tabs-content #tab2,
+#tabs-content #tab3,
+#tabs-content #tab4,
+#tabs-content #tab5
+{
+	/*border-radius: 0px 5px 5px 5px;*/
+	display:inline-table;
+	
+} 
+
+#tabswrapper.dropdown_4columns 
+{
+	
+	
+	width:600px;
+}
+
+#tabswrapper #tabs-content
+{
+	
+    background: #fff;
+    padding: 1em;
+    /*height: 220px;*/
+   
+    bottom:1px;
+    overflow:visible;
+    /*display:table-row;*/
+   
+    position: relative;
+    z-index: 2;
+
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    
+    box-shadow: 3px 3px 3px rgba(20%,20%,40%,0.5);
+    box-shadow: -5px -5px 6px #888;
+    box-shadow: -5px -5px 6px rgba(0,0,0,.4);
+    
+    /* box-shadow: 4px 4px 3px rgba(20%,20%,40%,0.5);
+     box-shadow: 0 0px 0px 2px rgba(0, 0, 0, .5);
+     */
+    margin-right:5px;
+    margin-left:5px;
+    
+}

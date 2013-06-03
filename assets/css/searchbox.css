@@ -1,0 +1,136 @@
+/*
+ * http://www.bloggermint.com/demos/css3searchbox/
+ */
+
+#search_head {
+	display: block;
+	float: left;
+	height: 35px;
+	/*
+	 position:absolute;
+	 left:0;
+	 top:0;
+	 */
+}
+
+#menu li.menu_right 
+{
+	border:0;
+}
+
+#white {
+	/*
+	height: 28px;
+	padding: 0px 0px;
+	margin: 0;
+	display: block;
+	border:0;
+	*/
+	border-width:1px;
+	
+}
+
+.menu_right
+{
+	
+}
+
+#white #search {
+
+}
+#white form
+{
+	margin-top:0;
+	display:block;
+	
+	
+}
+#white #search input[type="text"] {
+	background: url("../images/search-white.png") no-repeat 10px 6px #fcfcfc;
+	
+	border: 1px solid #d1d1d1;
+	font: bold 12px Arial, Helvetica, Sans-serif;
+	color: #bebebe;
+	width: 150px;
+	padding: 6px 15px 6px 35px;
+	padding:0;
+	padding-left:35px;
+	padding-bottom:5px;
+	height:25px;
+	
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) inset;
+	-webkit-transition: all 0.7s ease 0s;
+	-moz-transition: all 0.7s ease 0s;
+	-o-transition: all 0.7s ease 0s;
+	transition: all 0.7s ease 0s;
+	font-size:16px;
+	display:inline-block;
+	
+	
+}
+
+#white #search input[type="text"]:focus {
+	width: 250px;
+	display:inline-block;
+	
+	
+}
+
+#apple {
+	height: 28px;
+	/*padding: 40px 160px;*/
+	background: #555;
+	position: relative;
+	float: left;
+	top: -5px;
+	height: 35px;
+	padding: 0px 5px;
+	margin-bottom: 50px;
+	display: block;
+	display: inline;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+}
+
+#apple #search {
+
+}
+
+#apple #search input[type="text"] {
+	background: url("../images/search-white.png") no-repeat 10px 6px #444;
+	border: 0 none;
+	font: bold 12px Arial, Helvetica, Sans-serif;
+	color: #d7d7d7;
+	width: 150px;
+	/* padding: 6px 15px 6px 35px;*/
+	padding-left: 35px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+	-webkit-transition: all 0.7s ease 0s;
+	-moz-transition: all 0.7s ease 0s;
+	-o-transition: all 0.7s ease 0s;
+	transition: all 0.7s ease 0s;
+	font-size: 16px;
+}
+
+#apple #search input[type="text"]:focus {
+	background: url("../images/search-dark.png") no-repeat 10px 6px #fcfcfc;
+	color: #6a6f75;
+	width: 200px;
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset;
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
