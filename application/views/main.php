@@ -60,7 +60,8 @@
 	</head>
 
 	<body>
-
+		
+		<?php if (isset($is_admin) && $is_admin) : ?>
 		<div class="navbar">
 			<div class="navbar-inner">
 				<div class="container-fluid">
@@ -94,7 +95,9 @@
 						</div>
 					</ul>
 					<div class="btn-group pull-right">
-						<?php $is_admin=true; if ($is_admin) :
+						<?php 
+						//$is_admin=false; 
+						if (isset($is_admin) && $is_admin) :
 						?>
 						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <i class="icon-wrench"></i> admin <span class="caret"></span> </a>
 						<ul class="dropdown-menu">
@@ -116,6 +119,7 @@
 			<!--/.navbar-inner -->
 		</div>
 		<!--/.navbar -->
+		<?php endif; ?>
 
 		<div id="wrapper">
 			<div id="header">
@@ -139,8 +143,8 @@
 
 				</div>
 				
-				<?php if ($is_admin):?>
-				<div class="navbar" style="float:right;">
+				<?php if (isset($isLoggedIn) && $isLoggedIn) : ?>
+				<div class="navbar" style="float:right;margin-top:25px;">
 							<div class="navbar-inner" style="float:left;position:relative;">
 							<div class="container-fluid">
 
@@ -151,18 +155,37 @@
 									切換模版 <span class="caret"></span>
 								</a>
 									<ul class="dropdown-menu" id="styleul">
-										<li value="bootstrap"><a href=#>素顏</a></li>
-										<li value="gray"><a href=#>略施脂粉</a></li>
-										<li value="default" class="active"><a href=#>樸素淡妝</a></li>
+										<li value="bootstrap"><a href=#><i></i>素顏</a></li>
+										<li value="gray"><a href=#><i></i>略施脂粉</a></li>
+										<li value="default" class="active"><a href=#><i></i>樸素淡妝</a></li>
+									</ul>
+								</li>
+								
+								<li class="divider-vertical"></li>
+								
+								<li class="dropdown">
+									<a href="#" data-toggle="dropdown" class="dropdown-toogle">
+										<i class="icon-user"></i>用戶專區
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu">
+										<li><a href=# ><i class="icon-pencil"></i>設定</a></li>
+										<li><a href=# ><i class="icon-off"></i>登出</a></li>
 									</ul>
 								</li>
 								
 								
-								<li>
-									<a href="#"><i class="icon-user"></i>用戶專區</a>
-								</li>
-								<li class="divider-vertical"></li>
-								
+								<style>
+									.dropdown-menu li a span:first-of-type
+										{
+											padding-left:10px;	
+										}
+									.dropdown-menu li a span:first-of-type::after
+									{
+										content:' ';
+									}										
+										
+								</style>									
 									
 								<li class="dropdown">
 									<a href="#" data-toggle="dropdown" class="dropdown-toogle">
@@ -170,16 +193,20 @@
 									交易信息
 									<b class="caret"></b>	
 									</a>
-									<ul class="dropdown-menu">
-										<li class="nav-header" style="font-size:1.2em;">
+									<!-- style="font-size:12px;" 
+										font-size:1.2em;
+										-->
+									<ul class="dropdown-menu" style="">
+										<li class="nav-header" style="">
 											RFQ
 										</li>
-										<li><a href=# ><i class="icon-th-list"></i>aa</a></li>
-										<li><a href=#><i class="icon-th"></i>bb</a></li>
+										<li><a href=# ><i class="icon-th-list"></i><span>未回覆</span><span class="badge badge-warning">7</span></a></li>
+										<li><a href=#><i class="icon-check"></i><span>已回覆</span><span class="badge badge-important">6</span></a></li>
 										<li class="divider"></li>
 										<li class="nav-header" style="font-size:1.2em;">詢價</li>
-										<li><a href=#><i class="icon-tasks"></i>aa</a></li>
-										<li><a href=#><i class="icon-folder-open"></i>aa</a></li>
+										<li><a href=#><i class=" icon-bell"></i><span>超過三天</span></span><span class="badge badge-warning">5</span></a></li>
+										<li><a href=#><i class="icon-tasks"></i><span>新進詢價</span><span class="badge badge-important">16</span></a></li>
+										
 										</ul>
 									
 								</li>
@@ -207,7 +234,7 @@
 						<div class="controlgroup">
 							<label class="cotrol-label"> PASSWORD</label>
 							<div class="controls">
-								<input type="password" />
+								<input type="password" id="pwd" />
 							</div>
 							</input>
 						</div>
@@ -994,16 +1021,16 @@ foreach ($subtree as $subt) {
 				</div>
 				<div id="main_content">
 					<header>
-
-						<span class="list-style-buttons"> <a href="#" id="gridview" class="switcher"> <img src="images/grid-view.png" alt="Grid"></a> <a href="#" id="listview" class="switcher active"> <img src="images/list-view-active.png" alt="List"> </a> </span>
+												
+						<span class="list-style-buttons"> <a href="#" id="gridview" class="switcher"> <img src="<?php echo base_url(); ?>images/grid-view.png" alt="Grid"></a> <a href="#" id="listview" class="switcher active"> <img src="<?php echo base_url(); ?>images/list-view-active.png" alt="List"> </a> </span>
 						<h1>Our Products</h1>
 					</header>
-
 					<ul id="products" class="list clearfix">
 						<!-- row 1 -->
 						<li class="clearfix">
 							<section class="left">
-								<img src="images/products/list-default-thumb.png" alt="default thumb" class="thumb">
+								
+								<img src="http://placehold.it/190X120" alt="default thumb" class="thumb">
 								<h3>Product Name</h3>
 								<span class="meta">Product ID: 543J423</span>
 							</section>

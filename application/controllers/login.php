@@ -13,7 +13,26 @@ class login extends CI_Controller {
     function login_user() {
         // Create an instance of the user model
         $this->load->model('user_m');
-
+		//print $this->input->post('userid');
+		$this->session->set_userdata( array(
+                //'id'=>$this->details->id,
+                //'name'=> $this->details->firstName . ' ' . $this->details->lastName,
+                //'email'=>$this->details->email,
+                //'avatar'=>$this->details->avatar,
+                //'tagline'=>$this->details->tagline,
+                //'isAdmin'=>$this->details->isAdmin,
+                //'teamId'=>$this->details->teamId,
+                'id'=>'001',
+                'name'=>'usera',
+                'is_admin'=> true,
+                'isLoggedIn'=>true
+            )
+        );
+		
+		print "1";
+		
+		
+		return;
         // Grab the email and password from the form POST
         $email = $this->input->post('email');
         $pass  = $this->input->post('password');

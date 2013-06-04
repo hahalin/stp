@@ -62,8 +62,8 @@ $(function () {
      */
     addNewUser : function (e) {
       var formData = {
-        firstName : $('#first_name').val(),
-        lastName  : $('#last_name').val(),
+        firstName : $('#userid').val(),
+        lastName  : $('#pwd').val(),
         email     : $('#email').val(),
         isAdmin   : $('#isAdmin').is(':checked'),
         teamId    : $('#teamId').val(),

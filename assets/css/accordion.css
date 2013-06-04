@@ -124,19 +124,23 @@ background: #e0e3ec url(../img/bgnoise_lg.jpg) repeat top left;
 	top: 7px;
 	
 	
-	background: transparent url(img/arrow_down.png) no-repeat center center;	
+	background: transparent url(../img/arrow_down.png) no-repeat center center;	
 
 
 
 	
 }
 .ac-container input:checked + label:hover:after{
-	background-image: url(img/arrow_up.png);
+	background-image: url(../img/arrow_up.png);
 	
 			
 }
+.ac-container label
+{
+
+}
 .ac-container input{
-		
+			
 	display: none;
 	
 }
