@@ -12,6 +12,15 @@ class utility extends CI_Controller {
 		//$this -> load -> model('appcfg_model');
 	}
 
+	public function genpwd()
+	{
+		$bcrypt = new Bcrypt(15);
+
+		$hash = $bcrypt->hash('pwd');
+		
+		print $hash;		
+	}
+
 	public function sAPPPATH()
 	{
 		$bcrypt = new Bcrypt(15);
