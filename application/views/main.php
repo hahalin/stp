@@ -1070,7 +1070,7 @@ if (isset($is_admin) && $is_admin) :
 
 		<div class="clear" ></div>
 		<div id="breadcrumb" style="">
-				<ul id="breadcrumbs-one">
+				<ul id="breadcrumbs-two">
 					<li>
 						<a href="">首頁</a>
 					</li>
