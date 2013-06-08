@@ -21,7 +21,7 @@ class app extends CI_Controller {
 		$data['user_name']=$user_name;
 		$data['is_admin']=$is_admin;
 		$data['isLoggedIn']=$isLoggedIn;
-		
+		$this -> load -> helper('form');
 		$this -> load -> view('main',$data);
 		
 		return;

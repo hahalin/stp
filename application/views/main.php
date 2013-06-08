@@ -239,6 +239,7 @@ if (isset($is_admin) && $is_admin) :
 			<ul class="dropdown-menu" style="">
 			<li class="nav-header" style="">
 			作業中RFQ
+				<div id="testdiv" style="display:block;border:1px dashed gray;width:250px;height:100px;position:absolute;left:-250px;top:normal;margin-right:65px;"
 			</li>
 			<li><a href="rfq" ><i class="icon-th-list"></i><span>清單</span><span class="badge badge-warning">7</span></a></li>
 			<li class="divider"></li>

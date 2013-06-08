@@ -28,7 +28,7 @@ class login extends CI_Controller {
                 'isLoggedIn'=>true
             )
         );
-		
+		redirect('app');
 		print "1";
 		
 		
