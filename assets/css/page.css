@@ -30,7 +30,11 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 #wrapper {
 	width: 100%;
+	width:1200px;
+	
 	border: 0px dashed #666;
+	margin:0 auto;
+	display:block;
 }
 
 #header {
@@ -107,6 +111,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	background: #fff;
 	box-shadow: 0 2px 8px #999;
 	margin-bottom: 10px;
+	
 }
 
 #page-content {

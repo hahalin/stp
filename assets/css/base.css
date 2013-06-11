@@ -4,6 +4,17 @@
 	clear:both;
 }
 
+#contenta
+{
+	padding: 0;
+	border: 0px dashed #aaa;
+	display: block;
+	width: 1000px;
+	margin: 0 auto;
+	position:relative;
+	display:block;
+}
+
 #content
 {
 	z-index:0;
@@ -21,12 +32,11 @@
 	 * 
 	border:5px #999 dashed; 
 	*/
+	padding:5px;	
 	margin: 0px auto 0px auto;
-	
+	margin:0 auto;
 	display:block;
 	position:relative;
-	
-	padding:5px;
 	
 }
 

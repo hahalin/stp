@@ -58,6 +58,7 @@
 	</head>
 
 	<body>
+  
 
 		<?php if (isset($is_admin) && $is_admin) : ?>
 		<div class="navbar">
@@ -103,11 +104,10 @@
 					</ul>
 
 					<div class="btn-group pull-right">
-						<?php
-//$is_admin=false;
-if (isset($is_admin) && $is_admin) :
-						?>
-						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <i class="icon-wrench"></i> admin <span class="caret"></span> </a>
+						
+		<?php if (isset($is_admin) && $is_admin) : ?>
+
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <i class="icon-wrench"></i> admin <span class="caret"></span> </a>
 						<ul class="dropdown-menu">
 						<li>
 						<a data-toggle="modal" href="#myModal"><i class="icon-user"></i> New User</a>
@@ -130,29 +130,11 @@ if (isset($is_admin) && $is_admin) :
 		<?php endif; ?>
 
 		 
-		
-			<!--
-			<a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> User</a>
-			<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-			 <span class="caret"></span></a>
-			<ul class="dropdown-menu">
-			<li>
-			<a href="#"><i class="icon-pencil"></i> Edit</a>
-			</li>
-			<li>
-			<a href="#"><i class="icon-trash"></i> Delete</a>
-			</li>
-			<li>
-			<a href="#"><i class="icon-ban-circle"></i> Ban</a>
-			</li>
-			<li class="divider"></li>
-			<li>
-			<a href="#"><i class="i"></i> Make admin</a>
-			</li>
-			</ul>
-			-->
-
-			<div id="wrapper">
+		<div id="wrapper">
+				
+			
+        <!-- header div -->					
+				
 			<div id="header">
 			<div id="head">
 			<div id="logo">
@@ -182,6 +164,7 @@ if (isset($is_admin) && $is_admin) :
 			<ul class="nav" style="border:0px dashed red;">
 
 			<style>
+			
 				#styleul li a span:first-of-type {
 					padding-left: 10px;
 				}
@@ -190,20 +173,20 @@ if (isset($is_admin) && $is_admin) :
 				}
 
 			</style>
-
 			<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href=#>
-			切換模版 <span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu" id="styleul">
-			<li value="default" class="active"><a href=#><i></i><span>樸素淡妝</span></a></li>
-			<li value="gray"><a href=#><i></i><span>略施脂粉</span></a></li>
-			<li value="bootstrap"><a href=#><i></i><span>素顏</span></a></li>
-
-			</ul>
+				<a class="dropdown-toggle" data-toggle="dropdown" href=#>
+				切換模版 <span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu" id="styleul">
+					<li value="default" class="active"><a href=#><i></i><span>樸素淡妝</span></a></li>
+					<li value="gray"><a href=#><i></i><span>略施脂粉</span></a></li>
+					<li value="bootstrap"><a href=#><i></i><span>素顏</span></a></li>
+				</ul>
 			</li>
-
 			<li class="divider-vertical"></li>
+			<li>
+				<a href=#><span style="font-weight:500;font-size:18px;"><?php print $user_name; ?></span></a>				
+			</li>
 
 			<style>
 				.dropdown-menu li a span:first-of-type {
@@ -225,38 +208,46 @@ if (isset($is_admin) && $is_admin) :
 			<li><a href="login/logout_user" ><i class="icon-off"></i><span>登出</span></a></li>
 			</ul>
 			</li>
-
+			
+			
 
 			<li class="dropdown">
-			<a href="#" data-toggle="dropdown" class="dropdown-toogle">
-			<i class="icon-book"></i>
-			交易信息
-			<b class="caret"></b>
-			</a>
-			<!-- style="font-size:12px;"
-			font-size:1.2em;
-			-->
-			<ul class="dropdown-menu" style="">
-			<li class="nav-header" style="">
-			作業中RFQ
-				<div id="testdiv" style="display:block;border:1px dashed gray;width:250px;height:100px;position:absolute;left:-250px;top:normal;margin-right:65px;"
-			</li>
-			<li><a href="rfq" ><i class="icon-th-list"></i><span>清單</span><span class="badge badge-warning">7</span></a></li>
-			<li class="divider"></li>
-			<li class="nav-header" style="">
-			已發送RFQ
-			</li>
-			<li><a href=# ><i class="icon-th-list"></i><span>未回覆</span><span class="badge badge-warning">7</span></a></li>
-			<li><a href=#><i class="icon-check"></i><span>已回覆</span><span class="badge badge-important">6</span></a></li>
-			<li class="divider"></li>
-			<li class="nav-header" style="">
-			客戶詢價
-			</li>
-			<li><a href=#><i class=" icon-bell"></i><span>超過三天</span></span><span class="badge badge-warning">5</span></a></li>
-			<li><a href=#><i class="icon-tasks"></i><span>新進詢價</span><span class="badge badge-important">16</span></a></li>
-
-			</ul>
-
+				<a href="#" data-toggle="dropdown" class="dropdown-toogle">
+				<i class="icon-book"></i>
+				交易信息
+				<b class="caret"></b>
+				</a>
+				<ul class="dropdown-menu" style="">
+					<li class="nav-header" style="">
+					作業中RFQ
+					</li>
+					<li>
+						<a href="#" id="a-active-rfq" >
+							<i class="icon-th-list"></i>
+							<span>清單</span>
+							<span class="badge badge-warning">7</span>
+						</a>
+						
+						<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+ 						<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+						
+					</li>
+					<li class="divider"></li>
+					<li class="nav-header" style="">
+						已發送RFQ
+					</li>
+					<li><a href=# ><i class="icon-th-list"></i><span>未回覆</span><span class="badge badge-warning">7</span></a></li>
+					<li><a href=#><i class="icon-check"></i><span>已回覆</span><span class="badge badge-important">6</span></a></li>
+					<li class="divider"></li>
+					<li class="nav-header" style="">
+						客戶詢價
+					</li>
+					<li><a href=#><i class=" icon-bell"></i><span>超過三天</span></span><span class="badge badge-warning">5</span></a></li>
+					<li><a href=#><i class="icon-tasks"></i><span>新進詢價</span><span class="badge badge-important">16</span></a></li>
+				</ul>
+				
+				
+				
 			</li>
 
 			</ul>
@@ -310,7 +301,12 @@ if (isset($is_admin) && $is_admin) :
 			
 			</div>
 
+		<!-- /header div -->
+			
 			<div class="clear"></div>
+			
+		<!-- menu div -->
+			
 			<ul id="menu">
 			<li class="menu_right" style="background-color:transparent;margin:0;padding:0;margin-top:3px;margin-bottom:3px;">
 
@@ -1068,29 +1064,25 @@ if (isset($is_admin) && $is_admin) :
 		<div class="clear"></div>
 
 		<!-- style="width:1000px;margin:0 auto;padding:5px;" -->
-
-		<div class="clear" ></div>
-		<div id="breadcrumb" style="">
-				<ul id="breadcrumbs-two">
-					<li>
-						<a href="">首頁</a>
-					</li>
-					<li>
-						<a href="">節點2</a>
-					</li>
-					<li>
-						<a href="" class="current">Current</a>
-					</li>
-				</ul>
+			
+		<div id="breadcrumb" >
+			<ul class="breadcrumb" style="padding:10px;">
+				<li><a href="#">首頁</a> <span class="divider">/</span></li>
+				<li><a href="#">商品分類</a> <span class="divider">/</span></li>
+				<li class="active">分類1 </li>
+			</ul>
 		</div>
-		<div class="clear"></div>
-		<div id="content">
+		
+		
+		<div id="content" >
 
 			
-			<div id="navi">
+		<div id="navi" >
+			
+		</div>
 
-			</div>
-			<div id="main_content">
+		<!-- main_content div -->
+		<div id="main_content" >
 				<header>
 
 					<span class="list-style-buttons"> <a href="#" id="gridview" class="switcher"> <img src="<?php echo base_url(); ?>images/grid-view.png" alt="Grid"></a> <a href="#" id="listview" class="switcher active"> <img src="<?php echo base_url(); ?>images/list-view-active.png" alt="List"> </a> </span>
@@ -1233,13 +1225,115 @@ if (isset($is_admin) && $is_admin) :
 					</li>
 
 				</ul>
+				
+				<!-- pagination div -->
+				<div style="clear:both;overflow:hidden;height:1%;"></div>
+				
+				<div class="pagination pagination-large pagination-centered">
+						<ul >
+							<li><a href="#">«</a></li>
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">»</a></li>
+						</ul>
+				</div><!-- /pagination div -->
+				
+		</div><!-- /main_content div -->
+		
 
-			</div>
-			<div style="clear:both;overflow:hidden;height:1%;"></div>
-		</div>
+		</div>  <!-- /content div -->
 
-		</div>
-		</div>
+
+		</div>  <!-- /main_content -->
+		
+		</div>  <!-- /wrapper -->
+		
+		
+		<!-- ****************************************************************** -->
+  <!--                        Active RFQ List Window                       -->
+  <!-- ****************************************************************** -->
+
+
+	<div id="dv-active-rfq-list"  style="position:absolute;display:none;">
+										<h3>RFQ清單</h3>
+										<span class="closediv" class="tooltip" title="關閉" type="button" class="close" data-dismiss="modal" aria-hidden="true">
+											<!--
+											<i class="icon-remove"></i>
+											-->
+										</span>
+										<div style="margin-left:10px;margin-right:10px;background:white;" >
+										<table id="tb-rfq-list" class="table table-striped table-bordered table-hover">
+											<thead>
+												<tr>
+												<th colspan="4" rowspan="1" style='text-align:center;vertical-align:middle'>
+													<h4>單號:20130606001 &nbsp;&nbsp;日期:2013-06-06</h4>
+												</th>
+												</tr>		
+												<tr>
+													<th style="width:10px;">#</th>
+													<th style="width:50px;">商品編號</th>
+													<th style="width:70px;">供應商</th>
+													<th style="width:70px;">聯絡人</th>
+												</tr>
+											</thead>
+
+											<tbody>
+												<tr>
+													<td>1</td>
+													<td><a href=#>Prod001</a></td>
+													<td><a href=#>Suppliera</a></td>
+													<td><a href=#>Contact</a></td>
+												</tr>
+												<tr>
+													<td>2</td>
+													<td><a href=#>Prod001</a></td>
+													<td><a href=#>Suppliera</a></td>
+													<td><a href=#>Contact</a></td>
+												</tr>
+												<tr>
+													<td>3</td>
+													<td><a href=#>Prod001</a></td>
+													<td><a href=#>Suppliera</a></td>
+													<td><a href=#>Contact</a></td>
+												</tr>
+												<tr>
+													<td>4</td>
+													<td><a href=#>Prod001</a></td>
+													<td><a href=#>Suppliera</a></td>
+													<td><a href=#>Contact</a></td>
+												</tr>
+												<tr>
+													<td>5</td>
+													<td><a href=#>Prod001</a></td>
+													<td><a href=#>Suppliera</a></td>
+													<td><a href=#>Contact</a></td>
+												</tr>
+												<tr>
+													<td>6</td>
+													<td><a href=#>Prod001</a></td>
+													<td><a href=#>Suppliera</a></td>
+													<td><a href=#>Contact</a></td>
+												</tr>
+												<tr>
+													<td>7</td>
+													<td><a href=#>Prod001</a></td>
+													<td><a href=#>Suppliera</a></td>
+													<td><a href=#>Contact</a></td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<th colspan="4" rowspan="1">總計:7筆</th>
+													
+												</tr>
+											</tfoot>
+										</table>
+										</div>
+	</div>
+		
 	</body>
 	<!--
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>

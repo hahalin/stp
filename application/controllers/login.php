@@ -3,8 +3,10 @@
 class login extends CI_Controller {
 
     function index() {
+            redirect('app');
+return;
         if( $this->session->userdata('isLoggedIn') ) {
-            redirect('/main/show_main');
+            redirect('app');
         } else {
             $this->show_login(false);
         }

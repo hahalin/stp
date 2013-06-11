@@ -7,7 +7,7 @@ class app extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->library('jsondata');
-		$this -> load -> model('appcfg_model');
+		//$this -> load -> model('appcfg_model');
 	}
 	
 	public function index() {
@@ -16,11 +16,17 @@ class app extends CI_Controller {
 		$user_name = $this->session->userdata('name');
     	$is_admin = $this->session->userdata('is_admin');
     	$isLoggedIn = $this->session->userdata('isLoggedIn');
+                
+                $isLoggedIn =1;
+                $is_admin=0;	
+                $user_id=2;
+                $user_name="TestUser";	
 		
-		$data['user_id']=$user_id;
+                $data['user_id']=$user_id;
 		$data['user_name']=$user_name;
 		$data['is_admin']=$is_admin;
 		$data['isLoggedIn']=$isLoggedIn;
+
 		$this -> load -> helper('form');
 		$this -> load -> view('main',$data);
 		
