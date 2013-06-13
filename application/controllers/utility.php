@@ -17,7 +17,7 @@ class utility extends CI_Controller {
 	
 	public function utest2()
 	{
-	  echo "utest2 ";	
+	  echo "utest2   ddd";	
 	}
 	
 	public function utest()
