@@ -12,7 +12,7 @@ RewriteEngine on
 #RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteCond %{REQUEST_FILENAME} !-d
 
-RewriteCond $1 !^(index\.php|main\.php|main2\.php|main2\.js|assets|images|img|includes|robots\.txt|$)
+RewriteCond $1 !^(index\.php|main\.php|main2\.php|main2\.js|user_guide|assets|images|img|includes|robots\.txt|$)
 
 #RewriteCond $1 !^(index\.php|images|robots\.txt|application\/views)
 
