@@ -28,7 +28,8 @@
 {
 	/*height:500px;*/
 	display:inline-table;
-	
+	width:100%;
+	display:block;
 	
 }
 #products a
@@ -150,10 +151,13 @@ ul.grid li {
 	display: block;
 	float: left;
 	width: 220px;
+	width: 210px;
 	height: 200px;
 	border-right: 1px solid #b6bdbe;
 	padding: 5px 22px;
+	padding: 5px 18px;
 	margin-bottom: 20px;
+	margin-bottom: 15px;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;

@@ -114,18 +114,18 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 
-INSERT INTO `user` VALUES (1,'vendera@example.com','$2a$15$rpykUpPDlnswE3yk3zzb4esBVfTibID3OjYqaKpDTM4fhz220N/7e','vendera','vender','assassin_avatar','',1,0);
+INSERT INTO `user` VALUES (1,'vendera@example.com','$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq','vendera','vender','assassin_avatar','',1,0);
 
-INSERT INTO `user` VALUES (1,'venderb@example.com','$2a$15$rpykUpPDlnswE3yk3zzb4esBVfTibID3OjYqaKpDTM4fhz220N/7e','venderb','vender','assassin_avatar','',1,0);
+INSERT INTO `user` VALUES (2,'venderb@example.com','$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq','venderb','vender','assassin_avatar','',1,0);
 
-INSERT INTO `user` VALUES (1,'venderc@example.com','$2a$15$rpykUpPDlnswE3yk3zzb4esBVfTibID3OjYqaKpDTM4fhz220N/7e','venderc','vender','assassin_avatar','',1,0);
+INSERT INTO `user` VALUES (3,'venderc@example.com','$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq','venderc','vender','assassin_avatar','',1,0);
 
 
-INSERT INTO `user` VALUES (1,'buyera@example.com','$2a$15$rpykUpPDlnswE3yk3zzb4esBVfTibID3OjYqaKpDTM4fhz220N/7e','buyera','buyer','assassin_avatar','',1,0);
+INSERT INTO `user` VALUES (4,'buyera@example.com','$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq','buyera','buyer','assassin_avatar','',1,0);
 
-INSERT INTO `user` VALUES (1,'buyerb@example.com','$2a$15$rpykUpPDlnswE3yk3zzb4esBVfTibID3OjYqaKpDTM4fhz220N/7e','buyerb','buyer','assassin_avatar','',1,0);
+INSERT INTO `user` VALUES (5,'buyerb@example.com','$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq','buyerb','buyer','assassin_avatar','',1,0);
 
-INSERT INTO `user` VALUES (1,'buyerc@example.com','$2a$15$rpykUpPDlnswE3yk3zzb4esBVfTibID3OjYqaKpDTM4fhz220N/7e','buyerc','buyer','assassin_avatar','',1,0);
+INSERT INTO `user` VALUES (6,'buyerc@example.com','$2y$07$BCryptRequires22Chrcte/VlQH0piJtjXl.0t1XkA8pw9dMXTpOq','buyerc','buyer','assassin_avatar','',1,0);
 
 
 

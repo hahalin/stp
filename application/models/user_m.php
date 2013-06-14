@@ -10,9 +10,11 @@ class user_m extends CI_Model {
         // based on the received username and password
         $this->db->from('user');
         $this->db->where('email',$email );
-        $this->db->where( 'password', sha1($password) );
+        //$this->db->where( 'password', sha1($password) );
+        $this->db->where( 'password', $password );
         $login = $this->db->get()->result();
-
+		//print $email." ".$password." ";
+		//print_r($login);
         // The results of the query are stored in $login.
         // If a value exists, then the user account exists and is validated
         if ( is_array($login) && count($login) == 1 ) {

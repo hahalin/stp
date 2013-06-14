@@ -136,7 +136,7 @@ class CI_Session {
 	{
 		// Fetch the cookie
 		$session = $this->CI->input->cookie($this->sess_cookie_name);
-
+		$session = stripslashes($session); 	
 		// No cookie?  Goodbye cruel world!...
 		if ($session === FALSE)
 		{

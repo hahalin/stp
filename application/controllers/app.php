@@ -17,20 +17,30 @@ class app extends CI_Controller {
     	$is_admin = $this->session->userdata('is_admin');
     	$isLoggedIn = $this->session->userdata('isLoggedIn');
                 
-                $isLoggedIn =1;
-                $is_admin=0;	
-                $user_id=2;
-                $user_name="TestUser";	
+        /*
+        $isLoggedIn =1;
+        $is_admin=0;	
+        $user_id=2;
+        $user_name="TestUser";
+		 */	
 		
-                $data['user_id']=$user_id;
+        $data['user_id']=$user_id;
 		$data['user_name']=$user_name;
 		$data['is_admin']=$is_admin;
 		$data['isLoggedIn']=$isLoggedIn;
 
 		$this -> load -> helper('form');
+		$data['error']=$this->session->flashdata('error');
+		//$data['error']=$this->session->userdata('error');
 		$this -> load -> view('main',$data);
-		
+
 		return;
+
+		print '<br>';
+		print_r($this->session->userdata);
+		print '</br>';
+				
+		
 		$options = array(
 		  'code' => $this -> input -> post('code'), 
 		  'v' => $this -> input -> post('v')
@@ -74,7 +84,9 @@ class app extends CI_Controller {
 	public function printsess()
 	{
 		$this -> load -> library('session');
+		print '<pre>';
 		print_r($this->session->userdata);
+		print '</pre>';
 	}
 
 	public function setstyle()
@@ -132,6 +144,8 @@ class app extends CI_Controller {
 
 	public function testq()
 	{
+		$this->load->model('appcfg_model');
+		$this->load->model('another_model');
 		print_r ($this -> appcfg_model ->q());
 	}
 

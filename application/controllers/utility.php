@@ -15,11 +15,6 @@ class utility extends CI_Controller {
 		$this->load->library('unit_test');
 	}
 	
-	public function utest2()
-	{
-	  echo "utest2   ddd";	
-	}
-	
 	public function utest()
 	{
 

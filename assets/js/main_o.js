@@ -342,11 +342,13 @@ $(document).ready(function() {
 		}
 	});
 	
-	
+
 
 	return;
 */
 
+
+	return;
 	$.ajax({
 		type : "POST",
 		url : "http://seascloud168.com/STP/ws1/ws_category.php",

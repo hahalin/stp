@@ -1,7 +1,18 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!-- saved from url=(0060)http://nettuts.s3.amazonaws.com/819_megamenu/demo/index.html -->
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+	  <meta charset="utf-8">
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	  <title></title>
+	  <meta name="description" content="">
+	  <meta name="viewport" content="width=device-width">
 
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -36,11 +47,11 @@
 
 		<link href="<?php echo base_url() ?>assets/css/tabs.css" rel="stylesheet" type="text/css" />
 
-		<!-- login sample -->
-		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/main.css">
+		<!-- login sample 
 
 		<script src="<?php echo base_url(); ?>assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
+		-->
 		<link href="<?php echo base_url() ?>assets/css/breadcrumb.css" rel="stylesheet" type="text/css" />
 		
 		<!--
@@ -58,8 +69,17 @@
 	</head>
 
 	<body>
-  
-
+  		
+  		<?php
+  		   if (isset($error) && (trim($error)!=''))
+		   {
+		   	 //$data['error'] = '登入帳號密碼錯誤';
+		   	 $data['error']=$error;
+  		     $this->load->view('errdiv',$data);   
+		   }
+  		?>
+		
+	
 		<?php if (isset($is_admin) && $is_admin) : ?>
 		<div class="navbar">
 			<div class="navbar-inner">
@@ -290,11 +310,6 @@
 					-->
 					</div>
 				</form>
-				<?php if (isset($error) && $error) : ?>
-				<div class='error'>
-					<?php print $error; ?>
-				</div>
-				<?php endif; ?>
 			</div>
 			
 			<?php endif; ?>
@@ -1343,4 +1358,10 @@
 
 	<script src="<?php echo base_url(); ?>/assets/js/main.js"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/main_o.js"></script>
-
+	
+	<div class="clear"></div>
+	
+<?php
+$data=array();
+$this->load->view('pfooter',$data);
+?>

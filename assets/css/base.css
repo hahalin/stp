@@ -65,12 +65,14 @@
 
 #main_content
 {
-	height:700px;
+	padding:0;
+	margin:0;
 	
+	width:640px;
 	position:absolute;
-	display:block;
-	right:10px;
-	left:320px;
+	position:relative;
+	float:right;
+	display:inline-table;
 	top:10px;
 	border:gray 0px dashed;
 }

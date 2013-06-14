@@ -25,7 +25,15 @@ class appcfg_model extends MY_Model {
 	{
 		
 		$query = $this->db->get('appcfg');
+		
+		
+		$this->another_model->output();
+		
 		return $query;
+		
+	}
+	public function another_output()
+	{
 		
 	}
 }
