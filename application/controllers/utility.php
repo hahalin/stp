@@ -62,7 +62,7 @@ class utility extends CI_Controller {
 		    'salt' => 'BCryptRequires22Chrcts',
 		);
 		$result=password_hash("rasmuslerdorf", PASSWORD_BCRYPT, $options)."\n";
-		
+		print trim($result);
 		return trim($result);
 		
 		

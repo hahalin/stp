@@ -13,6 +13,7 @@ class user_m extends CI_Model {
         //$this->db->where( 'password', sha1($password) );
         $this->db->where( 'password', $password );
         $login = $this->db->get()->result();
+		print_r ($login);
 		//print $email." ".$password." ";
 		//print_r($login);
         // The results of the query are stored in $login.

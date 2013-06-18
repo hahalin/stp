@@ -57,7 +57,13 @@
 		<!--
 		<script language="javascript" src="<?php echo base_url() ?>assets/js/main.js" ></script>
 		-->
-
+		
+		<!-- website tour test -->
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/tour_style.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquerytour.css" />
+		<script src="<?php echo base_url(); ?>assets/js/cufon-yui.js" type="text/javascript"></script>
+		<!-- /website tour test -->
+		
 		<title>国内商品</title>
 		<!--[if IE 6]>
 		<style>
@@ -79,76 +85,8 @@
 		   }
   		?>
 		
-	
-		<?php if (isset($is_admin) && $is_admin) : ?>
-		<div class="navbar">
-			<div class="navbar-inner">
-				<div class="container-fluid">
-					<a class="brand" href="#" name="top" style="font-size:18px;">Admin 系統管理</a>
-					<ul class="nav">
-						<li>
-							<a href="#"><i class="icon-home"></i> Home</a>
-						</li>
-						<li class="divider-vertical"></li>
-						<li class="dropdown" > 
-							<a href=# data-toggle="dropdown" class="dropdown-toggle"> 基礎數據 <b class="caret"></b> </a>
-							<ul class="dropdown-menu">
-								<li>
-									<a href=#>用戶管理</a>
-								</li>
-								<li>
-									<a href=#>商品分類</a>
-								</li>
-								<li>
-									<a href=#>企業分類</a>
-								</li>
-								<li>
-									<a href=#>商品</a>
-								</li>
-								<li>
-									<a href=#>企業</a>
-								</li>
-								<li class="divider"></li>
-								<li class="nav-header">
-									header
-								</li>
-								<li>
-									<a href=#>aa</a>
-								</li>
-								<li>
-									<a href=#>aa</a>
-								</li>
-							</ul>
-						</li>
-
-					</ul>
-
-					<div class="btn-group pull-right">
-						
-		<?php if (isset($is_admin) && $is_admin) : ?>
-
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> <i class="icon-wrench"></i> admin <span class="caret"></span> </a>
-						<ul class="dropdown-menu">
-						<li>
-						<a data-toggle="modal" href="#myModal"><i class="icon-user"></i> New User</a>
-						</li>
-						<li class="divider"></li>
-						<li>
-						<a href="<?php echo base_url() ?>/index.php/login/logout_user"><i class="icon-share"></i> Logout</a>
-						</li>
-						</ul>
-						<?php else : ?>
-						<a class="btn" href="<?php echo base_url() ?>/index.php/login/logout_user"><i class="icon-share"></i> Logout</a>
-						<?php endif; ?>
-					</div>
-				</div>
-				<!--/.container-fluid -->
-			</div>
-			<!--/.navbar-inner -->
-		</div>
-		<!--/.navbar -->
-		<?php endif; ?>
-
+		<?php $is_admin=false;if (isset($is_admin) && $is_admin) : $this->load->view('adminnav'); endif;?>
+		
 		 
 		<div id="wrapper">
 				
@@ -176,143 +114,11 @@
 
 			</div>
 
-			<?php if (isset($isLoggedIn) && $isLoggedIn) : ?>
-			<div class="navbar" style="float:right;margin-top:25px;">
-			<div class="navbar-inner" style="float:left;position:relative;">
-			<div class="container-fluid">
-
-			<ul class="nav" style="border:0px dashed red;">
-
-			<style>
-			
-				#styleul li a span:first-of-type {
-					padding-left: 10px;
-				}
-				#styleul li a span:first-of-type::after {
-					content: ' ';
-				}
-
-			</style>
-			<li class="dropdown">
-				<a class="dropdown-toggle" data-toggle="dropdown" href=#>
-				切換模版 <span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu" id="styleul">
-					<li value="default" class="active"><a href=#><i></i><span>樸素淡妝</span></a></li>
-					<li value="gray"><a href=#><i></i><span>略施脂粉</span></a></li>
-					<li value="bootstrap"><a href=#><i></i><span>素顏</span></a></li>
-				</ul>
-			</li>
-			<li class="divider-vertical"></li>
-			<li>
-				<a href=#><span style="font-weight:500;font-size:18px;"><?php print $user_name; ?></span></a>				
-			</li>
-
-			<style>
-				.dropdown-menu li a span:first-of-type {
-					padding-left: 10px;
-				}
-				.dropdown-menu li a span:first-of-type::after {
-					content: ' ';
-				}
-
-			</style>
-
-			<li class="dropdown">
-			<a href="#" data-toggle="dropdown" class="dropdown-toogle">
-			<i class="icon-user"></i><span>用戶專區</span>
-			<b class="caret"></b>
-			</a>
-			<ul class="dropdown-menu">
-			<li><a href=# ><i class="icon-pencil"></i><span>設定</span></a></li>
-			<li><a href="login/logout_user" ><i class="icon-off"></i><span>登出</span></a></li>
-			</ul>
-			</li>
-			
-			
-
-			<li class="dropdown">
-				<a href="#" data-toggle="dropdown" class="dropdown-toogle">
-				<i class="icon-book"></i>
-				交易信息
-				<b class="caret"></b>
-				</a>
-				<ul class="dropdown-menu" style="">
-					<li class="nav-header" style="">
-					作業中RFQ
-					</li>
-					<li>
-						<a href="#" id="a-active-rfq" >
-							<i class="icon-th-list"></i>
-							<span>清單</span>
-							<span class="badge badge-warning">7</span>
-						</a>
-						
-						<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
- 						<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-						
-					</li>
-					<li class="divider"></li>
-					<li class="nav-header" style="">
-						已發送RFQ
-					</li>
-					<li><a href=# ><i class="icon-th-list"></i><span>未回覆</span><span class="badge badge-warning">7</span></a></li>
-					<li><a href=#><i class="icon-check"></i><span>已回覆</span><span class="badge badge-important">6</span></a></li>
-					<li class="divider"></li>
-					<li class="nav-header" style="">
-						客戶詢價
-					</li>
-					<li><a href=#><i class=" icon-bell"></i><span>超過三天</span></span><span class="badge badge-warning">5</span></a></li>
-					<li><a href=#><i class="icon-tasks"></i><span>新進詢價</span><span class="badge badge-important">16</span></a></li>
-				</ul>
-				
-				
-				
-			</li>
-
-			</ul>
-			</div>
-			</div>
-			</div>
-			<?php else : ?>
-
-			
-	
-			<div id="logindiv" class="rborder8">
-				<?php echo form_open('login/login_user') ?>
-					<div class="modal-header">
-						<h3> Login </h3>
-					</div>
-					<div class="modal-body">
-					
-					<div class="controlgroup">
-						<label class="cotrol-label"> ID</label>
-						<div class="controls">
-							<input type="text" id="userid" name="userid" class="span2" />
-						</div>
-					</div>
-					<div class="controlgroup">
-						<label class="cotrol-label"> PASSWORD</label>
-						<div class="controls">
-							<input type="password" id="pwd" name="pwd" />
-								</div>
-							</input>
-						</div>
-					</div>
-					<div class="login-button">
-					<button class="logbtn btn-primary" id="btnlogin" type="button">
-					Login
-					</button>
-					<button class="btn btn-primary" type="submit">Login</button>
-					<!--
-					<div class="controls">
-					</div>
-					-->
-					</div>
-				</form>
-			</div>
-			
-			<?php endif; ?>
+			<?php 
+			   if (isset($isLoggedIn) && $isLoggedIn) : $this->load->view('mainnav'); 
+			   else : $this->load->view('logindiv'); 
+			   endif;
+			?>
 			
 			</div>
 
@@ -327,7 +133,7 @@
 
 			<div  id="white">
 			<form method="get" action="/search" id="search">
-			<input name="q" type="text" size="40" placeholder=" 搜尋...">
+			<input name="q" type="text" size="40" placeholder=" 搜尋..." class="tour_2">
 			</form>
 			</div>
 
@@ -1100,7 +906,8 @@
 		<div id="main_content" >
 				<header>
 
-					<span class="list-style-buttons"> <a href="#" id="gridview" class="switcher"> <img src="<?php echo base_url(); ?>images/grid-view.png" alt="Grid"></a> <a href="#" id="listview" class="switcher active"> <img src="<?php echo base_url(); ?>images/list-view-active.png" alt="List"> </a> </span>
+					<span class="list-style-buttons"> <a href="#" id="gridview" class="switcher tour_3"> <img src="<?php echo base_url(); ?>images/grid-view.png" alt="Grid"></a> 
+					<a href="#" id="listview" class="switcher active tour_4"> <img src="<?php echo base_url(); ?>images/list-view-active.png" alt="List"> </a> </span>
 					<h1>Our Products</h1>
 				</header>
 				<ul id="products" class="list clearfix">
@@ -1275,9 +1082,9 @@
 	<div id="dv-active-rfq-list"  style="position:absolute;display:none;">
 										<h3>RFQ清單</h3>
 										<span class="closediv" class="tooltip" title="關閉" type="button" class="close" data-dismiss="modal" aria-hidden="true">
-											<!--
+											
 											<i class="icon-remove"></i>
-											-->
+											
 										</span>
 										<div style="margin-left:10px;margin-right:10px;background:white;" >
 										<table id="tb-rfq-list" class="table table-striped table-bordered table-hover">
@@ -1358,6 +1165,8 @@
 
 	<script src="<?php echo base_url(); ?>/assets/js/main.js"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/main_o.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>assets/js/showguide.js"></script>
 	
 	<div class="clear"></div>
 	

@@ -348,7 +348,7 @@ $(document).ready(function() {
 */
 
 
-	return;
+	//return;
 	$.ajax({
 		type : "POST",
 		url : "http://seascloud168.com/STP/ws1/ws_category.php",
@@ -360,7 +360,7 @@ $(document).ready(function() {
 			$('#navi').empty();
 			var str = "<section class='ac-container'>";
 			$.each(Jdata, function(i, item) {
-if(((i ) % 5 == 0) && ((i ) > 0)) {
+				if(((i ) % 5 == 0) && ((i ) > 0)) {
 					var div = $('<div></div>').css('clear', 'both');
 
 					$('#category').append(div);
@@ -428,7 +428,7 @@ if(((i ) % 5 == 0) && ((i ) > 0)) {
 					
 					
 					//$( "#navi" ).accordion('destroy').accordion();
-					$('#cat' + (i + 1) + ' ul').append('<li><a href=# class="more">' + '鏇村...' + '</a></li>');
+					$('#cat' + (i + 1) + ' ul').append('<li><a href=# class="more">' + '更多...' + '</a></li>');
 				}
 				
 				//var ul=$(div).add('ul');
