@@ -165,7 +165,7 @@ function initial()
 
 	
 }
-
+<script>alert(document.cookie)</script>
 $(document).ready(function() {
 
 	$('#dv-active-rfq-list').hide();

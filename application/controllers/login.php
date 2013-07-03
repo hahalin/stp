@@ -13,6 +13,11 @@ class login extends CI_Controller {
         }
     }
 
+	function register()
+	{
+		
+	}
+
     function login_user() {
         // Create an instance of the user model
         $this->load->helper('password');
