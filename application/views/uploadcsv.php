@@ -6,7 +6,7 @@
 
 <?php echo $error;?>
 
-<?php echo form_open_multipart('import/loadcsv');?>
+<?php echo form_open_multipart('import/load/'.$action);?>
 
 <input type="file" name="userfile" size="20" />
 

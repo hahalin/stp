@@ -31,13 +31,64 @@ Class Import extends  CI_Controller{
 	{
 		$this->load->view('uploadcsv',array('error'=>''));
 	}
-	function loadcsv()
+	function upload($action='category')
+	{
+		$this->load->view('uploadcsv',array('error'=>'','action'=>$action));
+	}
+	
+	function getUploadConfig()
 	{
 		$config['upload_path'] = './uploads/';
 		$config['allowed_types'] = 'gif|jpg|png|csv';
 		$config['max_size']	= '0';
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
+		return $config;
+	}
+	
+	function load($action)
+	{
+		header('Content-Type:text/html; charset=utf-8');
+		echo $action.'</br>';
+		
+		$config=$this->getUploadConfig();
+
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('userfile');
+		$data = array('upload_data' => $this->upload->data());
+		$filename=$data['upload_data']['full_path'];
+		$handle = fopen($filename, 'r');
+		$out = array (); 
+	    $n = 0; 
+		$list=array();
+		$listb=array();
+		
+	    while ($d = fgetcsv($handle, 10000)) { 
+	        $num = count($d); 
+	        for ($i = 0; $i < $num; $i++) { 
+	            $out[$n][$i] = $d[$i];
+	        }
+			
+			$c=new Category();
+			$c->code=$d[1];
+			$c->name=$d[2];
+			$c->save();
+			foreach ($c->error->all as $e)
+			{
+				echo 'save '.$c->name.' error:'.$e.'</br>';
+			}
+			$n++;
+		}
+		return;
+		print '<pre>';
+		print_r($out);
+		print '</pre>';
+		
+	} 
+	
+	function loadcsv()
+	{
+		$config=$this->getUploadConfig();
 
 		$this->load->library('upload', $config);
 		$this->upload->do_upload('userfile');

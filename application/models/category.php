@@ -32,9 +32,9 @@ class Category extends DataMapper {
 	// --------------------------------------------------------------------	
 	
 	public $validation = array(
-		//'name' => array(
-		//	'rules' => array('required', 'trim', 'unique', 'max_length' => 40)
-		//)
+		'name' => array(
+			'rules' => array('required', 'trim', 'unique', 'max_length' => 40)
+		)
 	);
 	
 	// Default to ordering by name
