@@ -2,6 +2,27 @@
 
 class Examples extends CI_Controller {
 
+	protected $states = array(
+		0	=> 'unknown',
+		1	=> 'list',
+		2	=> 'add',
+		3	=> 'edit',
+		4	=> 'delete',
+		5	=> 'insert',
+		6	=> 'update',
+		7	=> 'ajax_list',
+		8   => 'ajax_list_info',
+		9	=> 'insert_validation',
+		10	=> 'update_validation',
+		11	=> 'upload_file',
+		12	=> 'delete_file',
+		13	=> 'ajax_relation',
+		14	=> 'ajax_relation_n_n',
+		15	=> 'success',
+		16  => 'export',
+		17  => 'print'
+	);
+
 	function __construct()
 	{
 		parent::__construct();
@@ -10,6 +31,27 @@ class Examples extends CI_Controller {
 		$this->load->helper('url');
 		
 		$this->load->library('grocery_CRUD');	
+	}
+	
+	function getmethodname()
+	{
+		$ci = &get_instance();		
+		print $ci->router->method . '</br>';
+		
+		$segment_position = count($ci->uri->segments) + 1;
+		$operation = 'list';
+		
+		$segements = $ci->uri->segments;
+		foreach($segements as $num => $value)
+		{
+			if($value != 'unknown' && in_array($value, $this->states))
+			{
+				$segment_position = (int)$num;
+				$operation = $value; //I don't have a "break" here because I want to ensure that is the LAST segment with name that is in the array.
+			}
+		}
+		
+		print $segment_position;
 	}
 	
 	function _example_output($output = null)

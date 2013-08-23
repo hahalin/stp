@@ -72,6 +72,19 @@ class app extends CI_Controller {
 
 	}
 	
+	public function pricing()
+	{
+		$this->load->view('header');
+		
+		$data['css']=array(
+			'plan',
+			'adminia-1.1'
+		);
+		
+		$this->load->view('pricing',$data);	
+		
+		$this->load->view('footer');
+	} 
 	
 	public function getcategory($pid=0)
 	{
