@@ -36,6 +36,40 @@ Class Import extends  CI_Controller{
 		$this->load->view('uploadcsv',array('error'=>'','action'=>$action));
 	}
 	
+	function listupload()
+	{
+		$this->load->view('uploadcsv',array('error'=>'','action'=>'listcontent'));
+	}
+	
+	function listcontent()
+	{
+		header('Content-Type:text/html; charset=utf-8');
+
+		$config=$this->getUploadConfig();
+
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('userfile');
+		$data = array('upload_data' => $this->upload->data());
+		$filename=$data['upload_data']['full_path'];
+		$handle = fopen($filename, 'r');
+		$out = array (); 
+	    $n = 0; 
+		$list=array();
+		$listb=array();
+		
+	    while ($d = fgetcsv($handle, 10000)) { 
+	        $num = count($d); 
+	        for ($i = 0; $i < $num; $i++) { 
+	            $out[$n][$i] = $d[$i];
+	        }
+			$n++;
+		}
+		fclose($handle);
+		echo '<pre>';
+		print_r($out);
+		echo '</pre>';
+	}
+	
 	function getUploadConfig()
 	{
 		$config['upload_path'] = './uploads/';
@@ -46,8 +80,19 @@ Class Import extends  CI_Controller{
 		return $config;
 	}
 	
+	function _loadcategory()
+	{
+		
+	}
+	
 	function load($action)
 	{
+		if ($action=='listcontent')
+		{
+			$this->listcontent();
+			return;
+		}
+		
 		header('Content-Type:text/html; charset=utf-8');
 		echo $action.'</br>';
 		
@@ -69,6 +114,11 @@ Class Import extends  CI_Controller{
 	            $out[$n][$i] = $d[$i];
 	        }
 			
+			$obj=new stdClass;
+			$obj->ida=$d[1];
+			$obj->nm=$d[2];
+			$obj->pida=$d[0];
+			
 			$c=new Category();
 			$c->code=$d[1];
 			$c->name=$d[2];
@@ -77,8 +127,74 @@ Class Import extends  CI_Controller{
 			{
 				echo 'save '.$c->name.' error:'.$e.'</br>';
 			}
+			$obj->id=0;
+			if($c->id)
+			{
+				$obj->id=$c->id;
+			}
+			$list[]=$obj;
 			$n++;
 		}
+		fclose($handle);
+		
+		$listb=$list;
+		
+		foreach ($list as $ic)
+		{
+			//use parent;
+			$c=new Category();
+			$c->get_by_id($ic->id);
+			if (!$c->id)
+			{
+				$c->get_by_name($ic->nm);
+			}
+			
+			if (!$c->id)
+			{
+				echo 'parent '.$ic-nm.' find child error without correct id';
+				continue;
+			}
+			
+			//find child
+			foreach($listb as $icb)
+			{
+				if ($icb->pida==$ic->ida)
+				{
+					$cs=new Category();
+					
+					if ($icb->id)
+					{
+						$cs->get_by_id($icb->id);
+					}
+					else 
+					{
+						echo 'child '.$icb->nm .' use name save parent</br>';
+						$cs->get_by_name($icb->nm);
+					}
+					if ($cs->id)
+					{
+						$cs->save_parentcategory($c);
+						if (count($cs->error->all)>0)
+						{
+							echo 'child '.$cs->name.' save parent occurs error:';
+							foreach($cs->error->all as $e)
+							{
+								echo $e.',';
+							}
+							echo '</br>';
+						}
+					}
+					else 
+					{
+						echo 'child save parent faild without correct id';
+					}
+				}
+			}
+		}
+		
+				
+
+
 		return;
 		print '<pre>';
 		print_r($out);
