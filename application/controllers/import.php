@@ -12,21 +12,6 @@ Class Import extends  CI_Controller{
 		$this->output->enable_profiler(TRUE);
 	}
 	
-	function dirtop()
-	{
-		header('Content-Type:text/html; charset=utf-8');
-		
-		$c=new Bzcategory();
-		$c->include_related_count('parent')->get();
-		foreach($c as $ci)
-		{
-			if ($ci->parent_count==0)
-			{
-				echo $ci->name."</br>";
-			}
-		}
-	}
-	
 	function index()
 	{
 		$this->load->view('uploadcsv',array('error'=>''));
@@ -51,8 +36,10 @@ Class Import extends  CI_Controller{
 		$this->upload->do_upload('userfile');
 		$data = array('upload_data' => $this->upload->data());
 		$filename=$data['upload_data']['full_path'];
+		$fsrc=strtolower(substr(basename($filename),0,7));
 		$handle = fopen($filename, 'r');
 		$out = array (); 
+		$list=array();
 	    $n = 0; 
 		$list=array();
 		$listb=array();
@@ -62,11 +49,63 @@ Class Import extends  CI_Controller{
 	        for ($i = 0; $i < $num; $i++) { 
 	            $out[$n][$i] = $d[$i];
 	        }
+	        
+	        $o=new stdClass();
+	        
+	        if ($fsrc=='product')
+	        {
+	           $o->nid=$out[$n][0];
+	           $o->title=$out[$n][1];
+	           $o->img=$out[$n][2];
+	           $o->catid=$out[$n][3];
+	           $o->ref=$out[$n][4];
+	           $o->name=$out[$n][5];
+	        }
+	        
+	        if ($fsrc=='company')
+	        {
+	           if ($out[$n][2] && (rtrim($out[$n][2])!=''))
+	           {
+		           $bc=new Bzcategory();
+				   
+				   $bc->get_by_code($out[$n][2]);
+				   if (!$bc->id)
+				   {
+				   	  echo $out[$n][1].' cat tid not exits:'.$out[$n][2].'</br>';
+				   } 	
+				   else 
+				   {
+			           $o->nid=$out[$n][0];
+			           $o->title=$out[$n][1];
+			           $o->tid=$out[$n][2];
+			           $o->ename=$out[$n][3];
+			           $o->addr2=$out[$n][4];
+			           $o->addr=$out[$n][5];
+			           $o->web=$out[$n][6];
+			           $o->province=$out[$n][7];
+			           $o->scope=$out[$n][8];
+			           $o->email=$out[$n][9];
+			           $o->tel=$out[$n][10];
+			           $o->fax=$out[$n][11];
+					   
+					   $c=new Company();
+					   $c->nid=$o->nid;
+					   $c->name=$o->title;
+					   $c->tid=$o->tid;
+					   $c->save_bzcategory($bc);
+					   foreach ($c->error->all as $e)
+						{
+							echo 'save '.$c->name.' error:'.$e.'</br>';
+						}
+					   $list[]=$o;
+				   }
+	           }
+	        }
 			$n++;
 		}
 		fclose($handle);
 		echo '<pre>';
-		print_r($out);
+		print_r($list);
 		echo '</pre>';
 	}
 	
@@ -85,11 +124,37 @@ Class Import extends  CI_Controller{
 		
 	}
 	
+	function _loadsec()
+	{
+		
+	}
+	function _loadprovince()
+	{
+		
+	}
 	function load($action)
 	{
 		if ($action=='listcontent')
 		{
 			$this->listcontent();
+			return;
+		}
+		
+		if ($action=='bzcategory')
+		{
+			$this->loadcsv();
+			return;
+		}
+		
+		if ($action=='province')
+		{
+			$this->_loadprovince();
+			return;
+		}
+		
+		if ($action=='sec')
+		{
+			$this->_loadsec();
 			return;
 		}
 		

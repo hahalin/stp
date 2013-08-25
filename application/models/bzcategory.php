@@ -28,6 +28,10 @@ class Bzcategory extends DataMapper {
 			'class'=>'bzcategorycode',
 			'other_field'=>'bzcategory',
 			'join_table'=>'bzcategorycodes'
+		),
+		'company'=>array(
+		  'class'=>'company',
+		  'join_table'=>'bzcategories_companies'
 		)
 	);
 	
