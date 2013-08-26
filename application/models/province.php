@@ -19,7 +19,7 @@
  * @author		Phil DeJarnett
  * @link		http://www.overzealous.com
  */
-class Company extends DataMapper {
+class Province extends DataMapper {
 
 	// Uncomment and edit these two if the class has a model name that
 	//   doesn't convert properly using the inflector_helper.
@@ -35,18 +35,12 @@ class Company extends DataMapper {
 	// --------------------------------------------------------------------
 
 	// Insert related models that Template can have just one of.
-	var $has_many = array(
-	   'bzcategory'=>array(
-	   	 'class'=>'bzcategory',
-	     'join_table'=>'bzcategories_companies',
-	     'cascade_delete'=>true
-	   )
+	var $has_one = array(
+		'sec'
 	);
 
 	// Insert related models that Template can have more than one of.
-	var $has_one = array(
-		'province'
-	);
+	var $has_many = array();
 
 	/* Relationship Examples
 	 * For normal relationships, simply add the model name to the array:
@@ -72,16 +66,11 @@ class Company extends DataMapper {
 	// --------------------------------------------------------------------
 
 	var $validation = array(
-	    'nid'=>array(
-			'rules'=>array('unique')
-		)
-		/*
-		'example' => array(
+		'name' => array(
 			// example is required, and cannot be more than 120 characters long.
-			'rules' => array('required', 'max_length' => 120),
-			'label' => 'Example'
+			'rules' => array('required', 'unique'),
+			'label' => 'name'
 		)
-		*/ 
 	);
 
 	// --------------------------------------------------------------------
