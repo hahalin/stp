@@ -5,7 +5,7 @@ class Users extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		// require admin access
+		//require admin access
 		$this->load->library('login_manager', array('required_group' => 1));
 	}
 	
@@ -27,6 +27,7 @@ class Users extends CI_Controller {
 		$this->load->view('template_footer');
 		
 	}
+	
 	
 	function add($save = FALSE)
 	{
