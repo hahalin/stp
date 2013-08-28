@@ -89,10 +89,27 @@ Class Import extends  CI_Controller{
 			           $o->fax=$out[$n][11];
 					   
 					   $c=new Company();
-					   $c->nid=$o->nid;
-					   $c->name=$o->title;
-					   $c->tid=$o->tid;
-					   $c->save_bzcategory($bc);
+					   $c->nid=$out[$n][0];
+					   $c->name=$out[$n][1];
+					   //$c->tid=$o->tid;
+					   //$c->save_bzcategory($bc);
+					   $c->save(
+					   		array(
+								'bzcategory'=>$bc
+							)
+					   );
+					   
+					   $p=new Province();
+					   $p->get_by_code($out[$n][7]);
+					   if ($p->id)
+					   {
+						  $c->save($p);
+						  //$c->province=$p;				   	
+					   }
+					   else 
+					   {
+					      $c->save();
+					   }
 					   foreach ($c->error->all as $e)
 						{
 							echo 'save '.$c->name.' error:'.$e.'</br>';
@@ -126,11 +143,99 @@ Class Import extends  CI_Controller{
 	
 	function _loadsec()
 	{
+		header('Content-Type:text/html; charset=utf-8');
+
+		$config=$this->getUploadConfig();
+
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('userfile');
+		$data = array('upload_data' => $this->upload->data());
+		$filename=$data['upload_data']['full_path'];
+		$fsrc=strtolower(substr(basename($filename),0,7));
+		$handle = fopen($filename, 'r');
+		$out = array (); 
+		$list=array();
+	    $n = 0; 
+		$list=array();
+		$listb=array();
+		
+	    while ($d = fgetcsv($handle, 10000)) { 
+	        $num = count($d); 
+	        for ($i = 0; $i < $num; $i++) { 
+	            $out[$n][$i] = $d[$i];
+	        }
+			$p=new Province();
+			$p->name=$out[$n][2];
+			$p->code=$out[$n][1];
+			$m->save();
+			foreach ($m->error->all as $e)
+			{
+				echo 'save '.$out[$n][2].' error:'.$e.'</br>';
+			}
+			$list[]=$out;
+			$n++;
+		}
+		fclose($handle);
+		
+		print '<pre>';
+		print_r($list);
+		print '</pre>';
 		
 	}
 	function _loadprovince()
 	{
+header('Content-Type:text/html; charset=utf-8');
+
+		$config=$this->getUploadConfig();
+
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('userfile');
+		$data = array('upload_data' => $this->upload->data());
+		$filename=$data['upload_data']['full_path'];
+		$fsrc=strtolower(substr(basename($filename),0,7));
+		$handle = fopen($filename, 'r');
+		$out = array (); 
+		$list=array();
+	    $n = 0; 
+		$list=array();
+		$listb=array();
 		
+	    while ($d = fgetcsv($handle, 10000)) { 
+	        $num = count($d); 
+	        for ($i = 0; $i < $num; $i++) { 
+	            $out[$n][$i] = $d[$i];
+	        }
+			
+			$p=new Province();
+			$p->name=$out[$n][2];
+			$p->code=$out[$n][1];
+			
+			$s=new Sec();
+			$s->get_by_code($out[$n][3]);
+			
+			if ($s->id)
+			{
+				$p->save($s);	
+			}
+			else 
+			{
+				echo 'save without sec </br>';
+				$p->save();
+			}
+			
+			foreach ($p->error->all as $e)
+			{
+				echo 'save '.$out[$n][2].' error:'.$e.'</br>';
+			}
+			$list[]=$out;
+			$n++;
+		}
+		fclose($handle);
+		
+		print '<pre>';
+		print_r($list);
+		print '</pre>';
+				
 	}
 	function load($action)
 	{

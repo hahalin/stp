@@ -6,6 +6,14 @@ Class CategoryC extends  CI_Controller{
 	{
 		parent::__construct();
 		
+		$this->output->enable_profiler(TRUE);
+	}
+	
+	function removecompany()
+	{
+		$c=new Company();
+		$c->get();
+		$c->truncate();
 	}
 	
 	function dir($entity,$top=0)
@@ -13,8 +21,6 @@ Class CategoryC extends  CI_Controller{
 		header('Content-Type:text/html; charset=utf-8');
 		
 		$c=new $entity();
-		
-		
 		
 		//return;
 		

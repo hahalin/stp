@@ -7,6 +7,35 @@ class Users extends CI_Controller {
 		parent::__construct();
 		//require admin access
 		$this->load->library('login_manager', array('required_group' => 1));
+		$this->output->enable_profiler(TRUE);
+	}
+	
+	function addsess()
+	{
+		$obj=new stdClass();
+		$obj->a='aa';
+		$obj->b=array(
+			'b1'=>'b1value'
+		);
+		$list=array();
+		for ($i=0;$i<100;$i++)
+		{
+			$o=new stdClass();
+			$o->id='1000'.$i;
+			$o->title='title'.$i;
+			$o->count=rand(1,10);
+			$list[]=$o;
+		}
+		$this->session->set_userdata('gg',$list);
+	}
+	
+	function getsess()
+	{
+		print('<pre>');
+			
+		print_r($this->session->userdata('gg'));
+		
+		print('</pre>');
 	}
 	
 	function index()

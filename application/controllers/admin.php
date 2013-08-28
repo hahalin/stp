@@ -6,6 +6,7 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('login_manager', array('autologin' => FALSE));
+		$this->output->enable_profiler(TRUE);
 	}
 
 	function index()
