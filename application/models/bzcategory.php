@@ -18,7 +18,8 @@ class Bzcategory extends DataMapper {
 	public $has_many = array(
 		'parent'=>array(
 			'class'=>'bzcategory',
-			'other_field'=>'bzcategory'
+			'other_field'=>'bzcategory',
+			'join_table'=>'bzcategories_parents'
 		),
 		'bzcategory'=>array(
 			//'class'=>'parentcategory',

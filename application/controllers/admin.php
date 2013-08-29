@@ -6,6 +6,7 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('login_manager', array('autologin' => FALSE));
+		$this->load->library('hgrid');
 		$this->output->enable_profiler(TRUE);
 	}
 
@@ -15,6 +16,45 @@ class Admin extends CI_Controller
 		$this->load->view('template_header', array('title' => 'Admin Console', 'section' => 'admin'));
 		$this->load->view('admin/index');
 		$this->load->view('template_footer');
+	}
+	
+	
+	function testhgrid()
+	{
+		
+		$gd = new hgrid();
+		
+		$m=new Sec();
+		$m->get();
+		//$m->get();
+		$columns=array();
+		foreach($m->fields as $key)
+		{
+			$columns[]=(object)array(
+				'field_name'=>$key,
+				'display_as'=>$key
+			);
+		}
+		$list=array();
+		foreach ($m as $mi)
+		{
+			$o=new stdClass();
+			foreach($m->fields as $fd)
+			{
+				
+				$o->$fd=$mi->$fd;
+			}
+			$list[$o->id]=$o;
+		}
+		$gd->setColumns($columns);
+		$gd->setList($list);
+		
+		$gd->set_post_js('assets/a.js');
+		$output = $gd->render();
+		
+		$this->load->view('hgrid.php',$output);
+		
+		
 	}
 
 	function reset_warning()

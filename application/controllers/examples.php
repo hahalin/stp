@@ -130,7 +130,7 @@ class Examples extends CI_Controller {
 	function orders_management()
 	{
 			$crud = new grocery_CRUD();
-
+			//$crud->set_theme('datatable');
 			$crud->set_relation('customerNumber','customers','{contactLastName} {contactFirstName}');
 			$crud->display_as('customerNumber','Customer');
 			$crud->set_table('orders');
@@ -165,7 +165,8 @@ class Examples extends CI_Controller {
 	function film_management()
 	{
 		$crud = new grocery_CRUD();
-		
+		//$crud->set_theme('flexigrid');
+		$crud->set_theme('datatables');
 		$crud->set_table('film');
 		$crud->set_relation_n_n('actors', 'film_actor', 'actor', 'film_id', 'actor_id', 'fullname','priority');
 		$crud->set_relation_n_n('category', 'film_category', 'category', 'film_id', 'category_id', 'name');

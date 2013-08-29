@@ -1394,6 +1394,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 	{
 		$data = $this->get_common_data();
 		
+		
 		$data->order_by 	= $this->order_by;
 		
 		$data->types 		= $this->get_field_types();
@@ -1401,11 +1402,13 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		$data->list = $this->get_list();
 		$data->list = $this->change_list($data->list , $data->types);
 		$data->list = $this->change_list_add_actions($data->list);
-		
+		echo '<pre>';
+		print_r($data->list);
+		echo '</pre>';
 		$data->total_results = $this->get_total_results();
 		
 		$data->columns 				= $this->get_columns();
-		
+		//print_r($data->columns);
 		$data->success_message		= $this->get_success_message_at_list($state_info);
 		
 		$data->primary_key 			= $this->get_primary_key();
@@ -1444,6 +1447,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		
 		if(!$ajax)
 		{
+			
 			$data->list_view = $this->_theme_view('list.php',$data,true);
 			$this->_theme_view('list_template.php',$data);	
 		}
@@ -2398,6 +2402,10 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 	{
 		$fields = $this->get_add_fields();
 		$types 	= $this->get_field_types();
+		
+		print '<pre>';
+		print_r ($types);
+		print '</pre>';
 		
 		$input_fields = array();
 		
@@ -3899,7 +3907,7 @@ class grocery_CRUD extends grocery_CRUD_States
 			throw new Exception('The state is unknown , I don\'t know what I will do with your data!', 4);
 			die();
 		}
-		
+		echo 'state_code:'.$this->state_code;
 		switch ($this->state_code) {
 			case 15://success
 			case 1://list
@@ -3916,6 +3924,9 @@ class grocery_CRUD extends grocery_CRUD_States
 				$this->set_basic_Layout();
 					
 				$state_info = $this->getStateInfo();
+				echo '<pre>';
+				print_r ($state_info);
+				echo '</pre>';
 				
 				$this->showList(false,$state_info);
 
@@ -4011,6 +4022,9 @@ class grocery_CRUD extends grocery_CRUD_States
 				$this->set_basic_Layout();
 				
 				$state_info = $this->getStateInfo();
+				echo '<pre>';
+				print_r ($state_info);
+				echo '</pre>';
 				$this->set_ajax_list_queries($state_info);				
 					
 				$this->showList(true);
