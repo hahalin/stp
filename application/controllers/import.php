@@ -128,7 +128,7 @@ Class Import extends  CI_Controller{
 	
 	function getUploadConfig()
 	{
-		$config['upload_path'] = './uploads/';
+		$config['upload_path'] = './assets/uploads/';
 		$config['allowed_types'] = 'gif|jpg|png|csv';
 		$config['max_size']	= '0';
 		$config['max_width']  = '1024';
@@ -136,10 +136,6 @@ Class Import extends  CI_Controller{
 		return $config;
 	}
 	
-	function _loadcategory()
-	{
-		
-	}
 	
 	function _loadsec()
 	{
@@ -181,10 +177,12 @@ Class Import extends  CI_Controller{
 		print_r($list);
 		print '</pre>';
 		
+		
+		
 	}
 	function _loadprovince()
 	{
-header('Content-Type:text/html; charset=utf-8');
+		header('Content-Type:text/html; charset=utf-8');
 
 		$config=$this->getUploadConfig();
 
@@ -237,8 +235,68 @@ header('Content-Type:text/html; charset=utf-8');
 		print '</pre>';
 				
 	}
+
+	function _upload_avatar()
+	{
+		header('Content-Type:text/html; charset=utf-8');
+		$config=$this->getUploadConfig();
+		$config['allowed_types'] = 'gif|jpg|png';
+		echo '<pre>';
+		print_r ($config);
+		echo '</pre>';
+		//$config['max_size']	= '100';// in KB
+		$this->load->library('upload', $config);
+		$this->upload->do_upload('userfile');
+		$data = array('upload_data' => $this->upload->data());
+		$filename=$data['upload_data']['full_path'];
+		echo $filename;
+		//$fsrc=strtolower(substr(basename($filename),0,7));
+		echo '<pre>';
+		print_r($data);
+		echo '</pre>';
+		
+		echo '<img src="'.base_url().'assets/uploads/'.$data['upload_data']['file_name'].'"/>';
+		
+		//echo '<img src="/stp_cosmos/assets/uploads/201302271428558604.jpg">';
+	$ftemp=base_url().'assets/uploads/'.$data['upload_data']['file_name'];
+		
+$config['image_library'] = 'gd2';
+$config['source_image']	= $config['upload_path'].$data['upload_data']['file_name'];
+$config['create_thumb'] = TRUE;
+$config['maintain_ratio'] = TRUE;
+$config['width']	 = 75;
+$config['height']	= 150;
+
+$this->load->library('image_lib', $config); 
+
+$this->image_lib->resize();
+echo '<pre>';
+$ftemp=base_url().'assets/uploads/'.pathinfo($this->image_lib->full_dst_path)['filename'].'.'.pathinfo($this->image_lib->full_dst_path)['extension'];
+
+echo '</pre>';
+
+		//$ftemp=base_url().'assets/uploads/'.$data['upload_data']['file_name'];
+		echo $ftemp;
+		echo '<img src="'.$ftemp.'"/>';
+				
+	}
+	
+	/*
+	 *  action
+	 *    category : default
+	 * 	  sec1 : _loadsec
+	 * 	  province : _loadprovince
+	 *    bzcategory : _loadbzcategory
+	 *    listcontent : listcontent
+	*/
 	function load($action)
 	{
+		if ($action=='avatar')
+		{
+			$this->_upload_avatar();
+			return;
+		}
+		
 		if ($action=='listcontent')
 		{
 			$this->listcontent();
@@ -247,7 +305,7 @@ header('Content-Type:text/html; charset=utf-8');
 		
 		if ($action=='bzcategory')
 		{
-			$this->loadcsv();
+			$this->_loadbzcategory();
 			return;
 		}
 		
@@ -263,6 +321,16 @@ header('Content-Type:text/html; charset=utf-8');
 			return;
 		}
 		
+		if ($action=='category')
+		{
+			$this->_loadcategory();
+			return;
+		}
+		
+	} 
+	
+	function _loadcategory()
+	{
 		header('Content-Type:text/html; charset=utf-8');
 		echo $action.'</br>';
 		
@@ -361,18 +429,14 @@ header('Content-Type:text/html; charset=utf-8');
 				}
 			}
 		}
-		
-				
-
 
 		return;
 		print '<pre>';
 		print_r($out);
-		print '</pre>';
-		
-	} 
+		print '</pre>';		
+	}
 	
-	function loadcsv()
+	function _loadbzcategory()
 	{
 		$config=$this->getUploadConfig();
 
