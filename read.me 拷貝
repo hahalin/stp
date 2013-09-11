@@ -1,0 +1,25 @@
+read me line 1
+
+2013/6/14
+
+1.Modify session.php correct session data disappearing on redirect 
+
+http://ellislab.com/forums/viewthread/193688/#913282
+[
+	If I add in this line to line 139 of /system/libraries/Session.php:
+	
+	$session = stripslashes($session); 
+	Now my sessions work!
+]
+
+2.config.php
+
+Cross-site request forgery (CSRF)
+$config['csrf_protection'] = TRUE;
+
+XSS 過濾
+$config['global_xss_filtering'] = TRUE;
+
+http://www.codeigniter.org.tw/user_guide/libraries/security.html
+
+3.
