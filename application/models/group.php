@@ -2,67 +2,40 @@
 
 /**
  * Group Class
- * Allows users to belong to one or more groups.
  *
- * @license 	MIT License
+ * Transforms groups table into an object.
+ * This is just here for use with the example in the Controllers.
+ *
+ * @licence 	MIT Licence
  * @category	Models
- * @author  	Phil DeJarnett
- * @link    	http://www.overzealous.com/dmz/
+ * @author  	Simon Stenhouse
+ * @link    	http://stensi.com
  */
 class Group extends DataMapper {
 
-	// --------------------------------------------------------------------
-	// Relationships
-	// --------------------------------------------------------------------
-
-	public $has_many = array("user");
+	var $has_many = array("user");	
 	
-	// --------------------------------------------------------------------
-	// Validation
-	// --------------------------------------------------------------------	
-	
-	public $validation = array(
-		'name' => array(
+	var $validation = array(
+		array(
+			'field' => 'name',
+			'label' => 'Name',
 			'rules' => array('required', 'trim', 'unique', 'min_length' => 3, 'max_length' => 20)
+		),
+		array(
+			'field' => 'user',
+			'label' => 'User',
+			'rules' => array('max_size' => 5) // Each group can have no more than 5 users
 		)
 	);
 	
-	// Default to ordering by name
-	public $default_order_by = array('id' => 'desc');
-	
 	/**
-	 * Returns the name of this status.
-	 * @return $this->name
+	 * Constructor
+	 *
+	 * Initialize DataMapper.
 	 */
-	function __toString()
+	function Group()
 	{
-		return empty($this->name) ? $this->localize_label('unset') : $this->name;
-	}
-	
-	// --------------------------------------------------------------------
-	
-	/**
-	 * This method is provided for the htmlform extension.
-	 * It is used to prevent logged-in users from being able to accidentally
-	 * convert themselves away from being an admin.
-	 * 
-	 * @param object $object
-	 * @param object $field
-	 * @return 
-	 */
-	function get_htmlform_list($object, $field)
-	{
-		if($object->model == 'user')
-		{
-			// limit the items if the user is the logged-in user
-			$CI =& get_instance();
-			if($CI->login_manager->get_user()->id == $object->id)
-			{
-				$this->get_by_id(1);
-				return;
-			}
-		}
-		$this->get_iterated();
+		parent::DataMapper();
 	}
 }
 

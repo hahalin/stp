@@ -11,7 +11,7 @@
  * @author		Phil DeJarnett
  * @link		http://www.overzealous.com/dmz/
  */
-class User extends DataMapper {
+class Usera extends DataMapper {
 
 	// --------------------------------------------------------------------
 	// Relationships
@@ -31,7 +31,11 @@ class User extends DataMapper {
 			'other_field' => 'editor'
 		),
 		// bugs assigned to this user
-		'bug'
+		'bug',
+		'company'=>array(
+		   'class'=>'company',
+		   'join_table'=>'companies_users'
+		)
 	);
 	
 	// --------------------------------------------------------------------

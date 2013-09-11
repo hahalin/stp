@@ -19,13 +19,13 @@
  * @author		Phil DeJarnett
  * @link		http://www.overzealous.com
  */
-class Company extends DataMapper {
+class Productpic extends DataMapper {
 
 	// Uncomment and edit these two if the class has a model name that
 	//   doesn't convert properly using the inflector_helper.
 	// var $model = 'template';
 	// var $table = 'templates';
-
+	var $table='product_pics';
 	// You can override the database connections with this option
 	// var $db_params = 'db_config_name';
 
@@ -35,22 +35,12 @@ class Company extends DataMapper {
 	// --------------------------------------------------------------------
 
 	// Insert related models that Template can have just one of.
-	var $has_many = array(
-	   'bzcategory'=>array(
-	   	 'class'=>'bzcategory',
-	     'join_table'=>'bzcategories_companies',
-	     'cascade_delete'=>true
-	   ),
-	   'user'=>array(
-	     'class'=>'user',
-	     'join_table'=>'companies_users'
-	   )
+	var $has_one = array(
+		'product'
 	);
 
 	// Insert related models that Template can have more than one of.
-	var $has_one = array(
-		'province'
-	);
+	var $has_many = array();
 
 	/* Relationship Examples
 	 * For normal relationships, simply add the model name to the array:
@@ -76,16 +66,11 @@ class Company extends DataMapper {
 	// --------------------------------------------------------------------
 
 	var $validation = array(
-	    'nid'=>array(
-			'rules'=>array('unique')
-		)
-		/*
-		'example' => array(
-			// example is required, and cannot be more than 120 characters long.
-			'rules' => array('required', 'max_length' => 120),
-			'label' => 'Example'
-		)
-		*/ 
+		//'example' => array(
+		//	// example is required, and cannot be more than 120 characters long.
+		//	'rules' => array('required', 'max_length' => 120),
+		//	'label' => 'Example'
+		//)
 	);
 
 	// --------------------------------------------------------------------
