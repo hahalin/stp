@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Examples extends CI_Controller {
+class Examples_gerocery extends CI_Controller {
 
 	protected $states = array(
 		0	=> 'unknown',
