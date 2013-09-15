@@ -40,6 +40,10 @@ class Company extends DataMapper {
 	   	 'class'=>'bzcategory',
 	     'join_table'=>'bzcategories_companies',
 	     'cascade_delete'=>true
+	   ),
+	   'user'=>array(
+	     'class'=>'user',
+	     'join_table'=>'companies_users'
 	   )
 	);
 

@@ -6,82 +6,53 @@
  * Transforms users table into an object.
  * This is just here for use with the example in the Controllers.
  *
- * @license		MIT License
+ * @licence 	MIT Licence
  * @category	Models
- * @author		Phil DeJarnett
- * @link		http://www.overzealous.com/dmz/
+ * @author  	Simon Stenhouse
+ * @link    	http://stensi.com
  */
 class User extends DataMapper {
 
-	// --------------------------------------------------------------------
-	// Relationships
-	// --------------------------------------------------------------------
-	
-	public $has_one = array('group');
-	
-	public $has_many = array(
-		// bugs created by this user
-		'created_bug' => array(
-			'class' => 'bug',
-			'other_field' => 'creator'
-		),
-		// bugs edited by this user
-		'edited_bug' => array(
-			'class' => 'bug',
-			'other_field' => 'editor'
-		),
-		// bugs assigned to this user
-		'bug'
-	);
-	
-	// --------------------------------------------------------------------
-	// Validation
-	// --------------------------------------------------------------------
+	var $has_one = array("group");
 
-	public $validation = array(
-		'name' => array(
-			'rules' => array('required', 'trim', 'unique', 'max_length' => 100)
+	var $validation = array(
+		array(
+			'field' => 'username',
+			'label' => 'Username',
+			'rules' => array('required', 'trim', 'unique', 'min_length' => 3, 'max_length' => 20)
 		),
-		'email' => array(
+		array(
+			'field' => 'password',
+			'label' => 'Password',
+			'rules' => array('required', 'trim', 'min_length' => 3, 'max_length' => 40, 'encrypt')
+		),
+		array(
+			'field' => 'confirm_password',
+			'label' => 'Confirm Password',
+			'rules' => array('encrypt', 'matches' => 'password')
+		),
+		array(
+			'field' => 'email',
+			'label' => 'Email Address',
 			'rules' => array('required', 'trim', 'unique', 'valid_email')
-		),
-		'username' => array(
-			'rules' => array('required', 'trim', 'unique', 'alpha_dash', 'min_length' => 3, 'max_length' => 20)
-		),
-		'password' => array(
-			'rules' => array('required', 'trim', 'min_length' => 3, 'max_length' => 40, 'encrypt'),
-			'type' => 'password'
-		),
-		'confirm_password' => array(
-			'rules' => array('required', 'encrypt', 'matches' => 'password', 'min_length' => 3, 'max_length' => 40),
-			'type' => 'password'
-		),
-		'group' => array(
+		)
+/* Uncomment to force the requirement of a user having to belong to a group
+		array(
+			'field' => 'group',
+			'label' => 'Group',
 			'rules' => array('required')
 		)
+*/
 	);
-	
-	// Default to ordering by name
-	public $default_order_by = array('name');
-	
-	// --------------------------------------------------------------------
-	
-	function __toString()
-	{
-		return empty($this->name) ? $this->localize_label('newuser') : $this->name;
-	}
-	
-	// --------------------------------------------------------------------
-	
+
 	/**
-	 * Returns an array list of all users that can have bugs assigned
-	 * to them.
-	 * 
-	 * @return $this for chaining
+	 * Constructor
+	 *
+	 * Initialize DataMapper.
 	 */
-	function get_assignable()
+	function User()
 	{
-		return $this->where_in_related_group('id', array(1, 2))->get();
+		parent::DataMapper();
 	}
 	
 	// --------------------------------------------------------------------
@@ -96,14 +67,11 @@ class User extends DataMapper {
 	 */
 	function login()
 	{
-		// backup username for invalid logins
-		$uname = $this->username;
-		
 		// Create a temporary user object
 		$u = new User();
 
 		// Get this users stored record via their username
-		$u->where('username', $uname)->get();
+		$u->where('username', $this->username)->get();
 
 		// Give this user their stored salt
 		$this->salt = $u->salt;
@@ -116,20 +84,17 @@ class User extends DataMapper {
 		// this user object would be fully populated, complete with their ID.
 
 		// If there was no matching record, this user would be completely cleared so their id would be empty.
-		if ($this->exists())
+		if (empty($this->id))
 		{
-			// Login succeeded
-			return TRUE;
+			// Login failed, so set a custom error message
+			$this->error_message('login', 'Username or password invalid');
+
+			return FALSE;
 		}
 		else
 		{
-			// Login failed, so set a custom error message
-			$this->error_message('login', $this->localize_label('error_login'));
-
-			// restore username for login field
-			$this->username = $uname;
-
-			return FALSE;
+			// Login succeeded
+			return TRUE;
 		}
 	}
 	 
