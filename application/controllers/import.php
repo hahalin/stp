@@ -258,27 +258,23 @@ Class Import extends  CI_Controller{
 		echo '<img src="'.base_url().'assets/uploads/'.$data['upload_data']['file_name'].'"/>';
 		
 		//echo '<img src="/stp_cosmos/assets/uploads/201302271428558604.jpg">';
-	$ftemp=base_url().'assets/uploads/'.$data['upload_data']['file_name'];
+		$ftemp=base_url().'assets/uploads/'.$data['upload_data']['file_name'];
 		
-$config['image_library'] = 'gd2';
-$config['source_image']	= $config['upload_path'].$data['upload_data']['file_name'];
-$config['create_thumb'] = TRUE;
-$config['maintain_ratio'] = TRUE;
-$config['width']	 = 75;
-$config['height']	= 150;
+		$config['image_library'] = 'gd2';
+		$config['source_image']	= $config['upload_path'].$data['upload_data']['file_name'];
+		$config['create_thumb'] = TRUE;
+		$config['maintain_ratio'] = TRUE;
+		$config['width']	 = 75;
+		$config['height']	= 150;
 
-$this->load->library('image_lib', $config); 
-
-$this->image_lib->resize();
-echo '<pre>';
-$ftemp=base_url().'assets/uploads/'.pathinfo($this->image_lib->full_dst_path)['filename'].'.'.pathinfo($this->image_lib->full_dst_path)['extension'];
-
-echo '</pre>';
-
+		$this->load->library('image_lib', $config); 
+		$this->image_lib->resize();
+		echo '<pre>';
+		//$ftemp=base_url().'assets/uploads/'.pathinfo($this->image_lib->full_dst_path)['filename'].'.'.pathinfo($this->image_lib->full_dst_path)['extension'];
+		echo '</pre>';
 		//$ftemp=base_url().'assets/uploads/'.$data['upload_data']['file_name'];
 		echo $ftemp;
 		echo '<img src="'.$ftemp.'"/>';
-				
 	}
 	
 	/*

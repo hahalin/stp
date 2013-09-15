@@ -35,7 +35,9 @@ class Product extends DataMapper {
 	// --------------------------------------------------------------------
 
 	// Insert related models that Template can have just one of.
-	var $has_one = array();
+	var $has_one = array(
+		'productgroup'
+	);
 
 	// Insert related models that Template can have more than one of.
 	var $has_many = array(
@@ -71,6 +73,14 @@ class Product extends DataMapper {
 	// --------------------------------------------------------------------
 
 	var $validation = array(
+		'productgroup'=>array(
+			'rules'=>array('required','checkduplicated')
+		),
+		'productname'=>array(
+			'rules'=>array('required'),
+			//'rules'=>array('required'),
+			'label'=>'商品名稱'
+		)
 		//'example' => array(
 			// example is required, and cannot be more than 120 characters long.
 		//	'rules' => array('required', 'max_length' => 120),
@@ -88,6 +98,18 @@ class Product extends DataMapper {
 
 	// --------------------------------------------------------------------
 
+	function _checkduplicated($field)
+    {
+    	return 'error '.'aaa';
+        // Don't encrypt an empty string
+        $m=new product();
+		$m->where('productname',$this->productname)->where_related('productgroup','groupname',$this->productgroup->groupname)->get();
+		//$m->where('productname',$this->productname)->get()->get_by_related($this->productgroup);
+		
+		return 'error '.$this->productname;
+    }	
+	
+	
 	/**
 	 * Constructor: calls parent constructor
 	 */
