@@ -415,6 +415,7 @@ a.more {
 }
 .more:hover {
 	
+	/*
 	background: #f47c20;
 	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
 	background: -moz-linear-gradient(top, #f88e11, #f06015);

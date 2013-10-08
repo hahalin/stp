@@ -50,6 +50,24 @@ class main extends CI_Controller{
     $data['tagline'] = $this->session->userdata('tagline');
     $data['teamId'] = $this->session->userdata('teamId');
 
+	//product category tree
+	
+	$tree=array();
+	$c=new category();
+	$c->where_not_in_related('parentcategory');
+	$c->get();
+	
+	foreach($c as $ci)
+	{
+		$o=new stdClass();
+		$o->text=$ci->name;
+		$o->id=$ci->id;
+		$tree[]=$o;	
+	}
+	
+	print_r ($tree);
+	$data['tree']=$tree;
+
     $this->load->view('main',$data);
   }
 

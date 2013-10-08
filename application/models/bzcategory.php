@@ -22,8 +22,9 @@ class Bzcategory extends DataMapper {
 			'join_table'=>'bzcategories_parents'
 		),
 		'bzcategory'=>array(
-			//'class'=>'parentcategory',
-			'other_field'=>'parent'
+			'class'=>'parentcategory',
+			'other_field'=>'parent',
+			'join_table'=>'bzcategories_parents'
 		),
 		'bzcategorycode'=>array(
 			'class'=>'bzcategorycode',

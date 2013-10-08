@@ -76,7 +76,19 @@ body, ul, li {
 }
 
 #menu li div ul:hover .more {
+	
 	visibility: visible;
+	
+	display:block;
+	width:60px;
+	height:21px;
+}
+
+#menu li div ul:hover .more {
+	
+	visibility: visible;
+	
+	display:block;
 }
 
 #menu li:hover {
@@ -177,7 +189,7 @@ body, ul, li {
  	width: 130px;
  }
  .co1_1 ul:hover li a.more {
- 	display: block;
+   display: block;
  	visibility: visible;
  }
  .col_2 {
@@ -365,6 +377,8 @@ body, ul, li {
  {
  	color: #f47c20;
  }
+ 
+ /*
  .more:hover {
  	
  	background: #f47c20;
@@ -377,9 +391,11 @@ body, ul, li {
  	border-color: #f47c20;
  	border-bottom-style: inset;
  	/* color:#f47c20;*/
+ 	/*
  	color: #fef4e9;
  }
- 
+ */
+
  #dv-active-rfq-list
  {
  	

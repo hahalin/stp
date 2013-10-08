@@ -64,11 +64,11 @@ class Template extends DataMapper {
 	// --------------------------------------------------------------------
 
 	var $validation = array(
-		'example' => array(
+		/*'example' => array(
 			// example is required, and cannot be more than 120 characters long.
 			'rules' => array('required', 'max_length' => 120),
 			'label' => 'Example'
-		)
+		)*/
 	);
 
 	// --------------------------------------------------------------------

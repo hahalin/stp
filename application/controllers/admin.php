@@ -18,6 +18,11 @@ class Admin extends CI_Controller
 		$this->load->view('template_footer');
 	}
 	
+	function testjarvis($page)
+	{
+		$this->load->view('jarvis/'.$page);
+	}
+	
 	
 	function testhgrid()
 	{

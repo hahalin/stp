@@ -24,7 +24,8 @@ class Category extends DataMapper {
 		'category'=>array(
 			//'class'=>'parentcategory',
 			'other_field'=>'parentcategory'
-		)
+		),
+		'product'
 	);
 	
 	// --------------------------------------------------------------------

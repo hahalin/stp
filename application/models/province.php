@@ -40,7 +40,9 @@ class Province extends DataMapper {
 	);
 
 	// Insert related models that Template can have more than one of.
-	var $has_many = array();
+	var $has_many = array(
+		'company'
+	);
 
 	/* Relationship Examples
 	 * For normal relationships, simply add the model name to the array:

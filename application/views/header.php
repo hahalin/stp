@@ -25,7 +25,7 @@
       padding-top: 60px;
       padding-bottom: 40px;
     }
-  </style>
+   </style>
   <!--<link rel="stylesheet" href="<?php /*echo base_url();*/?>/assets/css/bootstrap-responsive.min.css">-->
   <!--
   <link rel="stylesheet" href="<?php echo base_url();?>assets/css/main.css">

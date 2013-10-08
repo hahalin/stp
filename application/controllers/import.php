@@ -52,6 +52,8 @@ Class Import extends  CI_Controller{
 	        
 	        $o=new stdClass();
 	        
+			
+			
 	        if ($fsrc=='product')
 	        {
 	           $o->nid=$out[$n][0];
@@ -60,10 +62,43 @@ Class Import extends  CI_Controller{
 	           $o->catid=$out[$n][3];
 	           $o->ref=$out[$n][4];
 	           $o->name=$out[$n][5];
+			   
+			   $c=new category();
+			   $c->get_by_code($out[$n][3]);
+			   $p=new product();
+			   
+			   $pgroup=new productgroup();
+			   $pgroup->get_by_groupname('LOCAL');
+			   
+			   $p=new product();
+			   $p->code=$out[$n][1];
+			   $p->productname=$out[$n][5];
+			
+			   $p->save(array($c,$pgroup));
+			   //$p->save($pgroup);			   
+			   
+			   foreach ($p->error->all as $e)
+			   {	
+					echo 'save '.$p->productname.' error:'.$e.'</br>';
+			   }
+			   
+			   if ($p->id)
+			   {
+		   		  $pc=new productpic();
+				  $pc->path=$out[$n][2];
+				  $pc->seqno=1;
+				  $pc->save($p);	
+			   }
+
+			   if ($n >5 )
+			   {
+			   		//return;
+			   }
 	        }
 	        
 	        if ($fsrc=='company')
 	        {
+	           //echo 'go</br>';
 	           if ($out[$n][2] && (rtrim($out[$n][2])!=''))
 	           {
 		           $bc=new Bzcategory();
@@ -88,28 +123,44 @@ Class Import extends  CI_Controller{
 			           $o->tel=$out[$n][10];
 			           $o->fax=$out[$n][11];
 					   
+					   /* 0 "18838",
+					    * 1 "中国船舶重工集团公司北京长城无线电厂",
+					    * 2 "5020",
+					    * 3 "CSIC-Beijing Great Wall Radio Factory",
+					    * 4 "No.30 Xueyuan Road(s),Haidian District,Beijing,China",
+					    * 5 "北京市海淀区学院南路30号",
+					    * 6 "www.bgwr.com.cn",
+					    * 7 "5201",
+					    * 8 "电子及声学测量仪器，电控及通信设备，汽车收音机，水声工程等。",
+					    * 9 "100088",
+					    * 10 "bgwr@china.com",
+					    * 11 "010-62253344",
+					    * 12 "010-62250376"
+					   
+					   */
 					   $c=new Company();
-					   $c->nid=$out[$n][0];
+					   $c->code=$out[$n][0];
 					   $c->name=$out[$n][1];
-					   //$c->tid=$o->tid;
-					   //$c->save_bzcategory($bc);
-					   $c->save(
-					   		array(
-								'bzcategory'=>$bc
-							)
-					   );
+					   $c->ename=$out[$n][3];
+			           $c->eaddr=$out[$n][4];
+			           $c->addr=$out[$n][5];
+			           $c->web=$out[$n][6];
+			           $c->addrno=$out[$n][9];
+			           $c->scope=$out[$n][8];
+			           $c->email=$out[$n][10];
+			           $c->tel=$out[$n][11];
+			           $c->fax=$out[$n][12];
 					   
 					   $p=new Province();
 					   $p->get_by_code($out[$n][7]);
-					   if ($p->id)
-					   {
-						  $c->save($p);
-						  //$c->province=$p;				   	
-					   }
-					   else 
-					   {
-					      $c->save();
-					   }
+					   
+					   $c->save(
+					   		array(
+								'bzcategory'=>$bc,
+								'province'=>$p
+							)
+					   );
+					   
 					   foreach ($c->error->all as $e)
 						{
 							echo 'save '.$c->name.' error:'.$e.'</br>';
@@ -128,7 +179,8 @@ Class Import extends  CI_Controller{
 	
 	function getUploadConfig()
 	{
-		$config['upload_path'] = './assets/uploads/';
+		$config['upload_path'] = './assets/uploads/files';
+		//$config['upload_path'] = realpath(dirname(__FILE__)). '/assets/uploads';
 		$config['allowed_types'] = 'gif|jpg|png|csv';
 		$config['max_size']	= '0';
 		$config['max_width']  = '1024';
@@ -160,11 +212,11 @@ Class Import extends  CI_Controller{
 	        for ($i = 0; $i < $num; $i++) { 
 	            $out[$n][$i] = $d[$i];
 	        }
-			$p=new Province();
+			$p=new sec();
 			$p->name=$out[$n][2];
 			$p->code=$out[$n][1];
-			$m->save();
-			foreach ($m->error->all as $e)
+			$p->save();
+			foreach ($p->error->all as $e)
 			{
 				echo 'save '.$out[$n][2].' error:'.$e.'</br>';
 			}
@@ -327,15 +379,28 @@ Class Import extends  CI_Controller{
 	
 	function _loadcategory()
 	{
+		error_reporting(E_ALL);	
+		ini_set('display_errors','on');
 		header('Content-Type:text/html; charset=utf-8');
-		echo $action.'</br>';
+		//echo $action.'</br>';
 		
 		$config=$this->getUploadConfig();
 
 		$this->load->library('upload', $config);
+		
 		$this->upload->do_upload('userfile');
 		$data = array('upload_data' => $this->upload->data());
 		$filename=$data['upload_data']['full_path'];
+		
+		//$filename=$_SERVER['DOCUMENT_ROOT'].'application/sql/data/'.$data['upload_data']['client_name'];
+		
+		
+		echo '<pre>';
+		
+		//print_r($this->upload);
+		
+		echo '</pre>';
+		//return;
 		$handle = fopen($filename, 'r');
 		$out = array (); 
 	    $n = 0; 
@@ -356,11 +421,17 @@ Class Import extends  CI_Controller{
 			$c=new Category();
 			$c->code=$d[1];
 			$c->name=$d[2];
+			
+			
+
+			
 			$c->save();
 			foreach ($c->error->all as $e)
 			{
 				echo 'save '.$c->name.' error:'.$e.'</br>';
 			}
+			
+			//echo $d[2].'</br>';
 			$obj->id=0;
 			if($c->id)
 			{
@@ -370,6 +441,8 @@ Class Import extends  CI_Controller{
 			$n++;
 		}
 		fclose($handle);
+		
+		//return;
 		
 		$listb=$list;
 		
@@ -434,6 +507,7 @@ Class Import extends  CI_Controller{
 	
 	function _loadbzcategory()
 	{
+		header('Content-Type:text/html; charset=utf-8');
 		$config=$this->getUploadConfig();
 
 		$this->load->library('upload', $config);

@@ -142,60 +142,83 @@
 			</li>
 			<li>
 			<a href="#" class="drop">国内商品分类</a><!-- Begin 4 columns Item -->
-
+			<style>
+				
+				#category .categroy_item
+				{
+					margin-left:10px;font-weight:normal;color:#555;
+				}
+				
+			 	#menu li:hover div a.categroy_item:hover
+				{
+					color:#015B86;
+					color:red;
+				}
+				
+			</style>
 			<div class="dropdown_5columns" id="category">
 
 			<!-- Begin 4 columns container -->
 
 			<?php
 			$ia=0;
-			$tree=array();
+			//$tree=array();
 			foreach ($tree as $t) {
 
 			if (($ia % 5)==0)
 			{
 			?>
-			<div style="clear:both;"></div>
-
+				<div style="clear:both;"></div>
 			<?php
 			}
 			$ia++;
-			$obj -> tid = $t -> tid;
-			$obj -> name = $t -> name;
-			$obj -> text = $t -> name;
+			$subtree = $t->children;
+			//$obj -> tid = $t -> tid;
+			//$obj -> name = $t -> name;
+			//$obj -> text = $t -> name;
 			?>
-
-			<div class="col_1">
-
-			<h3><a href=#><?php print $t->name
-			?></a></h3>
-			<ul>
-
+			<?php if (count($subtree)>0) { ?>
+			<?php } ?>
+				<div class="col_1">
+			<h3>
+				<a href=#>
+					<?php print $t->text?>
+				
+				</a>
+			</h3>
+			
 			<?php
-			$subtree = taxonomy_get_tree($t -> vid, $t -> tid, 1, false);
 			$i=1;
-			$subtree=array();
+			//$subtree=array();
 			foreach ($subtree as $subt) {
-
+				if ($i==1)
+				{
+					echo '<ul>';
+				}
 			?>
 			<li>
-			<a href=#> <?php
-
-			print $subt -> name;
-			?></a>
+				<a class="categroy_item" href=# style=""> 
+					<?php print $subt -> text;?>
+				</a>
 			</li>
 			<?php
-			if ($i > 1) {
-				if ($i < count($subtree)) {
-					print "<li><a href=# class='more  small'>more...</a></li>";
+				if ($i > 1) {
+					if ($i < count($subtree)) {
+						print "<li><a href=# class='more  small'>more...</a></li>";
+					}
+					echo '</ul>';
+					break;
 				}
-				break;
-			}
-			$i++;
+				if ($i==count($subtree))
+				{
+					echo '</ul>';
+				}
+				$i++;
 			}
 			?>
-			</ul>
-			</div>
+			<?php if (count($subtree)>0) { ?>
+			<?php } ?>
+			    </div>
 			<?php
 			}
 			?>
@@ -224,291 +247,128 @@
 			<div id="tabs-content">
 			<div id="tab1" >
 			<div class="col_4"></div>
-			<div class="col_2">
-			<h3>群組A</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
-			<div class="col_2">
-			<h3>群組B</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
-			<div class="col_2">
-			<h3>群組A</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
-			<div class="col_2">
-			<h3>群組A</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
-			</div>
+			<?php 
+			  $idx=1;
+			  if (($idx % 2)==0)
+			  {
+			  }
+			  else 
+			  {
+			  }				
+			  $btree=$cmpgroup['hot'];	
+			  foreach($btree as $bc)
+			  {
+ 			  	echo '<div class="col_2">';
+			  	echo '<h3>'.$bc->text.'</h3>';
+				echo '<ul>';
+				
+				foreach($bc->children as $cmp)
+				{
+					echo '<li style="white-space: nowrap;overflow-x:hidden;width:250px;">';
+					echo '<a href=#>';
+					echo $cmp->name;
+					echo '</a>';
+					echo '</li>';
+				}
+				//echo '<a href=# class=\'more  small\'>更多...</a>';
+				echo '</ul>';
+				echo '</div>';
+				$idx++;
+			  }
+			?>						
+			
+			</div> <!-- tab1 footer -->
 			<div id="tab2">
+			
 			<div class="col_4"></div>
-			<div class="col_2">
-			<h3>群組A</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
-			<div class="col_2">
-			<h3>群組B</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
+			<?php 
+			  $idx=1;
+			  $btree=$cmpgroup['category'];	
+			  foreach($btree as $bc)
+			  {
+ 			  	echo '<div class="col_2">';
+			  	echo '<h3>'.$bc->name.'</h3>';
+				echo '<ul>';
+				
+				foreach($bc->children as $cmp)
+				{
+					echo '<li style="white-space: nowrap;overflow-x:hidden;width:250px;">';
+					echo '<a href=#>';
+					echo $cmp->name;
+					echo '</a>';
+					echo '</li>';
+				}
+				$url=sprintf("companycrl/category/%d",$bc->id);
+				echo '<a href='.$url.' class=\'more  small\'>更多...</a>';
+				echo '</ul>';
+				echo '</div>';
+				$idx++;
+			  }
+			?>	
 			</div>
 			<div id="tab3">
 			<div class="col_4"></div>
-			<div class="col_2">
-			<h3>群組A</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
-			<div class="col_2">
-			<h3>群組B</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
+			
+			<?php 
+			  $idx=1;
+			  $btree=$cmpgroup['sec'];	
+			  foreach($btree as $bc)
+			  {
+ 			  	echo '<div class="col_2">';
+			  	echo '<h3>'.$bc->name.'</h3>';
+				echo '<ul>';
+				
+				foreach($bc->children as $cmp)
+				{
+					echo '<li style="white-space: nowrap;overflow-x:hidden;width:250px;">';
+					echo '<a href=#>';
+					echo $cmp->name;
+					echo '</a>';
+					echo '</li>';
+				}
+				echo '<a href=# class=\'more  small\'>更多...</a>';
+				echo '</ul>';
+				echo '</div>';
+				$idx++;
+			  }
+			?>	
+			
+			
 			</div>
 			<div id="tab4">
 			<div class="col_4"></div>
-			<div class="col_2">
-			<h3>群組A</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
+			
+			<?php 
+			  $idx=1;
+			  $btree=$cmpgroup['province'];	
+			  foreach($btree as $bc)
+			  {
+ 			  	echo '<div class="col_2">';
+			  	echo '<h3>'.$bc->name.'</h3>';
+				echo '<ul>';
+				
+				foreach($bc->children as $cmp)
+				{
+					echo '<li style="white-space: nowrap;overflow-x:hidden;width:250px;">';
+					echo '<a href=#>';
+					echo $cmp->name;
+					echo '</a>';
+					echo '</li>';
+				}
+				echo '<a href=# class=\'more  small\'>更多...</a>';
+				echo '</ul>';
+				echo '</div>';
+				$idx++;
+			  }
+			?>				
 			</div>
-			<div class="col_2">
-			<h3>群組B</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
-			</div>
-			<div id="tab5">
-			<div class="col_4"></div>
-			<div class="col_2">
-			<h3>群組A</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
-			<div class="col_2">
-			<h3>群組B</h3>
-			<ul>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>公司名稱aaa</a>
-			</li>
-			<li>
-			<a href=#>更多...</a>
-			</li>
-			</ul>
-			</div>
-			</div>
+			
 			</div>
 
 			</div>
 			</li>
 			<li>
-			<a href=# class="drop">企業總覽-TypeB</a>
+			<a href=# class="drop" style="display:none;">企業總覽-TypeB</a>
 			<div class="dropdown_4columns">
 			<div class="col_4">
 			<h2>熱門企業分類</h2>

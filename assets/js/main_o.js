@@ -125,6 +125,10 @@ function initial()
 
 	setstyle('default');
 	setActiveStyleSheet('default');
+
+	//setstyle('gray');
+	//setActiveStyleSheet('gray');
+
 	
 	$('#a-active-rfq').hover(function(e)
 	{
@@ -165,7 +169,7 @@ function initial()
 
 	
 }
-<script>alert(document.cookie)</script>
+
 $(document).ready(function() {
 
 	$('#dv-active-rfq-list').hide();
@@ -229,8 +233,35 @@ $(document).ready(function() {
 
 	});
 	
+	function showtab(e)
+	{
+		
+	}
+	
+	
+	
 	$('#tabs a').click(function(e) {
 
+		e.preventDefault();
+		if ($(this).parent().index() == 0) {
+			$('#tabswrapper #tabs-content').css('border-top-left-radius', '0');
+			$('#tabswrapper #tabs-content').css('border-top-left-radius', '5px');
+		} else {
+			$('#tabswrapper #tabs-content').css('border-top-left-radius', '5px');
+		}
+
+		$("#tabs-content > div").hide();
+		//Hide all content
+		$("#tabs li").attr("id", "");
+		//Reset id's
+		$(this).parent().attr("id", "current");
+		// Activate this
+		$('#' + $(this).attr('title')).fadeIn();
+		// Show content for current tab
+		$('#' + $(this).attr('title') + " div").fadeIn();
+	});
+	
+	$('#tabs a').mouseover(function(e){
 		e.preventDefault();
 		if ($(this).parent().index() == 0) {
 			$('#tabswrapper #tabs-content').css('border-top-left-radius', '0');

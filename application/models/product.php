@@ -45,7 +45,8 @@ class Product extends DataMapper {
 			'class'=>'prdtb',
 			'join_table'=>'products_prdtbs'
 		),
-		'productpic'
+		'productpic',
+		'category'
 	
 	);
 
@@ -98,6 +99,25 @@ class Product extends DataMapper {
 
 	// --------------------------------------------------------------------
 
+	
+	function getdftbcount()
+	{
+		$ptb=new prdtb();
+		
+		$ptb->select_func('count','id','count');
+		$ptb->where_related_product('id',$this->id);
+		$ptb->get();
+		
+		if ($ptb->exists())
+		{
+			return $ptb->count;
+		}
+		else 
+		{
+			return 0;
+		}
+	}
+	
 	function _checkduplicated($field)
     {
     	return 'error '.'aaa';

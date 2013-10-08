@@ -12,6 +12,7 @@ class app extends CI_Controller {
 	
 	public function index() {
 
+	    $this->output->enable_profiler(TRUE);
 		$user_id = $this->session->userdata('id');
 		$user_name = $this->session->userdata('name');
     	$is_admin = $this->session->userdata('is_admin');
@@ -32,7 +33,204 @@ class app extends CI_Controller {
 		$this -> load -> helper('form');
 		$data['error']=$this->session->flashdata('error');
 		//$data['error']=$this->session->userdata('error');
+		
+		$c=new category();
+		$c->where_not_in_related('parentcategory');
+		$c->get();
+
+		$tree=array();
+		foreach($c as $ci)
+		{
+			$o=new stdClass();
+			$o->text=$ci->name;
+			$o->id=$ci->id;
+			
+			$subc=new category();
+			$subc->where_related_parentcategory('id',$ci->id);
+			$subc->get();
+			$subarray=array();
+			foreach($subc as $subci)
+			{
+				$subo=new stdClass();
+				$subo->text=$subci->name;
+				$subo->id=$subci->id;
+				$subarray[]=$subo;
+			}		
+			$o->children=$subarray;
+			$tree[]=$o;	
+			
+		}
+		
+		$data['tree']=$tree;
+		
+		
+		$cmpgroup=array();
+		
+		$bc=new bzcategory();
+		//$bc->where_not_in_related('parent');
+		//$bc_cmp=$bc->company;
+		//$bc_cmp->where_related('bzcategory','id','$(parent).id');
+		
+		$bc->where_related_company('id is not null');
+		$bc->order_by('rand()')->limit(6);
+		$bc->distinct();
+		$bc->get();	
+		$btree=array();
+		foreach($bc as $ibc)
+		{
+			$bo=new stdClass();
+			$bo->text=$ibc->name;
+			$bo->id=$ibc->id;
+			
+			$cmplist=array();
+			
+			$cmp=new company();
+			$cmp->where_related_bzcategory('id',$bo->id);
+			$cmp->order_by('rand()')->limit(3)->get();
+			
+		    foreach ($cmp as $cmpi)
+			{
+				$co=new stdClass();
+				$co->name=$cmpi->name;
+				$co->id=$cmpi->id;
+				$cmplist[]=$co;
+			}
+			
+			$bo->children=$cmplist;
+			
+			$btree[]=$bo;
+		}
+		
+		$cmpgroup['hot']=$btree;
+		
+		//category begin
+		$bc2=new bzcategory();
+		$bc2->where_related_company('id is not null');
+		$bc2->order_by('rand()')->limit(6);
+		$bc2->distinct()->get();
+		$list=array();
+		foreach($bc2 as $item)
+		{
+			$o=new stdClass();
+			$o->id=$item->id;
+			$o->name=$item->name;
+			
+			$cmp=new company();
+			$cmp->where_related_bzcategory('id',$o->id);
+			$cmp->order_by('rand()')->limit(3)->get();
+			$sublist=array();
+			foreach($cmp as $subitem)
+			{
+				$subo=new stdClass();
+				$subo->id=$subitem->id;
+				$subo->name=$subitem->name;
+				$sublist[]=$subo;
+			}
+			$o->children=$sublist;
+			$list[]=$o;
+		}
+		
+		$cmpgroup['category']=$list;
+		//category end
+		
+		//sec start
+		$sec=new sec();
+		$sec->get();		
+		$list=array();
+		foreach($sec  as $item)
+		{
+			$o=new stdClass();
+			$o->id=$item->id;
+			$o->name=$item->name;
+			
+			$p=new province();
+			$p->where_related_sec('id',$item->id);
+			//$p->where_related_company('')
+			$p->order_by('rand()')->limit(5);
+			$p->get();
+					
+			$cmp=new company();
+			//$cmp->where_related_province('id',$p->id);
+			$sublist=array();
+			
+			$cmp->where_related('province/sec','id',$item->id);
+			$cmp->order_by('rand()')->limit(1)->get();
+			foreach($cmp as $subitem)
+			{
+				$subo=new stdClass();
+				$subo->id=$subitem->id;
+				$subo->name=$p->name.'-'.$subitem->name;
+				$sublist[]=$subo;
+			}
+			
+			$cmp->where_related('province/sec','id',$item->id);
+			$cmp->order_by('rand()')->limit(1)->get();
+			foreach($cmp as $subitem)
+			{
+				$subo=new stdClass();
+				$subo->id=$subitem->id;
+				$subo->name=$p->name.'-'.$subitem->name;
+				$sublist[]=$subo;
+			}
+				
+			$cmp->where_related('province/sec','id',$item->id);
+			$cmp->order_by('rand()')->limit(1)->get();
+			foreach($cmp as $subitem)
+			{
+				$subo=new stdClass();
+				$subo->id=$subitem->id;
+				$subo->name=$p->name.'-'.$subitem->name;
+				$sublist[]=$subo;
+			}					
+			
+			$o->children=$sublist;
+			$list[]=$o;
+		}
+		
+		$cmpgroup['sec']=$list;		
+		
+		//sec end
+		
+		//province start 
+		
+		$p=new province();
+		$p->get();		
+		$list=array();
+		foreach($p  as $item)
+		{
+			$o=new stdClass();
+			$o->id=$item->id;
+			$o->name=$item->name;
+			
+			$cmp=new company();
+			$sublist=array();
+			
+			$cmp->where_related('province','id',$item->id);
+			$cmp->order_by('rand()')->limit(3)->get();
+			foreach($cmp as $subitem)
+			{
+				$subo=new stdClass();
+				$subo->id=$subitem->id;
+				$subo->name=$subitem->name;
+				$sublist[]=$subo;
+			}
+			$o->children=$sublist;
+			$list[]=$o;
+		}
+		
+		$cmpgroup['province']=$list;		
+		
+		
+		//province end
+		
+		
+		$data['cmpgroup']=$cmpgroup;
+		
+		//$data['btree']=$btree;
+		
+		
 		$this -> load -> view('main',$data);
+
 
 		return;
 

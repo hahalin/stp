@@ -44,7 +44,8 @@ class Company extends DataMapper {
 	   'user'=>array(
 	     'class'=>'user',
 	     'join_table'=>'companies_users'
-	   )
+	   ),
+	   'rfqitem'
 	);
 
 	// Insert related models that Template can have more than one of.
@@ -76,7 +77,7 @@ class Company extends DataMapper {
 	// --------------------------------------------------------------------
 
 	var $validation = array(
-	    'nid'=>array(
+	    'code'=>array(
 			'rules'=>array('unique')
 		)
 		/*
