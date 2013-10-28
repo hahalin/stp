@@ -5,11 +5,31 @@ class User extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		//$this->config->item('use_mongodb', 'ion_auth') ?$this->load->library('mongo_db') :$this->load->database();
+		$this->output->enable_profiler(TRUE);
+		
+		
 	}
 
 	public function index()
 	{
 		redirect('home');
+	}
+	
+	function checklogin()
+	{
+		echo $this->ion_auth->get_user_id();
+		//$user=new user();
+		$s=new ion_auth_model();
+		$s->user($this->ion_auth->get_user_id());
+		echo $s->row()->username;
+		return;
+		//$u=new user();
+		//$u->get_by_id($this->ion_auth->get_user_id())->get();
+		//$u->where('id',7);	
+		//$u->get();
+		//echo $u->username;
+		
 	}
 	
 	function user_info() {

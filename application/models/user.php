@@ -11,10 +11,10 @@
  * @author  	Simon Stenhouse
  * @link    	http://stensi.com
  */
-class User extends DataMapper {
+class user extends DataMapper {
 
-	var $has_one = array("group");
-
+	//var $has_one = array("group");
+	var $table = 'users';
 	var $validation = array(
 		array(
 			'field' => 'username',
@@ -50,7 +50,7 @@ class User extends DataMapper {
 	 *
 	 * Initialize DataMapper.
 	 */
-	function User()
+	function user()
 	{
 		parent::DataMapper();
 	}

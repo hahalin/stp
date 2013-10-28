@@ -37,7 +37,7 @@ body, ul, li {
 }
 
 
-#menu {
+#menu_header {
     
 	z-index:10;
 	position:relative;
@@ -64,7 +64,7 @@ body, ul, li {
 	box-shadow: inset 0px 0px 1px #edf9ff;
 }
 
-#menu li {
+#menu_header li {
 	float: left;
 	display: block;
 	text-align: center;
@@ -75,23 +75,13 @@ body, ul, li {
 	border: none;
 }
 
-#menu li div ul:hover .more {
-	
-	visibility: visible;
-	
-	display:block;
-	width:60px;
-	height:21px;
+#menu_header li div ul:hover .more {
+	display:compact;
+	visibility:visible;
 }
 
-#menu li div ul:hover .more {
-	
-	visibility: visible;
-	
-	display:block;
-}
 
-#menu li:hover {
+#menu_header li:hover {
 	border: 1px solid #777777;
 	padding: 4px 9px 4px 9px;
 	
@@ -109,7 +99,7 @@ body, ul, li {
 	border-radius: 5px 5px 0px 0px;
 }
 
-#menu li a {
+#menu_header li a {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 15px;
 	color: #EEEEEE;
@@ -121,15 +111,15 @@ body, ul, li {
 	
 }
 
-#menu li:hover a {
+#menu_header li:hover a {
 	color: #161616;
 	text-shadow: 1px 1px 1px #ffffff;
 }
-#menu li .drop {
+#menu_header li .drop {
 	padding-right: 21px;
 	background: url("../img/drop.png") no-repeat right 8px;
 }
-#menu li:hover .drop {
+#menu_header li:hover .drop {
 	background: url("../img/drop.png") no-repeat right 7px;
 }
 
@@ -171,7 +161,7 @@ body, ul, li {
  	width: 700px;
  }
  
- #menu li:hover .dropdown_1column, #menu li:hover .dropdown_2columns, #menu li:hover .dropdown_3columns, #menu li:hover .dropdown_4columns, #menu li:hover .dropdown_5columns {
+ #menu_header li:hover .dropdown_1column, #menu_header li:hover .dropdown_2columns, #menu_header li:hover .dropdown_3columns, #menu_header li:hover .dropdown_4columns, #menu_header li:hover .dropdown_5columns {
  	left: -1px;
  	top: auto;
  }
@@ -189,8 +179,8 @@ body, ul, li {
  	width: 130px;
  }
  .co1_1 ul:hover li a.more {
-   display: block;
- 	visibility: visible;
+ 	display:compact;	
+ 	
  }
  .col_2 {
  	width: 270px;
@@ -205,31 +195,31 @@ body, ul, li {
  	width: 690px;
  }
  
- #menu .menu_right {
+ #menu_header .menu_right {
  	float: right;
  	margin-right: 0px;
  }
- #menu li .align_right {
+ #menu_header li .align_right {
  	/* Rounded Corners */
  	-moz-border-radius: 5px 0px 5px 5px;
  	-webkit-border-radius: 5px 0px 5px 5px;
  	border-radius: 5px 0px 5px 5px;
  }
  
- #menu li:hover .align_right {
+ #menu_header li:hover .align_right {
  	left: auto;
  	right: -1px;
  	top: auto;
  }
  
- #menu p, #menu h2, #menu h3, #menu ul li {
+ #menu_header p, #menu_header h2, #menu_header h3, #menu_header ul li {
  	font-family: Arial, Helvetica, sans-serif;
  	line-height: 21px;
  	font-size: 12px;
  	text-align: left;
  	text-shadow: 1px 1px 1px #FFFFFF;
  }
- #menu h2 {
+ #menu_header h2 {
  	font-size: 21px;
  	font-weight: 400;
  	letter-spacing: -1px;
@@ -237,22 +227,22 @@ body, ul, li {
  	padding-bottom: 14px;
  	border-bottom: 1px solid #666666;
  }
- #menu h3 {
+ #menu_header h3 {
  	font-size: 14px;
  	margin: 7px 0 14px 0;
  	padding-bottom: 7px;
  	border-bottom: 1px solid #888888;
  }
- #menu p {
+ #menu_header p {
  	line-height: 18px;
  	margin: 0 0 10px 0;
  }
  
- #menu li:hover div a {
+ #menu_header li:hover div a {
  	font-size: 14px;
  	color: #015b86;
  }
- #menu li:hover div a:hover {
+ #menu_header li:hover div a:hover {
  	color: #029feb;
  }
  
@@ -278,7 +268,7 @@ body, ul, li {
  	margin: 5px 15px 5px 5px;
  }
  
- #menu li .black_box {
+ #menu_header li .black_box {
  	background-color: #333333;
  	color: #eeeeee;
  	text-shadow: 1px 1px 1px #000;
@@ -293,14 +283,14 @@ body, ul, li {
  	box-shadow: inset 0 0 3px #000000;
  }
  
- #menu li ul {
+ #menu_header li ul {
  	list-style: none;
  	padding: 0;
  	margin: 0 0 12px 0;
  }
  
  
- #menu li ul li {
+ #menu_header li ul li {
  	font-size: 14px;
  	line-height: 24px;
  	position: relative;
@@ -311,14 +301,14 @@ body, ul, li {
  	text-align: left;
  	width: 130px;
  }
- #menu li ul li:hover {
+ #menu_header li ul li:hover {
  	background: none;
  	border: none;
  	padding: 0;
  	margin: 0;
  }
  
- #menu li .greybox li {
+ #menu_header li .greybox li {
  	background: #F4F4F4;
  	border: 1px solid #bbbbbb;
  	margin: 0px 0px 4px 0px;
@@ -330,7 +320,7 @@ body, ul, li {
  	-khtml-border-radius: 5px;
  	border-radius: 5px;
  }
- #menu li .greybox li:hover {
+ #menu_header li .greybox li:hover {
  	background: #ffffff;
  	border: 1px solid #aaaaaa;
  	padding: 4px 6px 4px 6px;
@@ -339,7 +329,7 @@ body, ul, li {
  
  
  
- #menua  a{
+ #menu_header  a{
  	
  	color:red;
  	font-weight: 500;
@@ -352,28 +342,33 @@ body, ul, li {
  	
  	text-decoration: underline;
  	color: #fef4e9;
- 	/*color: white;*/
+	
+	visibility:collapse; 	
  	
+	/*color: white;*/
+ 	/*
+ 	visibility: hidden; 
+ 	 
  	border: solid 1px #da7c0c;
  	background: #f78d1d;
  	background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
  	background: -moz-linear-gradient(top, #faa51a, #f47a20);
  	filter: progid :DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
  
- 	/*
+ 	
  	 -webkit-border-radius: .8em;
  	 -moz-border-radius: .8em;
  	 border-radius: .8em;
- 	 */
+ 	 
  	width: 4em;
  	border-width: 0;
  	background: transparent;
  	display: none;
- 	visibility: hidden;
+ 	*/
  	
  }
  
- #menu li:hover div a.more:hover ,#menu li div a.more 
+ #menu_header li:hover div a.more:hover,#menu_header li div a.more  
  {
  	color: #f47c20;
  }

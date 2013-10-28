@@ -326,7 +326,7 @@ $(document).ready(function() {
 				theimg.attr("src", "images/list-view-active.png");
 
 				// remove the grid view and change to list
-				theproducts.removeClass("grid")
+				theproducts.removeClass("grid");
 				theproducts.addClass("list");
 				// update all thumbnails to smaller size
 				$("img.thumb").attr("src", listthumb);

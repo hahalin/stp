@@ -228,6 +228,43 @@ class app extends CI_Controller {
 		
 		//$data['btree']=$btree;
 		
+		//category begin
+		$cb=new category();
+		$cb->where_related('parentcategory');
+		$cb->distinct();
+		$cb->get();
+		$cblist=array();
+		$pagesize=10;
+		foreach($cb as $item)
+		{
+			$o=new stdClass();
+			$o->id=$item->id;
+			$o->name=$item->name;
+			$o->active=false;
+			$o->active=false;
+			
+			$children=new category();
+			$children->where_related_parentcategory('id',$o->id)->get();
+			$childlist=array();
+			foreach ($children as $citem)
+			{
+				$childo=new stdClass();
+				$childo->id=$citem->id;
+				$childo->name=$citem->name;
+				$childo->active=false;
+				$childlist[]=$childo;
+			}
+			$o->count=count($childlist);
+			$o->children=$childlist;
+			$cblist[]=$o;
+		}
+		$data['category']=$cblist;
+		$data['category_link']=site_url('productcrl/category/');
+		
+		
+		//category end
+		
+		
 		
 		$this -> load -> view('main',$data);
 

@@ -17,7 +17,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 		<link href="<?php echo base_url(); ?>assets/css/page.css" rel="stylesheet"  />
-		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.twitter.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/base.css" type="text/css" media="screen" />
 
 		<link rel="stylesheet" href="<?php echo base_url() ?>assets/css/menu.css" type="text/css" media="screen" title="default" />
@@ -119,7 +119,18 @@
 			   else : $this->load->view('logindiv'); 
 			   endif;
 			?>
-			
+			<!--
+			<div class="navbar" style="float:right;margin-top:25px;">
+				<div class="navbar-inner" style="float:left;position:relative;">
+					<div class="container-fluid">
+						<ul class="nav" style="border:0px dashed red;">
+							<li><a href='regiser'>註冊會員</a></li>				
+						</ul>
+					</div>
+				</div>
+			</div>
+			-->
+				
 			</div>
 
 		<!-- /header div -->
@@ -128,7 +139,7 @@
 			
 		<!-- menu div -->
 			
-			<ul id="menu">
+			<ul id="menu_header">
 			<li class="menu_right" style="background-color:transparent;margin:0;padding:0;margin-top:3px;margin-bottom:3px;">
 
 			<div  id="white">
@@ -299,7 +310,7 @@
 					echo '</li>';
 				}
 				$url=sprintf("companycrl/category/%d",$bc->id);
-				echo '<a href='.$url.' class=\'more  small\'>更多...</a>';
+				echo '<li><a href='.$url.' class=\'more  small\'>更多...</a><li>';
 				echo '</ul>';
 				echo '</div>';
 				$idx++;
@@ -326,7 +337,7 @@
 					echo '</a>';
 					echo '</li>';
 				}
-				echo '<a href=# class=\'more  small\'>更多...</a>';
+				echo '<li><a href=# class=\'more  small\'>更多...</a></li>';
 				echo '</ul>';
 				echo '</div>';
 				$idx++;
@@ -355,7 +366,7 @@
 					echo '</a>';
 					echo '</li>';
 				}
-				echo '<a href=# class=\'more  small\'>更多...</a>';
+				echo '<li><a href=# class=\'more  small\'>更多...</a></li>';
 				echo '</ul>';
 				echo '</div>';
 				$idx++;
@@ -757,9 +768,54 @@
 		
 		<div id="content" >
 
+			<link rel="stylesheet" href="<?php echo base_url();?>assets/developer-admin/css/style.css?v=1">
+			<link rel="stylesheet" href="<?php echo base_url();?>assets/developer-admin/css/colors.css?v=1">
+
+
 			
-		<div id="navi" >
-			
+		<div id="navi">
+			<div class="panel-navigation silver-gradient">
+				<div class="panel-load-target scrollable custom-scroll" style="position: relative;">
+					<div class="navigable">
+						<ul class="unstyled-list open-on-panel-content">
+						<?php
+						  foreach ($category as $item)
+						  {
+						  	if (count($item->children)>0)
+							{
+								echo '<li class="big-menu grey-gradient with-right-arrow">';
+								echo '<span><span class="list-count">'.count($item->children).'</span>'.$item->name.'</span>';
+							}
+							else 
+							{
+								echo '<li class="big-menu grey-gradient ">';
+								//echo '<li>';
+								echo '<span>'.$item->name.'</span>';
+							}
+							
+						  	if (count($item->children)>0)
+							{
+								echo '<ul class="message-menu">';
+													
+								foreach($item->children as $citem)
+								{
+									echo '<li>';
+									echo '<span class="message-status2">';
+									echo '<a href=#>'.$citem->name.'</a>';
+									//echo '<li>'.$citem->name.'</li>';
+									echo '</span>';
+									echo '</li>';
+								}
+								
+								echo '</ul>';
+							}
+							echo '</li>';
+						  }
+						?>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<!-- main_content div -->
@@ -1020,12 +1076,31 @@
 	<!--
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	-->
+	
+	<!-- developer-amdin js begin -->
+	<!-- JavaScript at bottom except for Modernizr -->
+	<script src="<?php echo base_url();?>assets/developer-admin/js/libs/modernizr.custom.js"></script>
+	<script src="<?php echo base_url();?>assets/developer-admin/js/libs/jquery-1.10.2.min.js"></script>
+	<script src="<?php echo base_url();?>assets/developer-admin/js/setup.js"></script>
 
+	<!-- Template functions -->
+	<script src="<?php echo base_url();?>assets/developer-admin/js/developr.input.js"></script>
+	<script src="<?php echo base_url();?>assets/developer-admin/js/developr.navigable.js"></script>
+	<script src="<?php echo base_url();?>assets/developer-admin/js/developr.notify.js"></script>
+	<script src="<?php echo base_url();?>assets/developer-admin/js/developr.scroll.js"></script>
+	<script src="<?php echo base_url();?>assets/developer-admin/js/developr.tooltip.js"></script>
+	<script src="<?php echo base_url();?>assets/developer-admin/js/developr.table.js"></script>
+
+	<!-- Plugins -->
+	<script src="<?php echo base_url();?>assets/developer-admin/js/libs/jquery.tablesorter.min.js"></script>
+	<script src="<?php echo base_url();?>assets/developer-admin/js/libs/DataTables/jquery.dataTables.min.js"></script>
+	<!-- developer-amdin js end -->
+		
 	<script src="<?php echo base_url(); ?>/assets/js/vendor/bootstrap.min.js"></script>
 
 	<script src="<?php echo base_url(); ?>/assets/js/main.js"></script>
 	<script src="<?php echo base_url(); ?>/assets/js/main_o.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.easing.1.3.js"></script>
+	<!--<script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.easing.1.3.js"></script>-->
 	<script type="text/javascript" src="<?php echo base_url();?>assets/js/showguide.js"></script>
 	
 	<div class="clear"></div>

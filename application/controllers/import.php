@@ -14,11 +14,27 @@ Class Import extends  CI_Controller{
 	
 	function index()
 	{
+	 	$baseurl=site_url('import/');	
+
+	 	echo '<ul>';
+	    echo '<li><a href="'.$baseurl.'/upload/sec'.'">sec</a></li>';	
+	    echo '<li><a href="'.$baseurl.'/upload/province'.'">province</a></li>';	
+	    echo '<li><a href="'.$baseurl.'/upload/bzcategory'.'">bzcategory</a></li>';	
+	    echo '<li><a href="'.$baseurl.'/upload/category'.'">category</a></li>';	
+	    echo '<li><a href="'.$baseurl.'/upload/listcontent/company'.'">company</a></li>';	
+	    echo '<li><a href="'.$baseurl.'/upload/listcontent/product'.'">product</a></li>';	
+		echo '</ul>';
+		return;	
 		$this->load->view('uploadcsv',array('error'=>''));
 	}
 	function upload($action='category')
 	{
-		$this->load->view('uploadcsv',array('error'=>'','action'=>$action));
+		$type="";
+		if ($this->uri->segment(4))
+		{
+			$type=$this->uri->segment(4);
+		}
+		$this->load->view('uploadcsv',array('error'=>'','action'=>$action,'type'=>$type));
 	}
 	
 	function listupload()

@@ -25,7 +25,7 @@ class Productpic extends DataMapper {
 	//   doesn't convert properly using the inflector_helper.
 	// var $model = 'template';
 	// var $table = 'templates';
-	var $table='product_pics';
+	var $table='products_pics';
 	// You can override the database connections with this option
 	// var $db_params = 'db_config_name';
 
