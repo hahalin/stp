@@ -236,6 +236,18 @@ Class Companycrl extends CI_Controller{
 		}				
 	}
 
+	function GetUsers($cid)
+	{
+		$c=new Company();
+		$c->user->get();
+		
+		$list=array();
+		foreach($c as $item)
+		{
+			$list[]=$item;
+		}
+	}
+
 	function product($act='add',$pa='')
 	{
 		

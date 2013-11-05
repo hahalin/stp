@@ -46,8 +46,11 @@ class Product extends DataMapper {
 			'join_table'=>'products_prdtbs'
 		),
 		'productpic',
-		'category'
-	
+		'category',
+		'company'=>array(
+	   		'class'=>'company',
+	   		'join_table'=>'companies_products'
+	    )
 	);
 
 	/* Relationship Examples

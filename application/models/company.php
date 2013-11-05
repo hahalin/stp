@@ -45,6 +45,10 @@ class Company extends DataMapper {
 	     'class'=>'user',
 	     'join_table'=>'companies_users'
 	   ),
+	   'product'=>array(
+	   		'class'=>'product',
+	   		'join_table'=>'companies_products'
+	   ),
 	   'rfqitem'
 	);
 
