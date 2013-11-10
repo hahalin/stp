@@ -13,11 +13,11 @@ Class Rfqcrl extends  CI_Controller{
 
 	function _showerr($model)
 	{
-		
+
 		foreach ($model->error->all as $e)
 		{
 			echo $e .'</br>';
-		}				
+		}
 	}
 
 	function createrfqstatus()
@@ -26,29 +26,29 @@ Class Rfqcrl extends  CI_Controller{
 		$m->name='initial';
 		$m->save();
 		$this->_showerr($m);
-		
+
 		$m=new rfqstatus();
 		$m->name='received';
 		$m->save();
 		$this->_showerr($m);
-		
+
 		$m=new rfqstatus();
 		$m->name='canceled';
 		$m->save();
 		$this->_showerr($m);
-		
+
 		echo '<p><a href="' . site_url('rfqcrl') . '">Back to Productcrl</a></p>';
-		
-		
+
+
 	}
 
     function index()
 	{
 
 		$data=array();
-		
+
 		$data['title']='RFQ Controller Example';
-		
+
 		$act=array();
 		$act['title']='Add rfqstatus';
 		$act['url']='rfqcrl/createrfqstatus';
@@ -57,10 +57,10 @@ Class Rfqcrl extends  CI_Controller{
 		$this->load->view('header');
 		$this->load->view('rfqcrl',$data);
 		$this->load->view('footer_base');
-		
-	} 	
-	
-	
-	
+
+	}
+
+
+
 }
 ?>

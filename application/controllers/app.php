@@ -9,7 +9,7 @@ class app extends CI_Controller {
 		$this->load->library('jsondata');
 		//$this -> load -> model('appcfg_model');
 	}
-	
+
 	public function index() {
 
 	    $this->output->enable_profiler(TRUE);
@@ -17,14 +17,14 @@ class app extends CI_Controller {
 		$user_name = $this->session->userdata('name');
     	$is_admin = $this->session->userdata('is_admin');
     	$isLoggedIn = $this->session->userdata('isLoggedIn');
-                
+
         /*
         $isLoggedIn =1;
-        $is_admin=0;	
+        $is_admin=0;
         $user_id=2;
         $user_name="TestUser";
-		 */	
-		
+		 */
+
         $data['user_id']=$user_id;
 		$data['user_name']=$user_name;
 		$data['is_admin']=$is_admin;
@@ -33,7 +33,7 @@ class app extends CI_Controller {
 		$this -> load -> helper('form');
 		$data['error']=$this->session->flashdata('error');
 		//$data['error']=$this->session->userdata('error');
-		
+
 		$c=new category();
 		$c->where_not_in_related('parentcategory');
 		$c->get();
@@ -44,7 +44,7 @@ class app extends CI_Controller {
 			$o=new stdClass();
 			$o->text=$ci->name;
 			$o->id=$ci->id;
-			
+
 			$subc=new category();
 			$subc->where_related_parentcategory('id',$ci->id);
 			$subc->get();
@@ -55,39 +55,39 @@ class app extends CI_Controller {
 				$subo->text=$subci->name;
 				$subo->id=$subci->id;
 				$subarray[]=$subo;
-			}		
+			}
 			$o->children=$subarray;
-			$tree[]=$o;	
-			
+			$tree[]=$o;
+
 		}
-		
+
 		$data['tree']=$tree;
-		
-		
+
+
 		$cmpgroup=array();
-		
+
 		$bc=new bzcategory();
 		//$bc->where_not_in_related('parent');
 		//$bc_cmp=$bc->company;
 		//$bc_cmp->where_related('bzcategory','id','$(parent).id');
-		
+
 		$bc->where_related_company('id is not null');
 		$bc->order_by('rand()')->limit(6);
 		$bc->distinct();
-		$bc->get();	
+		$bc->get();
 		$btree=array();
 		foreach($bc as $ibc)
 		{
 			$bo=new stdClass();
 			$bo->text=$ibc->name;
 			$bo->id=$ibc->id;
-			
+
 			$cmplist=array();
-			
+
 			$cmp=new company();
 			$cmp->where_related_bzcategory('id',$bo->id);
 			$cmp->order_by('rand()')->limit(3)->get();
-			
+
 		    foreach ($cmp as $cmpi)
 			{
 				$co=new stdClass();
@@ -95,14 +95,14 @@ class app extends CI_Controller {
 				$co->id=$cmpi->id;
 				$cmplist[]=$co;
 			}
-			
+
 			$bo->children=$cmplist;
-			
+
 			$btree[]=$bo;
 		}
-		
+
 		$cmpgroup['hot']=$btree;
-		
+
 		//category begin
 		$bc2=new bzcategory();
 		$bc2->where_related_company('id is not null');
@@ -114,7 +114,7 @@ class app extends CI_Controller {
 			$o=new stdClass();
 			$o->id=$item->id;
 			$o->name=$item->name;
-			
+
 			$cmp=new company();
 			$cmp->where_related_bzcategory('id',$o->id);
 			$cmp->order_by('rand()')->limit(3)->get();
@@ -129,30 +129,30 @@ class app extends CI_Controller {
 			$o->children=$sublist;
 			$list[]=$o;
 		}
-		
+
 		$cmpgroup['category']=$list;
 		//category end
-		
+
 		//sec start
 		$sec=new sec();
-		$sec->get();		
+		$sec->get();
 		$list=array();
 		foreach($sec  as $item)
 		{
 			$o=new stdClass();
 			$o->id=$item->id;
 			$o->name=$item->name;
-			
+
 			$p=new province();
 			$p->where_related_sec('id',$item->id);
 			//$p->where_related_company('')
 			$p->order_by('rand()')->limit(5);
 			$p->get();
-					
+
 			$cmp=new company();
 			//$cmp->where_related_province('id',$p->id);
 			$sublist=array();
-			
+
 			$cmp->where_related('province/sec','id',$item->id);
 			$cmp->order_by('rand()')->limit(1)->get();
 			foreach($cmp as $subitem)
@@ -162,7 +162,7 @@ class app extends CI_Controller {
 				$subo->name=$p->name.'-'.$subitem->name;
 				$sublist[]=$subo;
 			}
-			
+
 			$cmp->where_related('province/sec','id',$item->id);
 			$cmp->order_by('rand()')->limit(1)->get();
 			foreach($cmp as $subitem)
@@ -172,7 +172,7 @@ class app extends CI_Controller {
 				$subo->name=$p->name.'-'.$subitem->name;
 				$sublist[]=$subo;
 			}
-				
+
 			$cmp->where_related('province/sec','id',$item->id);
 			$cmp->order_by('rand()')->limit(1)->get();
 			foreach($cmp as $subitem)
@@ -181,30 +181,30 @@ class app extends CI_Controller {
 				$subo->id=$subitem->id;
 				$subo->name=$p->name.'-'.$subitem->name;
 				$sublist[]=$subo;
-			}					
-			
+			}
+
 			$o->children=$sublist;
 			$list[]=$o;
 		}
-		
-		$cmpgroup['sec']=$list;		
-		
+
+		$cmpgroup['sec']=$list;
+
 		//sec end
-		
-		//province start 
-		
+
+		//province start
+
 		$p=new province();
-		$p->get();		
+		$p->get();
 		$list=array();
 		foreach($p  as $item)
 		{
 			$o=new stdClass();
 			$o->id=$item->id;
 			$o->name=$item->name;
-			
+
 			$cmp=new company();
 			$sublist=array();
-			
+
 			$cmp->where_related('province','id',$item->id);
 			$cmp->order_by('rand()')->limit(3)->get();
 			foreach($cmp as $subitem)
@@ -217,17 +217,17 @@ class app extends CI_Controller {
 			$o->children=$sublist;
 			$list[]=$o;
 		}
-		
-		$cmpgroup['province']=$list;		
-		
-		
+
+		$cmpgroup['province']=$list;
+
+
 		//province end
-		
-		
+
+
 		$data['cmpgroup']=$cmpgroup;
-		
+
 		//$data['btree']=$btree;
-		
+
 		//category begin
 		$cb=new category();
 		$cb->where_related('parentcategory');
@@ -242,7 +242,7 @@ class app extends CI_Controller {
 			$o->name=$item->name;
 			$o->active=false;
 			$o->active=false;
-			
+
 			$children=new category();
 			$children->where_related_parentcategory('id',$o->id)->get();
 			$childlist=array();
@@ -260,12 +260,12 @@ class app extends CI_Controller {
 		}
 		$data['category']=$cblist;
 		$data['category_link']=site_url('productcrl/category/');
-		
-		
+
+
 		//category end
-		
-		
-		
+
+
+
 		$this -> load -> view('main',$data);
 
 
@@ -274,10 +274,10 @@ class app extends CI_Controller {
 		print '<br>';
 		print_r($this->session->userdata);
 		print '</br>';
-				
-		
+
+
 		$options = array(
-		  'code' => $this -> input -> post('code'), 
+		  'code' => $this -> input -> post('code'),
 		  'v' => $this -> input -> post('v')
 		);
 
@@ -288,12 +288,12 @@ class app extends CI_Controller {
 
 		$this -> form_validation -> set_rules('code', 'Title', 'required');
 		$this -> form_validation -> set_rules('v', 'text', 'required');
-		
+
 		if ($this -> form_validation -> run() == FALSE) {
 			$this -> load -> view('app/add');
 		} else {
 			$appcfg = $this -> appcfg_model -> add($options);
-			
+
 			$data=array('result'=>$appcfg);
 			//$data['baseurl']=base_url();
 			//$this->parser->parse('app/frmsuccess',$data);
@@ -301,26 +301,26 @@ class app extends CI_Controller {
 		}
 
 		//$appcfg = $this -> appcfg_model -> add($options);
-		
+
 		return;
 
 
 	}
-	
+
 	public function pricing()
 	{
 		$this->load->view('header');
-		
+
 		$data['css']=array(
 			'plan',
 			'adminia-1.1'
 		);
-		
-		$this->load->view('pricing',$data);	
-		
+
+		$this->load->view('pricing',$data);
+
 		$this->load->view('footer');
-	} 
-	
+	}
+
 	public function getcategory($pid=0)
 	{
 		$this->load->model('category_m');
@@ -328,7 +328,7 @@ class app extends CI_Controller {
 		$obj=$this->jsondata->datawrapper($list);
 		print json_encode($obj);
 	}
-	
+
 	public function printsess()
 	{
 		$this -> load -> library('session');
@@ -342,7 +342,7 @@ class app extends CI_Controller {
 		$s=urlencode($this->input->post('style'));
 		$this -> load -> library('session');
 		$this->session->set_userdata('style',$s);
-	} 
+	}
 	public function getstyle()
 	{
 		$this -> load -> library('session');
@@ -355,9 +355,9 @@ class app extends CI_Controller {
 		//$this -> load -> helper('url');
 		$this->load->library('parser');
 		$this->load->view('prodlist');
-		
+
 	}
-	
+
 	public function addpid($pid)
 	{
 		$this -> load -> library('session');
@@ -373,18 +373,20 @@ class app extends CI_Controller {
 			$list[$pid]=1;
 			$msg .="add";
 		}
-		else 
+		else
 		{
 			$list[$pid] +=1;
 			$msg .="modify";
 		}
 		$this -> session -> set_userdata('pidlist',$list);
-		
-		print "{success:true,msg:'".$msg."'}";
-		
-		
+        $o=new stdClass;
+        $o->success=true;
+        $o->msg=$msg;
+		print json_encode($o);
+
+
 	}
-	
+
 	public function foo($p="default")
 	{
 	   print "foo";
@@ -397,7 +399,7 @@ class app extends CI_Controller {
 		print_r ($this -> appcfg_model ->q());
 	}
 
-	
+
 
 	public function add() {
 

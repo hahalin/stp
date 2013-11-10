@@ -7,12 +7,12 @@
 <?php echo $error;?>
 
 <h2>
-	<?php 
+	<?php
 		echo $action;
 		if ($type)
 		{
 			echo '-'.$type;
-		}  
+		}
 	?>
 </h2>
 

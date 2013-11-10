@@ -37,7 +37,7 @@ class Login_Manager {
 			$u = new User();
 			if($u->count() == 0)
 			{
-				redirect('admin/init');
+				redirect('admin/login');
 			}
 		}
 		// if not logged in, automatically redirect

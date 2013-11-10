@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class Usercrl extends CI_Controller {
 
 	function __construct()
 	{
@@ -8,12 +8,35 @@ class User extends CI_Controller {
 		//$this->config->item('use_mongodb', 'ion_auth') ?$this->load->library('mongo_db') :$this->load->database();
 		$this->output->enable_profiler(TRUE);
 		
-		
 	}
 
 	public function index()
 	{
 		redirect('home');
+	}
+	
+	function GetCompanies($uid)
+	{
+		$u=new User();
+		$u->get_by_id($uid);
+		$c=$u->company->get();
+		
+		$list=array();
+		foreach($c as $item)
+		{
+			$list[]=$item;
+		}
+	}
+	
+	//set company
+	function JoinCompany($uid,$cid)
+	{
+		$this->output->enable_profiler(TRUE);
+		$u=new User();
+		$u->get_by_id($uid);
+		$c=new Company();
+		$c->get_by_id($cid);
+		$u->save($c);
 	}
 	
 	function checklogin()

@@ -1,0 +1,15 @@
+# Join Tables
+bzcategories_parents
+categories_parentcategories
+groups_users
+
+# Model Tables
+bzcategories
+bzcategorycodes
+categories
+companies
+groups
+provinces
+rfqstatuses
+secs
+users

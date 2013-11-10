@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `bzcategories_parents` (
   `bzcategory_id` bigint(20) unsigned DEFAULT NULL,
   `parent_id` bigint(20) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=274 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `bzcategorycodes` (
   `code` varchar(20) DEFAULT NULL,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=377 ;
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1  ;
 
 -- --------------------------------------------------------
 
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `name` varchar(40) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `code` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1396 ;
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1  ;
 
 -- --------------------------------------------------------
 
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `categories_parentcategories` (
   `category_id` bigint(20) unsigned NOT NULL,
   `parentcategory_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=176 ;
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1  ;
 
 -- --------------------------------------------------------
 
