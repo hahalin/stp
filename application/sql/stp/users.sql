@@ -7,6 +7,7 @@ CREATE TABLE  IF NOT EXISTS `users` (
   `password` char(40) NOT NULL,
   `salt` varchar(32) default NULL,
   `group_id` bigint(20) unsigned default NULL,
+  `avatar` varchar(255),
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)

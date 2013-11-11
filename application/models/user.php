@@ -17,7 +17,12 @@ class User extends DataMapper {
 	// Relationships
 	// --------------------------------------------------------------------
 	
-	public $has_one = array('group');
+	public $has_one = array(
+		  'group'=>array(
+				'class'=>'group',
+				'join_table'=>'groups_users'
+			)
+	);
 	
 	public $has_many = array(
 		// bugs created by this user
@@ -36,6 +41,7 @@ class User extends DataMapper {
 		   'class'=>'company',
 		   'join_table'=>'companies_users'
 		)
+		
 	);
 	
 	// --------------------------------------------------------------------

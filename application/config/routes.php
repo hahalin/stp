@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "welcome";
+$route['default_controller'] = "app";
 //$route['default_controller'] = "app";
 //$route['app/add']="app/add";
 //$route['app/(:any)'] = 'app/$1';

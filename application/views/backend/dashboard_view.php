@@ -14,6 +14,7 @@
 	    <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet">
 	    <link href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.css" rel="stylesheet">
 	    <link href="<?php echo base_url(); ?>assets/css/main.css" rel="stylesheet">
+       
         <script src="<?php echo base_url(); ?>assets/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
@@ -38,6 +39,11 @@
 				    <div class="tab-pane active" id="account_tab">
 				      <p>
 				      	<table class="table table-bordered table-striped">
+				      		<tr>
+				      			<td>
+				      				<img src="<?php echo $user_info->avatar;?>" style="height:150px;" />
+				      			</td>
+				      		</tr>
 				      		<tr>
 				      			<td><b>Username:</b></td>
 				      			<td><?php echo $user_info->username; ?></td>

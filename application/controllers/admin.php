@@ -46,6 +46,11 @@ class Admin extends CI_Controller
 		
 	}
 	
+	function testdeveloper($page)
+	{
+		$this->load->view('developer-admin/'.$page);
+	}
+	
 	function testjarvis($page)
 	{
 		$this->load->view('jarvis/'.$page);

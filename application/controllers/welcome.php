@@ -26,6 +26,10 @@ class Welcome extends CI_Controller {
 	}
 
 	public function index() {
+		if ($this->ion_auth->logged_in())
+		{
+			echo $this->session->userdata('username');
+		}
 		$this -> load -> view('welcome_message');
 	}
 

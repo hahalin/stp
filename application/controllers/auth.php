@@ -4,7 +4,10 @@ class Auth extends CI_Controller {
 
 	function __construct()
 	{
+
 		parent::__construct();
+		$this->output->enable_profiler(true);
+		//$this->load->library('session');
 		$this->load->library('form_validation');
 
 		// Load MongoDB library instead of native db driver if required
@@ -43,6 +46,12 @@ class Auth extends CI_Controller {
 
 			$this->_render_page('auth/index', $this->data);
 		}
+	}
+	
+	function install()
+	{
+		$data=array('a1key'=>'a1v');
+		$this->_render_page('jarvis/install',$data);
 	}
 	
 	function getUploadConfig()     
@@ -148,7 +157,7 @@ class Auth extends CI_Controller {
 	
 	function register()
 	{
-			
+		$this->output->enable_profiler(true);	
 		if ($this->ion_auth->logged_in())
 		{
 			redirect('auth', 'refresh');
@@ -302,13 +311,23 @@ class Auth extends CI_Controller {
 				//if the login is successful
 				//redirect them back to the dashboard
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				
+				$identity = $this->config->item('identity', 'ion_auth');
+
+				//echo ($this->session->userdata('username'));
+				//print_r ($this->session->userdata($identity));
+				
 				redirect('dashboard', 'refresh');
+				return;
 			}
 			else
 			{
 				//if the login was un-successful
 				//redirect them back to the login page
 				$this->session->set_flashdata('message', $this->ion_auth->errors());
+				//print_r(
+				//	$this->ion_auth->errors()
+				//);
 				redirect('auth/login', 'refresh'); //use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
 		}

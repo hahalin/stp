@@ -13,7 +13,12 @@
  */
 class Group extends DataMapper {
 
-	var $has_many = array("user");	
+	var $has_many = array(
+	  'user'=>array(
+			'class'=>'user',
+			'join_table'=>'groups_users'
+		)
+	);	
 	
 	var $validation = array(
 		array(
