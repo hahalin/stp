@@ -50,8 +50,35 @@ class Auth extends CI_Controller {
 	
 	function install()
 	{
+		$this->output->enable_profiler(false);
+		header('Content-Type:text/html; charset=utf-8');
 		$data=array('a1key'=>'a1v');
+		
+		$this->load->helper('file');
+		$path = APPPATH . 'sql/stp';
+		$tables = get_filenames($path);
+		$tblist=array();
+		$data['path']=$path;
+		foreach($tables as $table) {
+			$n = str_ireplace('.sql', '', $table);
+			$status='';
+			if ($this->db->table_exists($n))
+			{
+				$status="created";
+			}
+			//$sql = file_get_contents($path . '/' . $table);
+			$tblist[]=array(
+				'table'=>$n,
+				'status'=>$status
+			);
+		}
+		$data['tblist']=$tblist;	
+		$this->load->view('developer-admin/head',$data);
+		$this->load->view('developer-admin/install.php',$data);
+		return;
+		$this->load->view('jarvis/head');
 		$this->_render_page('jarvis/install',$data);
+		$this->load->view('jarvis/footer');
 	}
 	
 	function getUploadConfig()     

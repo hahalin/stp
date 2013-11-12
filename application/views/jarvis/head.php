@@ -35,6 +35,9 @@
 	<!-- font awsome and custom icons -->
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/jarvis/css/font-awesome.min.css?v=1">
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/jarvis/css/cus-icons.css?v=1">
+	
+   <link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap-fileupload.min.css">
+	
 	<!-- jarvis widget css -->
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/jarvis/css/jarvis-widgets.css?v=1">
 	<!-- Data tables, normal tables and responsive tables css -->
@@ -85,6 +88,11 @@
 	<link rel="apple-touch-startup-image" href="<?php echo base_url();?>assets/jarvis/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
 	<link rel="apple-touch-startup-image" href="<?php echo base_url();?>assets/jarvis/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 	<link rel="apple-touch-startup-image" href="<?php echo base_url();?>assets/jarvis/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+	
+	<!-- datatables 1.9.4 -->
+	<link rel="stylesheet" href="<?php echo base_url();?>media/css/jquery.dataTables.css">
+    
+	  
 	
   </head>
   <body>
