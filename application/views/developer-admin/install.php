@@ -7,7 +7,7 @@
 
 		<!-- Title bar -->
 		<header role="banner" id="title-bar">
-			<h2>Developr</h2>
+			<h2><?php echo $title; ?></h2>
 		</header>
 
 		<!-- Button to open/hide menu -->

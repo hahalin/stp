@@ -14,8 +14,6 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		
-
-		
 		if (!$this->ion_auth->logged_in())
 		{
 			//redirect them to the login page
@@ -23,7 +21,9 @@ class Dashboard extends CI_Controller {
 		} else {
 			$data['user_info'] = $this->ion_auth->user()->row();
 			$data['title'] = $data['user_info']->username . "'s Dashboard";
-			$this->load->view('backend/dashboard_view', $data);
+			//$this->load->view('backend/dashboard_view', $data);
+			$this->load->view('developer-admin/head',$data);
+			$this->load->view('developer-admin/dashboard', $data);
 		}
 	}
 	
