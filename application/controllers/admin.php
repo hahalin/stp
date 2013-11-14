@@ -197,6 +197,15 @@ class Admin extends CI_Controller
 		return TRUE;
 	}
 	
+	function init_stpdata()
+	{
+		$this->_init_stpdata();
+	}
+	
+	function createstptables()
+	{
+		$this->_create_stptables();
+	}
 	function _create_stptables() {
 		$this->load->helper('file');
 		$path = APPPATH . 'sql/' . $this->db->dbdriver;
@@ -209,11 +218,14 @@ class Admin extends CI_Controller
 			$n = str_ireplace('.sql', '', $table);
 			$this->_message("Creating table $n...");
 			$sql = file_get_contents($path . '/' . $table);
-			if($this->db->query($sql)) {
-				echo("done.");
-			} else {
-				echo("ERROR.");
-				return FALSE;
+			if (!$this->db->table_exists($n))
+			{
+				if($this->db->query($sql)) {
+					echo("done.");
+				} else {
+					echo("ERROR.");
+					return FALSE;
+				}
 			}
 		}
 		return TRUE;
@@ -271,6 +283,188 @@ class Admin extends CI_Controller
 		
 	}
 	
+	function _loadcompanies($filename)
+	{
+		$handle = fopen($filename, 'r');
+		$out = array (); 
+	    $n = 0; 
+		$list=array();
+		
+	    while ($d = fgetcsv($handle, 10000)) {
+	    	$num = count($d); 
+	        for ($i = 0; $i < $num; $i++) { 
+	            $out[$n][$i] = $d[$i];
+	        }
+			 $o=new stdClass();
+			 
+			 if ($out[$n][2] && (rtrim($out[$n][2])!=''))
+	           {
+		           $bc=new Bzcategory();
+				   
+				   $bc->get_by_code($out[$n][2]);
+				   if (!$bc->id)
+				   {
+				   	  echo $out[$n][1].' cat tid not exits:'.$out[$n][2].'</br>';
+				   } 	
+				   else 
+				   {
+			           $o->nid=$out[$n][0];
+			           $o->title=$out[$n][1];
+			           $o->tid=$out[$n][2];
+			           $o->ename=$out[$n][3];
+			           $o->addr2=$out[$n][4];
+			           $o->addr=$out[$n][5];
+			           $o->web=$out[$n][6];
+			           $o->province=$out[$n][7];
+			           $o->scope=$out[$n][8];
+			           $o->email=$out[$n][9];
+			           $o->tel=$out[$n][10];
+			           $o->fax=$out[$n][11];
+					   
+					   $c=new Company();
+					   $c->code=$out[$n][0];
+					   $c->name=$out[$n][1];
+					   $c->ename=$out[$n][3];
+			           $c->eaddr=$out[$n][4];
+			           $c->addr=$out[$n][5];
+			           $c->web=$out[$n][6];
+			           $c->addrno=$out[$n][9];
+			           $c->scope=$out[$n][8];
+			           $c->email=$out[$n][10];
+			           $c->tel=$out[$n][11];
+			           $c->fax=$out[$n][12];
+					   
+					   $p=new Province();
+					   $p->get_by_code($out[$n][7]);
+					   
+					   $c->save(
+					   		array(
+								'bzcategory'=>$bc,
+								'province'=>$p
+							)
+					   );
+					   
+					   foreach ($c->error->all as $e)
+						{
+							echo 'save '.$c->name.' error:'.$e.'</br>';
+						}
+					   $list[]=$o;
+				   }
+	           }
+			  $n++;
+	    }
+		fclose($handle);
+		return $n; 
+	}
+	
+	function _loadbzcategories($filename)
+	{
+		$handle = fopen($filename, 'r');
+		$out = array (); 
+	    $n = 0; 
+		$list=array();
+		
+	    while ($d = fgetcsv($handle, 10000)) { 
+	        $num = count($d); 
+	        for ($i = 0; $i < $num; $i++) { 
+	            $out[$n][$i] = $d[$i];
+	        }
+			$obj=new stdClass;
+			$obj->ida=$d[1];
+			$obj->nm=$d[2];
+			$obj->pida=$d[0];
+			
+			$c=new Bzcategory();
+			$c->code=$d[1];
+			$c->name=$d[2];
+			$c->save();
+			
+			$code=new Bzcategorycode();
+			$code->code=$d[1];
+			$code->name=$d[2];
+			$code->save();
+			if ($c->id)
+			{
+				$code->save($c);
+			}
+			foreach ($code->error->all as $e)
+			{
+				echo 'save code error:'.$e.'</br>';
+			}
+			
+			
+			foreach ($c->error->all as $e)
+			{
+    			echo $e . $c->name."<br />";
+			}
+			$obj->id=0;
+			if ($c->id !='')
+			{
+				$obj->id=$c->id;
+			}
+			$list[]=$obj;
+			//echo "</br>";
+	        $n++; 
+	    }
+		
+		$listb=$list;
+		foreach ($list as $ic)
+		{
+			//use parent;
+			$c=new Bzcategory();
+			$c->get_by_id($ic->id);
+			if (!$c->id)
+			{
+				$c->get_by_name($ic->nm);
+			}
+			
+			if (!$c->id)
+			{
+				echo 'parent '.$ic-nm.' find child error without correct id';
+				continue;
+			}
+			
+			//find child
+			foreach($listb as $icb)
+			{
+				if ($icb->pida==$ic->ida)
+				{
+					$cs=new Bzcategory();
+					
+					if ($icb->id)
+					{
+						$cs->get_by_id($icb->id);
+					}
+					else 
+					{
+						echo 'child '.$icb->nm .' use name save parent</br>';
+						$cs->get_by_name($icb->nm);
+					}
+					if ($cs->id)
+					{
+						$cs->save_parent($c);
+						if (count($cs->error->all)>0)
+						{
+							echo 'child '.$cs->name.' save parent occurs error:';
+							foreach($cs->error->all as $e)
+							{
+								echo $e.',';
+							}
+							echo '</br>';
+						}
+					}
+					else 
+					{
+						echo 'child save parent faild without correct id';
+					}
+				}
+			}
+		}
+		
+		fclose($handle);
+		return $n; 
+	}
+	
 	function _loadprovinces($filename)
 	{
 		$handle = fopen($filename, 'r');
@@ -321,9 +515,13 @@ class Admin extends CI_Controller
 		$path = APPPATH . 'sql/data/stp';
 		$files = get_filenames($path);
 		$filelist=array();
-		$filelist[]='group.csv';
-		$filelist[]='secs.csv';
-		$filelist[]='provinces.csv';
+		
+		//$filelist[]='group.csv';
+		//$filelist[]='secs.csv';
+		//$filelist[]='provinces.csv';
+		//$filelist[]='bzcategories.csv';
+		
+		$filelist[]='companies.csv';
 		
 		foreach($filelist as $file) {
 			if( ! strpos($file, '.csv'))
@@ -331,6 +529,22 @@ class Admin extends CI_Controller
 				continue;
 			}
 			$class = str_ireplace('.csv', '', $file);
+			
+			if ($class=='companies')
+			{
+				$this->_message("Importing data for $class ");
+				$importfile=	$path . '/' . $file;
+				$num= $this->{'_load'.$class}($importfile);
+				echo(" $num $class  were imported.");
+			}
+			
+			if ($class=='bzcategories')
+			{
+				$this->_message("Importing data for $class ");
+				$importfile=	$path . '/' . $file;
+				$num= $this->{'_load'.$class}($importfile);
+				echo(" $num $class  were imported.");
+			}
 			
 			if ($class=='secs')
 			{

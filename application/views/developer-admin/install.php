@@ -54,456 +54,22 @@
 					<tbody>
 						<?php
 						foreach ($tblist as $tb) {
-
-							echo '
-						<tr>
-							';
+							echo '<tr>';
 							echo '<th scope="row" class="checkbox-cell align-center" align="middle">';
-							echo '
-							<input type="checkbox" name="checked[]"  table="' . $tb['table'] . '" />
-							';
+							echo '<input type="checkbox" name="checked[]"  table="' . $tb['table'] . '" />';
 							echo '<td class="center">' . $tb['table'] . '</td>';
 							echo '<td class="center">' . $tb['status'] . '</td>';
 							echo '<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>';
-							echo '
-						</tr>';
+							echo '</tr>';
 						}
 						?>
 
 					</tbody>
+					
 				</table>
 
-				<h4>Styled table with advanced sorting</h4>
-
-				<table class="table responsive-table" id="sorting-advanced2">
-
-					<thead>
-						<tr>
-							<th scope="col">
-							<input type="checkbox" name="check-all" id="check-all" value="1">
-							</th>
-							<th scope="col">Text</th>
-							<th scope="col" width="15%" class="align-center hide-on-mobile">Date</th>
-							<th scope="col" width="15%" class="align-center hide-on-mobile-portrait">Status</th>
-							<th scope="col" width="15%" class="hide-on-tablet">Tags</th>
-							<th scope="col" width="60" class="align-center">Actions</th>
-						</tr>
-					</thead>
-
-					<tfoot>
-						<tr>
-							<td colspan="6"> 6 entries found </td>
-						</tr>
-					</tfoot>
-
-					<tbody>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-1" value="1">
-							</th>
-							<td>John Doe</td>
-							<td>Jul 5, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-2" value="2">
-							</th>
-							<td>John Appleseed</td>
-							<td>Jul 5, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag orange-bg">Non-verified</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-3" value="3">
-							</th>
-							<td>Sheldon Cooper</td>
-							<td>Jul 4, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-4" value="4">
-							</th>
-							<td>Rage Guy</td>
-							<td>Jun 25, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag red-bg">Fake</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-5" value="5">
-							</th>
-							<td>Thomas A. Anderson</td>
-							<td>Jun 16, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-6" value="6">
-							</th>
-							<td>Jane Doe</td>
-							<td>May 19, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-1" value="1">
-							</th>
-							<td>John Doe</td>
-							<td>Jul 5, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-2" value="2">
-							</th>
-							<td>John Appleseed</td>
-							<td>Jul 5, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag orange-bg">Non-verified</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-3" value="3">
-							</th>
-							<td>Sheldon Cooper</td>
-							<td>Jul 4, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-4" value="4">
-							</th>
-							<td>Rage Guy</td>
-							<td>Jun 25, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag red-bg">Fake</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-5" value="5">
-							</th>
-							<td>Thomas A. Anderson</td>
-							<td>Jun 16, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-6" value="6">
-							</th>
-							<td>Jane Doe</td>
-							<td>May 19, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-1" value="1">
-							</th>
-							<td>John Doe</td>
-							<td>Jul 5, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-2" value="2">
-							</th>
-							<td>John Appleseed</td>
-							<td>Jul 5, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag orange-bg">Non-verified</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-3" value="3">
-							</th>
-							<td>Sheldon Cooper</td>
-							<td>Jul 4, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-4" value="4">
-							</th>
-							<td>Rage Guy</td>
-							<td>Jun 25, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag red-bg">Fake</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-5" value="5">
-							</th>
-							<td>Thomas A. Anderson</td>
-							<td>Jun 16, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-6" value="6">
-							</th>
-							<td>Jane Doe</td>
-							<td>May 19, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small></td>
-							<td class="low-padding align-center"><a href="#" class="button compact icon-gear">Edit</a></td>
-						</tr>
-					</tbody>
-
-				</table>
-
-				<h4>Styled table with simple sorting</h4>
-
-				<p>
-					Simple sorting and manual controls if you prefer to handle the table output server-side:
-				</p>
-
-				<p>
-					<b>Tip:</b> try clicking on a row to show an extra line style!
-				</p>
-
-				<div class="table-header button-height">
-					<div class="float-right">
-						Search&nbsp;
-						<input type="text" name="table_search" id="table_search" value="" class="input mid-margin-left">
-					</div>
-
-					Show&nbsp;
-					<select name="range" class="select blue-gradient glossy">
-						<option value="1">10</option>
-						<option value="2">20</option>
-						<option value="3" selected="selected">40</option>
-						<option value="4">100</option>
-					</select>
-					entries
-				</div>
-				<table class="table responsive-table" id="sorting-example1">
-
-					<thead>
-						<tr>
-							<th scope="col">
-							<input type="checkbox" name="check-all" id="check-all" value="1">
-							</th>
-							<th scope="col">Text</th>
-							<th scope="col" width="15%" class="align-center hide-on-mobile">Date</th>
-							<th scope="col" width="15%" class="align-center hide-on-mobile-portrait">Status</th>
-							<th scope="col" width="15%" class="hide-on-tablet">Tags</th>
-							<th scope="col" width="100" class="align-right">Actions</th>
-						</tr>
-					</thead>
-
-					<tfoot>
-						<tr>
-							<td colspan="6"> 6 entries found </td>
-						</tr>
-					</tfoot>
-
-					<tbody>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-1" value="1">
-							</th>
-							<td>John Doe</td>
-							<td>Jul 5, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding"><span class="select compact full-width" tabindex="0"> <a href="#" class="select-value">Edit</a> <span class="select-arrow"></span> <span class="drop-down"> <a href="#">Put offline</a> <a href="#">Review</a> <a href="#">Put to trash</a> <a href="#">Delete</a> </span> </span></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-2" value="2">
-							</th>
-							<td>John Appleseed</td>
-							<td>Jul 5, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag orange-bg">Non-verified</small></td>
-							<td class="low-padding"><span class="select compact full-width" tabindex="0"> <a href="#" class="select-value">Edit</a> <span class="select-arrow"></span> <span class="drop-down"> <a href="#">Put offline</a> <a href="#">Review</a> <a href="#">Put to trash</a> <a href="#">Delete</a> </span> </span></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-3" value="3">
-							</th>
-							<td>Sheldon Cooper</td>
-							<td>Jul 4, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding"><span class="select compact full-width" tabindex="0"> <a href="#" class="select-value">Edit</a> <span class="select-arrow"></span> <span class="drop-down"> <a href="#">Put offline</a> <a href="#">Review</a> <a href="#">Put to trash</a> <a href="#">Delete</a> </span> </span></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-4" value="4">
-							</th>
-							<td>Rage Guy</td>
-							<td>Jun 25, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag red-bg">Fake</small></td>
-							<td class="low-padding"><span class="select compact full-width" tabindex="0"> <a href="#" class="select-value">Edit</a> <span class="select-arrow"></span> <span class="drop-down"> <a href="#">Put offline</a> <a href="#">Review</a> <a href="#">Put to trash</a> <a href="#">Delete</a> </span> </span></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-5" value="5">
-							</th>
-							<td>Thomas A. Anderson</td>
-							<td>Jun 16, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small><small class="tag green-bg">Valid</small></td>
-							<td class="low-padding"><span class="select compact full-width" tabindex="0"> <a href="#" class="select-value">Edit</a> <span class="select-arrow"></span> <span class="drop-down"> <a href="#">Put offline</a> <a href="#">Review</a> <a href="#">Put to trash</a> <a href="#">Delete</a> </span> </span></td>
-						</tr>
-						<tr>
-							<th scope="row" class="checkbox-cell">
-							<input type="checkbox" name="checked[]" id="check-6" value="6">
-							</th>
-							<td>Jane Doe</td>
-							<td>May 19, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small></td>
-							<td class="low-padding"><span class="select compact full-width" tabindex="0"> <a href="#" class="select-value">Edit</a> <span class="select-arrow"></span> <span class="drop-down"> <a href="#">Put offline</a> <a href="#">Review</a> <a href="#">Put to trash</a> <a href="#">Delete</a> </span> </span></td>
-						</tr>
-					</tbody>
-
-				</table>
-
-				<form method="post" action="" class="table-footer button-height large-margin-bottom">
-					<div class="float-right">
-						<div class="button-group">
-							<a href="#" title="First page" class="button blue-gradient glossy"><span class="icon-previous"></span></a>
-							<a href="#" title="Previous page" class="button blue-gradient glossy"><span class="icon-backward"></span></a>
-						</div>
-
-						<div class="button-group">
-							<a href="#" title="Page 1" class="button blue-gradient glossy">1</a>
-							<a href="#" title="Page 2" class="button blue-gradient glossy active">2</a>
-							<a href="#" title="Page 3" class="button blue-gradient glossy">3</a>
-							<a href="#" title="Page 4" class="button blue-gradient glossy">4</a>
-						</div>
-
-						<div class="button-group">
-							<a href="#" title="Next page" class="button blue-gradient glossy"><span class="icon-forward"></span></a>
-							<a href="#" title="Last page" class="button blue-gradient glossy"><span class="icon-next"></span></a>
-						</div>
-					</div>
-
-					With selected:
-					<select name="select90" class="select blue-gradient glossy mid-margin-left">
-						<option value="0">Delete</option>
-						<option value="1">Duplicate</option>
-						<option value="2">Put offline</option>
-						<option value="3">Put online</option>
-						<option value="4">Move to trash</option>
-					</select>
-					<button type="submit" class="button blue-gradient glossy">
-						Go
-					</button>
-				</form>
-
-				<h4>Simple table</h4>
-
-				<table class="simple-table responsive-table" id="sorting-example2">
-
-					<thead>
-						<tr>
-							<th scope="col">Contact</th>
-							<th scope="col" width="15%" class="hide-on-mobile">Date</th>
-							<th scope="col" width="15%" class="hide-on-mobile-portrait">Status</th>
-							<th scope="col" width="15%" class="hide-on-tablet">Tags</th>
-							<th scope="col" width="120" class="align-right">Actions</th>
-						</tr>
-					</thead>
-
-					<tfoot>
-						<tr>
-							<td colspan="5"> 6 entries found </td>
-						</tr>
-					</tfoot>
-
-					<tbody>
-						<tr>
-							<th scope="row"> John Doe
-							<br>
-							<small>Founder</small></th>
-							<td>Jul 5, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small><small class="tag green-bg">Valid</small></td>
-							<td class="align-right vertical-center"><span class="button-group compact"> <a href="#" class="button icon-pencil">Edit</a> <a href="#" class="button icon-gear with-tooltip" title="Other actions"></a> <a href="#" class="button icon-trash with-tooltip confirm" title="Delete"></a> </span></td>
-						</tr>
-						<tr>
-							<th scope="row"> John Appleseed
-							<br>
-							<small>CEO</small></th>
-							<td>Jul 5, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag orange-bg">Non-verified</small></td>
-							<td class="align-right vertical-center"><span class="button-group compact"> <a href="#" class="button icon-pencil">Edit</a> <a href="#" class="button icon-gear with-tooltip" title="Other actions"></a> <a href="#" class="button icon-trash with-tooltip confirm" title="Delete"></a> </span></td>
-						</tr>
-						<tr>
-							<th scope="row"> Sheldon Cooper
-							<br>
-							<small>Genius</small></th>
-							<td>Jul 4, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag green-bg">Valid</small></td>
-							<td class="align-right vertical-center"><span class="button-group compact"> <a href="#" class="button icon-pencil">Edit</a> <a href="#" class="button icon-gear with-tooltip" title="Other actions"></a> <a href="#" class="button icon-trash with-tooltip confirm" title="Delete"></a> </span></td>
-						</tr>
-						<tr>
-							<th scope="row"> Rage Guy
-							<br>
-							<small>Fuuuuu</small></th>
-							<td>Jun 25, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag red-bg">Fake</small></td>
-							<td class="align-right vertical-center"><span class="button-group compact"> <a href="#" class="button icon-pencil">Edit</a> <a href="#" class="button icon-gear with-tooltip" title="Other actions"></a> <a href="#" class="button icon-trash with-tooltip confirm" title="Delete"></a> </span></td>
-						</tr>
-						<tr>
-							<th scope="row"> Thomas A. Anderson
-							<br>
-							<small>Neo</small></th>
-							<td>Jun 16, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small><small class="tag green-bg">Valid</small></td>
-							<td class="align-right vertical-center"><span class="button-group compact"> <a href="#" class="button icon-pencil">Edit</a> <a href="#" class="button icon-gear with-tooltip" title="Other actions"></a> <a href="#" class="button icon-trash with-tooltip confirm" title="Delete"></a> </span></td>
-						</tr>
-						<tr>
-							<th scope="row"> Jane Doe
-							<br>
-							<small>Designer</small></th>
-							<td>May 19, 2011</td>
-							<td>Enabled</td>
-							<td><small class="tag">User</small><small class="tag">Client</small></td>
-							<td class="align-right vertical-center"><span class="button-group compact"> <a href="#" class="button icon-pencil">Edit</a> <a href="#" class="button icon-gear with-tooltip" title="Other actions"></a> <a href="#" class="button icon-trash with-tooltip confirm" title="Delete"></a> </span></td>
-						</tr>
-					</tbody>
-
-				</table>
-
+				
+				
 			</div>
 
 		</section>
@@ -512,25 +78,25 @@
 		<!-- Side tabs shortcuts -->
 		<ul id="shortcuts" role="complementary" class="children-tooltip tooltip-right">
 			<li>
-				<a href="./" class="shortcut-dashboard" title="Dashboard">Dashboard</a>
+				<a href="./" class="shortcut-dashboard" title="信息中控台">Dashboard</a>
 			</li>
 			<li>
-				<a href="inbox.html" class="shortcut-messages" title="Messages">Messages</a>
+				<a href="inbox.html" class="shortcut-messages" title="訊息">Messages</a>
 			</li>
 			<li>
 				<a href="agenda.html" class="shortcut-agenda" title="Agenda">Agenda</a>
 			</li>
 			<li class="current">
-				<a href="tables.html" class="shortcut-contacts" title="Contacts">Contacts</a>
+				<a href="tables.html" class="shortcut-contacts" title="企業名單">Contacts</a>
 			</li>
 			<li>
-				<a href="explorer.html" class="shortcut-medias" title="Medias">Medias</a>
+				<a href="explorer.html" class="shortcut-medias" title="商品管理">Medias</a>
 			</li>
 			<li>
 				<a href="sliders.html" class="shortcut-stats" title="Stats">Stats</a>
 			</li>
 			<li>
-				<a href="form.html" class="shortcut-settings" title="Settings">Settings</a>
+				<a href="form.html" class="shortcut-settings" title="系統設定">Settings</a>
 			</li>
 			<li>
 				<span class="shortcut-notes" title="Notes">Notes</span>
@@ -548,9 +114,11 @@
 				</header>
 
 				<div id="profile">
-					<img src="img/user.png" width="64" height="64" alt="User name" class="user-icon">
+					<!--<img src="img/user.png" width="64" height="64" alt="User name" class="user-icon"> width="64" -->
+					<img src="<?php echo base_url().$user_info -> avatar; ?>"   height="120"  alt="User name" class="user-icon">
 					Hello
-					<span class="name">John <b>Doe</b></span>
+					<!-- <span class="name">John <b>Doe</b></span> -->
+					<span class="name"><?php echo $user_info -> username; ?> </span>
 				</div>
 
 				<!-- By default, this section is made for 4 icons, see the doc to learn how to change this, in "basic markup explained" -->

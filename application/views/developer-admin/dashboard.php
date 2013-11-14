@@ -529,17 +529,7 @@
 	</section>
 	<!-- End main content -->
 
-	<!-- Side tabs shortcuts -->
-	<ul id="shortcuts" role="complementary" class="children-tooltip tooltip-right">
-		<li class="current"><a href="./" class="shortcut-dashboard" title="Dashboard">Dashboard</a></li>
-		<li><a href="inbox.html" class="shortcut-messages" title="Messages">Messages</a></li>
-		<li><a href="agenda.html" class="shortcut-agenda" title="Agenda">Agenda</a></li>
-		<li><a href="tables.html" class="shortcut-contacts" title="Contacts">Contacts</a></li>
-		<li><a href="explorer.html" class="shortcut-medias" title="Medias">Medias</a></li>
-		<li><a href="sliders.html" class="shortcut-stats" title="Stats">Stats</a></li>
-		<li class="at-bottom"><a href="form.html" class="shortcut-settings" title="Settings">Settings</a></li>
-		<li><span class="shortcut-notes" title="Notes">Notes</span></li>
-	</ul>
+	<?php $this->load->view('developer-admin/sidetabs'); ?>
 
 	<!-- Side tabs shortcuts with legends under the icons -->
 	<!-- <ul id="shortcuts" role="complementary" class="children-tooltip tooltip-right with-legend">
@@ -559,25 +549,9 @@
 		<!-- This wrapper is used by several responsive layouts -->
 		<div id="menu-content">
 
-			<header>
-				Administrator
-			</header>
+			<?php $this->load->view('developer-admin/profilediv'); ?>
 
-			<div id="profile">
-				<!--<img src="img/user.png" width="64" height="64" alt="User name" class="user-icon"> width="64" -->
-				<img src="<?php echo $user_info -> avatar; ?>"   height="120"  alt="User name" class="user-icon">
-				Hello
-				<!-- <span class="name">John <b>Doe</b></span> -->
-				<span class="name"><?php echo $user_info -> username; ?> </span>
-			</div>
-
-			<!-- By default, this section is made for 4 icons, see the doc to learn how to change this, in "basic markup explained" -->
-			<ul id="access" class="children-tooltip">
-				<li><a href="inbox.html" title="Messages"><span class="icon-inbox"></span><span class="count">2</span></a></li>
-				<li><a href="calendars.html" title="Calendar"><span class="icon-calendar"></span></a></li>
-				<li><a href="login.html" title="Profile"><span class="icon-user"></span></a></li>
-				<li class="disabled"><span class="icon-gear"></span></li>
-			</ul>
+			
 
 			<section class="navigable">
 				<ul class="big-menu">
@@ -1060,6 +1034,30 @@
 		* This script is dedicated to building and refreshing the demo chart
 		* Remove if not needed
 		*/
+		
+		$(document).ready(function() {
+			var table = $('#exampletable');
+   	   		$('#shortcuts li').removeClass('current');
+   			var idx=<?php echo $sidetabidx; ?>;
+   			$('#sidetabs-'+idx).addClass('current');
+
+   			//var idx=1;
+
+			table.dataTable({
+				'aoColumnDefs' : [{
+					'bSortable' : true
+				}],
+				'sPaginationType' : 'full_numbers',
+				'sDom' : '<"dataTables_header"lfr>t<"dataTables_footer"ip>',
+				'fnInitComplete' : function(oSettings) {
+					// Style length select
+					table.closest('.dataTables_wrapper').find('.dataTables_length select').addClass('select blue-gradient glossy').styleSelect();
+					tableStyled = true;
+				}
+			});
+			
+		});
+
 
 		// Demo chart
 		var chartInit = false, drawVisitorsChart = function() {
@@ -1174,24 +1172,7 @@
 		// Respond.js hook (media query polyfill)
 		$(document).on('respond-ready', drawVisitorsChart);
 
-		$(document).ready(function() {
-			var table = $('#exampletable');
-
-			table.dataTable({
-				'aoColumnDefs' : [{
-					'bSortable' : true
-				}],
-				'sPaginationType' : 'full_numbers',
-				'sDom' : '<"dataTables_header"lfr>t<"dataTables_footer"ip>',
-				'fnInitComplete' : function(oSettings) {
-					// Style length select
-					table.closest('.dataTables_wrapper').find('.dataTables_length select').addClass('select blue-gradient glossy').styleSelect();
-					tableStyled = true;
-				}
-			});
-			
-		});
-
+		
 	</script>
 </body>
 </html>

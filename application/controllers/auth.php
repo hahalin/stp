@@ -73,6 +73,9 @@ class Auth extends CI_Controller {
 			);
 		}
 		$data['tblist']=$tblist;	
+		$data['user_info'] = $this->ion_auth->user()->row();
+		//$data['title'] = $data['user_info']->username . "'s Dashboard";
+			
 		$this->load->view('developer-admin/head',$data);
 		$this->load->view('developer-admin/install.php',$data);
 		return;
