@@ -1,8 +1,8 @@
 	<!-- Side tabs shortcuts -->
 	<!-- class="current" -->
 	<ul id="shortcuts" role="complementary" class="children-tooltip tooltip-right">
-		<li id="sidetabs-1"><a href="dashboard" class="shortcut-dashboard" title="個人中控台">個人中控台</a></li>
-		<li id="sidetabs-2"><a href="inbox.html" class="shortcut-messages" title="信息管理">信息管理</a></li>
+		<li id="sidetabs-1"><a href="<?php echo base_url(); ?>dashboard" class="shortcut-dashboard" title="個人中控台">個人中控台</a></li>
+		<li id="sidetabs-2"><a href="<?php echo base_url(); ?>dashboard/inbox" class="shortcut-messages" title="信息管理">信息管理</a></li>
 		<li id="sidetabs-3"><a href="agenda.html" class="shortcut-agenda" title="Agenda">Agenda</a></li>
 		<li id="sidetabs-4"><a href="tables.html" class="shortcut-contacts" title="信息管理">信息管理</a></li>
 		<li id="sidetabs-5"><a href="explorer.html" class="shortcut-medias" title="商品資料">商品資料</a></li>

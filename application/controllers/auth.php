@@ -346,8 +346,17 @@ class Auth extends CI_Controller {
 
 				//echo ($this->session->userdata('username'));
 				//print_r ($this->session->userdata($identity));
-				
-				redirect('dashboard', 'refresh');
+				if ($this->session->userdata('prior_url'))
+				{
+					$url=$this->session->userdata('prior_url');
+					$this->session->unset_userdata('prior_url');
+					redirect($url);
+					return;
+				}
+				else 
+				{
+				  redirect('dashboard', 'refresh');
+				}
 				return;
 			}
 			else
@@ -696,7 +705,7 @@ class Auth extends CI_Controller {
 			$password = $this->input->post('password');
 
 			$additional_data = array(
-				//'first_name' => $this->input->post('first_name'),
+				'first_name' => $this->input->post('first_name'),
 				//'last_name'  => $this->input->post('last_name'),
 				//'company'    => $this->input->post('company'),
 				//'phone'      => $this->input->post('phone1') . '-' . $this->input->post('phone2') . '-' . $this->input->post('phone3'),

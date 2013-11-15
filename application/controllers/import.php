@@ -437,10 +437,7 @@ Class Import extends  CI_Controller{
 			$c=new Category();
 			$c->code=$d[1];
 			$c->name=$d[2];
-			
-			
 
-			
 			$c->save();
 			foreach ($c->error->all as $e)
 			{

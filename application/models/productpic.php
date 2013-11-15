@@ -25,7 +25,7 @@ class Productpic extends DataMapper {
 	//   doesn't convert properly using the inflector_helper.
 	// var $model = 'template';
 	// var $table = 'templates';
-	var $table='products_pics';
+	var $table='productpics';
 	// You can override the database connections with this option
 	// var $db_params = 'db_config_name';
 
@@ -71,6 +71,9 @@ class Productpic extends DataMapper {
 		//	'rules' => array('required', 'max_length' => 120),
 		//	'label' => 'Example'
 		//)
+		'path'=>array(
+			'rules'=>array('unique')
+		)
 	);
 
 	// --------------------------------------------------------------------

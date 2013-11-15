@@ -22,6 +22,27 @@ class Admin extends CI_Controller
 		$this->load->library('hgrid');
 		$this->output->enable_profiler(TRUE);
 	}
+	
+	function getUploadConfig()     
+	{
+            $config['upload_path'] = './assets/images/stp';
+            $config['allowed_types'] = 'jpg|jpeg|gif|png';
+            $config['max_size'] = '6048';                
+            return $config;
+    }
+
+    function getResizeConfig($sourceimage)
+    {
+                                     
+            $rconfig['image_library'] = 'gd2';
+            $rconfig['source_image']        = $sourceimage; //'/path/to/image/mypic.jpg';
+            $rconfig['create_thumb'] = TRUE;
+            $rconfig['maintain_ratio'] = TRUE;
+            $rconfig['width']         = 300;
+            $rconfig['height']        = 200;
+            return $rconfig;
+			
+    }       	
 
 	function index()
 	{
@@ -283,6 +304,192 @@ class Admin extends CI_Controller
 		
 	}
 	
+	function _loadcategories($filename)
+	{
+		$handle = fopen($filename, 'r');
+		$out = array (); 
+	    $n = 0; 
+		$list=array();
+		$listb=array();
+		while ($d = fgetcsv($handle, 10000)) { 
+				$num = count($d); 
+				for ($i = 0; $i < $num; $i++) { 
+				    $out[$n][$i] = $d[$i];
+				}
+				
+				$obj=new stdClass;
+				$obj->ida=$d[1];
+				$obj->nm=$d[2];
+				$obj->pida=$d[0];
+				
+				$c=new Category();
+				$c->code=$d[1];
+				$c->name=$d[2];
+				
+				$c->save();
+				
+				$obj->id=0;
+				if($c->id)
+				{
+					$obj->id=$c->id;
+				}
+				$list[]=$obj;
+				$n++;
+		 }
+		 //main loop end
+		 fclose($handle);
+		 
+		 //build parent-child relationship
+		 $listb=$list;
+		 
+		 foreach ($list as $ic)
+		{
+			//use parent;
+			$c=new Category();
+			$c->get_by_id($ic->id);
+			if (!$c->id)
+			{
+				$c->get_by_name($ic->nm);
+			}
+			
+			if (!$c->id)
+			{
+				echo 'parent '.$ic-nm.' find child error without correct id';
+				continue;
+			}
+			
+			//find child
+			foreach($listb as $icb)
+			{
+				if ($icb->pida==$ic->ida)
+				{
+					$cs=new Category();
+					
+					if ($icb->id)
+					{
+						$cs->get_by_id($icb->id);
+					}
+					else 
+					{
+						echo 'child '.$icb->nm .' use name save parent</br>';
+						$cs->get_by_name($icb->nm);
+					}
+					if ($cs->id)
+					{
+						$cs->save_parentcategory($c);
+						if (count($cs->error->all)>0)
+						{
+							echo 'child '.$cs->name.' save parent occurs error:';
+							foreach($cs->error->all as $e)
+							{
+								echo $e.',';
+							}
+							echo '</br>';
+						}
+					}
+					else 
+					{
+						echo 'child save parent faild without correct id';
+					}
+				}
+			}
+		}
+		 
+		 return $n;
+		  
+	}
+	
+	function _loadproducts($filename)
+	{
+		$handle = fopen($filename, 'r');
+		$out = array (); 
+	    $n = 0; 
+		$list=array();
+		
+	    while ($d = fgetcsv($handle, 10000)) {
+	    	$num = count($d); 
+	        for ($i = 0; $i < $num; $i++) { 
+	            $out[$n][$i] = $d[$i];
+	        }
+			$o=new stdClass();
+		   $o->nid=$out[$n][0];
+           $o->title=$out[$n][1];
+           $o->img=$out[$n][2];
+           $o->catid=$out[$n][3];
+           $o->ref=$out[$n][4];
+           $o->name=$out[$n][5];
+		   
+		   $c=new category();
+		   $c->get_by_code($out[$n][3]);
+		   $p=new product();
+		   
+		   //$pgroup=new productgroup();
+		   //$pgroup->get_by_groupname('LOCAL');
+		   
+		   $p=new product();
+		   $p->code=$out[$n][1];
+		   $p->productname=$out[$n][5];
+		   $p->local=$out[$n][1];
+		   $p->save(array($c));
+		   
+		   if (count($p->error->all)>0)
+		   {
+				echo 'save product  '.$p->productname.' occurs error:';
+				foreach($p->error->all as $e)
+				{
+					echo $e.',';
+				}
+				echo '</br>';
+			}
+		   
+		    if ($p->id)
+		    {
+		   		  $picidx=0;
+				  for 	($picidx=0;$picidx<3;$picidx++)
+				  {
+				  	  $filestr='./assets/images/stp_src/'.$out[$n][1].$picidx.'.png';
+					   if (!file_exists($filestr))
+					   {
+					   	  echo 'file not exists: '.$filestr;
+					   }
+			   		  if (file_exists($filestr))
+					  {
+					  	    $sourceimage=$filestr;
+				            $rconfig=$this->getResizeConfig($sourceimage);
+				            $rconfig['overwrite'] = TRUE;
+							$rconfig['new_image'] = './assets/images/stp_thumbs/'.$out[$n][1].$picidx.'.png'; 
+						    
+							$this->load->library('image_lib', $rconfig); 
+							$this->image_lib->initialize($rconfig);
+						    $pc=new productpic();
+						    $pc->product_id=$p->id;
+						    $pc->path=$filestr;
+						    $pc->seqno=$picidx;
+							$this->image_lib->resize();
+							if (count($this->image_lib->error_msg) ==0)
+							{
+								$pc->thumb=$this->image_lib->full_dst_path;
+							}
+						    $pc->save($p);
+							
+							if (count($pc->error->all)>0)
+						    {
+								echo 'save product pics '.$pc->path.'  occurs error:';
+								foreach($pc->error->all as $e)
+								{
+									echo $e.',';
+								}
+								echo '</br>';
+							 }
+					  }	
+				  }
+			}
+			$n++;
+	    }
+		fclose($handle);
+		return $n; 
+	}
+	
 	function _loadcompanies($filename)
 	{
 		$handle = fopen($filename, 'r');
@@ -520,8 +727,10 @@ class Admin extends CI_Controller
 		//$filelist[]='secs.csv';
 		//$filelist[]='provinces.csv';
 		//$filelist[]='bzcategories.csv';
+		//$filelist[]='companies.csv';
+		//$filelist[]='categories.csv';
+		$filelist[]='products.csv';
 		
-		$filelist[]='companies.csv';
 		
 		foreach($filelist as $file) {
 			if( ! strpos($file, '.csv'))
@@ -529,6 +738,23 @@ class Admin extends CI_Controller
 				continue;
 			}
 			$class = str_ireplace('.csv', '', $file);
+
+			if ($class=='categories')
+			{
+				$this->_message("Importing data for $class ");
+				$importfile=	$path . '/' . $file;
+				$num= $this->{'_load'.$class}($importfile);
+				echo(" $num $class  were imported.");
+			}
+						
+			
+			if ($class=='products')
+			{
+				$this->_message("Importing data for $class ");
+				$importfile=	$path . '/' . $file;
+				$num= $this->{'_load'.$class}($importfile);
+				echo(" $num $class  were imported.");
+			}
 			
 			if ($class=='companies')
 			{

@@ -36,7 +36,7 @@ class Product extends DataMapper {
 
 	// Insert related models that Template can have just one of.
 	var $has_one = array(
-		'productgroup'
+		//'productgroup'
 	);
 
 	// Insert related models that Template can have more than one of.
@@ -77,12 +77,14 @@ class Product extends DataMapper {
 	// --------------------------------------------------------------------
 
 	var $validation = array(
-		'productgroup'=>array(
-			'rules'=>array('required','checkduplicated')
+		//'productgroup'=>array(
+		//	'rules'=>array('required','checkduplicated')
+		//),
+		'local'=>array(
+			'rules'=>array('unique')
 		),
 		'productname'=>array(
 			'rules'=>array('required'),
-			//'rules'=>array('required'),
 			'label'=>'商品名稱'
 		)
 		//'example' => array(

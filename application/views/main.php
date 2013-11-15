@@ -62,6 +62,7 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/css/tour_style.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquerytour.css" />
 		<script src="<?php echo base_url(); ?>assets/js/cufon-yui.js" type="text/javascript"></script>
+		
 		<!-- /website tour test -->
 		
 		<title>国内商品</title>
@@ -77,15 +78,17 @@
 	<body>
   		
   		<?php
-  		   if (isset($error) && (trim($error)!=''))
-		   {
-		   	 //$data['error'] = '登入帳號密碼錯誤';
-		   	 $data['error']=$error;
-  		     $this->load->view('errdiv',$data);   
-		   }
-  		?>
-		
-		<?php $is_admin=false;if (isset($is_admin) && $is_admin) : $this->load->view('adminnav'); endif;?>
+			if (isset($error) && (trim($error) != '')) {
+				//$data['error'] = '登入帳號密碼錯誤';
+				$data['error'] = $error;
+				$this -> load -> view('errdiv', $data);
+			}
+	
+			$is_admin = false;
+			if (isset($is_admin) && $is_admin) {
+				$this -> load -> view('adminnav');
+			}
+	    ?>
 		
 		 
 		<div id="wrapper">
@@ -115,9 +118,14 @@
 			</div>
 
 			<?php 
-			   if (isset($isLoggedIn) && $isLoggedIn) : $this->load->view('mainnav'); 
-			   else : $this->load->view('logindiv'); 
-			   endif;
+				   if (isset($user_info))  
+				   {
+				   	    $this->load->view('mainnav'); 
+				   }
+				   else  
+				   {
+				   	     $this->load->view('logindiv'); 
+				   }
 			?>
 			<!--
 			<div class="navbar" style="float:right;margin-top:25px;">
@@ -788,9 +796,9 @@
 							}
 							else 
 							{
-								echo '<li class="big-menu grey-gradient ">';
+								echo '<li class="big-menu silver-gradient ">';
 								//echo '<li>';
-								echo '<span>'.$item->name.'</span>';
+								echo '<span cid="'.$item->id.'" >'.$item->name.'</span>';
 							}
 							
 						  	if (count($item->children)>0)
@@ -800,9 +808,8 @@
 								foreach($item->children as $citem)
 								{
 									echo '<li>';
-									echo '<span class="message-status2">';
+									echo '<span class="_message-status2" cid="'.$citem->id.'" >';
 									echo '<a href=#>'.$citem->name.'</a>';
-									//echo '<li>'.$citem->name.'</li>';
 									echo '</span>';
 									echo '</li>';
 								}
@@ -821,14 +828,13 @@
 		<!-- main_content div -->
 		<div id="main_content" >
 				<header>
-
 					<span class="list-style-buttons"> <a href="#" id="gridview" class="switcher tour_3"> <img src="<?php echo base_url(); ?>images/grid-view.png" alt="Grid"></a> 
 					<a href="#" id="listview" class="switcher active tour_4"> <img src="<?php echo base_url(); ?>images/list-view-active.png" alt="List"> </a> </span>
 					<h1>Our Products</h1>
 				</header>
 				<ul id="products" class="list clearfix">
 					<!-- row 1 -->
-					<li class="clearfix">
+					<li class="clearfix" >
 						<section class="left">
 
 							<img src="http://placehold.it/190X120" alt="default thumb" class="thumb">
@@ -837,7 +843,7 @@
 						</section>
 
 						<section class="right">
-							<span class="darkview"> <a href="javascript:void(0);" class="firstbtn">
+							<span class="darkview show-on-parent-hover"> <a href="javascript:void(0);" class="firstbtn">
 								<button class="btn blue">
 									明細
 								</button> </a> <a href="javascript:void(0);">
@@ -857,9 +863,9 @@
 							<span class="meta">Product ID: 543J424</span>
 						</section>
 
-						<section class="right">
+						<section class="right show-on-parent-hover">
 
-							<span class="darkview"> <a href="javascript:void(0);" >
+							<span class="darkview "> <a href="javascript:void(0);" >
 								<button class="btn blue">
 									明細
 								</button> </a> <a href="javascript:void(0);">
@@ -1076,7 +1082,6 @@
 	<!--
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	-->
-	
 	<!-- developer-amdin js begin -->
 	<!-- JavaScript at bottom except for Modernizr -->
 	<script src="<?php echo base_url();?>assets/developer-admin/js/libs/modernizr.custom.js"></script>
@@ -1105,7 +1110,10 @@
 	
 	<div class="clear"></div>
 	
-<?php
-$data=array();
-$this->load->view('pfooter',$data);
-?>
+	<?php
+	$data=array();
+	$this->load->view('pfooter',$data);
+	?>
+	
+</body>
+</html>

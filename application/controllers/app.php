@@ -12,23 +12,36 @@ class app extends CI_Controller {
 
 	public function index() {
 
-	    $this->output->enable_profiler(TRUE);
-		$user_id = $this->session->userdata('id');
-		$user_name = $this->session->userdata('name');
-    	$is_admin = $this->session->userdata('is_admin');
-    	$isLoggedIn = $this->session->userdata('isLoggedIn');
-
+	    $this->output->enable_profiler(false);
+		
+		$this->session->set_userdata('prior_url',current_url());
+		
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			$this->session->set_userdata('prior_url',current_url());
+		}
+		else 
+		{
+			$data['user_info'] = $this->ion_auth->user()->row();		
+			/*
+			$user_id = $this->session->userdata('id');
+			$user_name = $this->session->userdata('name');
+	    	$is_admin = $this->session->userdata('is_admin');
+	    	$isLoggedIn = $this->session->userdata('isLoggedIn')
+			*/ 
+		}
         /*
         $isLoggedIn =1;
         $is_admin=0;
         $user_id=2;
         $user_name="TestUser";
-		 */
 
         $data['user_id']=$user_id;
 		$data['user_name']=$user_name;
 		$data['is_admin']=$is_admin;
 		$data['isLoggedIn']=$isLoggedIn;
+		 */
 
 		$this -> load -> helper('form');
 		$data['error']=$this->session->flashdata('error');
@@ -307,6 +320,45 @@ class app extends CI_Controller {
 
 	}
 
+
+	public function getproduct($cid)
+	{
+	
+		$this->output->enable_profiler(false);
+		
+		$p=new product();
+		$p->where_related_category('id',$cid)->get();
+		$list=array();
+		foreach($p as $pi)
+		{
+			//echo $p->id;
+			$o=new stdClass();
+			$o->id=$p->id;
+			$o->productname=$p->productname;
+			$pic=new productpic();
+			$pic->where_related_product('id',$pi->id)->get();
+			//print_r ($pic);
+			$idx=0;
+			foreach($pic as $picitem)
+			{
+				$attr='pic';
+				if ($idx>0)
+				{
+					$attr .=$idx;
+				}
+				$o->$attr=$picitem->thumb;
+				$idx++;
+			}
+			$list[]=$o;
+		}
+		$obj=new stdClass();
+		$obj->aa='aa';
+		//echo json_encode($obj);
+		//return;
+		echo json_encode($list);
+		return;
+	}
+	
 	public function pricing()
 	{
 		$this->load->view('header');

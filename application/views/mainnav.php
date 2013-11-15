@@ -21,12 +21,14 @@
 				<ul class="dropdown-menu" id="styleul">
 					<li value="default" class="active"><a href=#><i></i><span>樸素淡妝</span></a></li>
 					<li value="gray"><a href=#><i></i><span>略施脂粉</span></a></li>
+					<!--
 					<li value="bootstrap"><a href=#><i></i><span>素顏</span></a></li>
+					-->				
 				</ul>
 			</li>
 			<li class="divider-vertical"></li>
 			<li>
-				<a href=#><span style="font-weight:500;font-size:18px;"><?php print $user_name; ?></span></a>				
+				<a href=#><span style="font-weight:500;font-size:18px;"><?php print $user_info->username; ?></span></a>				
 			</li>
 
 			<style>

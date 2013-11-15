@@ -1,5 +1,6 @@
 <div id="logindiv" class="rborder8">
-				<?php echo form_open('login/login_user') ?>
+				<?php echo form_open('auth/login') ?>
+				   
 					<div class="modal-header">
 						<h3> Login </h3>
 					</div>

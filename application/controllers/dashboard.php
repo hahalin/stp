@@ -28,6 +28,23 @@ class Dashboard extends CI_Controller {
 		}
 	}
 	
+	public function inbox()
+	{
+		if (!$this->ion_auth->logged_in())
+		{
+			//redirect them to the login page
+			$this->session->set_userdata('prior_url',current_url());
+			redirect('auth/login', 'refresh');
+		} else {
+			$data['user_info'] = $this->ion_auth->user()->row();
+			$data['title'] = $data['user_info']->username . "'s Dashboard";
+			//$this->load->view('backend/dashboard_view', $data);
+			$data['sidetabidx']=2;
+			$this->load->view('developer-admin/head',$data);
+			$this->load->view('developer-admin/inbox', $data);
+		}
+	}
+	
 	public function logout() {
 		if (!$this->ion_auth->logged_in())
 		{
